@@ -55,12 +55,12 @@ var tabs = {
     mew: true,
     cx: true
   },
-  ens: {
+    ens: {
     id:7,
     name: "NAV_ENS",
     url: "ens",
     mew: false,
-    cx: true
+    cx: false
   },
   viewWalletInfo: {
     id: 8,
@@ -80,7 +80,7 @@ var tabs = {
     id: 10,
     name: "NAV_SignMsg",
     url: "sign-message",
-    mew: false,
+    mew: true,
     cx: false
   },
   bulkGenerate: {
