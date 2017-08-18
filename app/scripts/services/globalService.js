@@ -52,7 +52,7 @@ var tabs = {
     id: 6,
     name: "NAV_Contracts",
     url: "contracts",
-    mew: true,
+    mew: false,
     cx: true
   },
     ens: {
@@ -73,14 +73,14 @@ var tabs = {
     id: 9,
     name: "NAV_Help",
     url: "help",
-    mew: true,
+    mew: false,
     cx: true
   },
   signMsg: {
     id: 10,
     name: "NAV_SignMsg",
     url: "sign-message",
-    mew: true,
+    mew: false,
     cx: false
   },
   bulkGenerate: {
