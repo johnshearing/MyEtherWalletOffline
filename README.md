@@ -1,3 +1,8 @@
+## This is a modified version of MyEtherWallet. It is optimised for use with the [The Secure Brick - An Air-Gapped Rasberry Pi](https://github.com/johnshearing/MyEtherWalletOffline/blob/master/Air-Gap_Setup.md). 
+
+
+
+
 ## Website: https://www.MyEtherWallet.com
 ## Chrome Extension: https://chrome.google.com/webstore/detail/myetherwallet-cx/nlbmnnijcnlegkjjpcfjclmcfggfefdm
 ## Download the Latest Release: https://github.com/kvhnuke/etherwallet/releases/latest
