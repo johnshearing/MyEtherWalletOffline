@@ -1012,47 +1012,44 @@ Maybe autostart Chrome/MyEtherWallet on bootup.
 [This Thread should help](https://raspberrypi.stackexchange.com/questions/38515/auto-start-chromium-on-raspbian-jessie-11-2015)  
 
 #### Changes to MyEtherWallet  
-Disable the notice that MEW is not connected to the Internet.  
-It will always be offline so there is no need for the message.  
 
-Change the Paper wallet so that it prints nicely on the Nano Printer.
-
-Trying to remove the ENS tab:  
-Right now the screen used to access the Ethereum Name Service will not disappear when **mew** is set to false in globalService.js  
-Taylor says it will be complicated to remove this particular tab.  
-She suggested wiping the tab clear and using it for something else.  
-Perhaps I can use this tab for implementing secure messaging.  
-
-Add a native way to generate keystore files (UTC / JSON) from a private key.  
+Done: Add a native way to generate keystore files (UTC / JSON) from a private key.  
 Turns out that this is built into the plugin.  
 Unfortunatley, the plugin seems to require an Internet connection in order to gain access to a wallet.  
 So the plugin can not be used offline.  
 Luit recommends: Make a script and let NodeJS prompt for the private key saving the result as a keystore file by including fs.  
 This should leave no log files.  
-I imagine this script can be added to MEW as utility.   
- 
-Add PGP Messaging utility where encrypted messages are passed in and out  of the device using QR-Code.  
-We will need this so that people can send private keys via email.  
-Maybe even something that allows the exchange of encrypted messages on the block chain.  
-This should not be too costly if only encrypted private keys are being exchanged this way.
-In this way, an email account is not even required - only access to MEW online some other means of interacting with smart contracts in order to get the encrypted message and convert it to a QR-Code scanning into the secure brick.
+I imagine this script can be added to MEW as utility. 
+20171110: Just put this into MEW. Adding the package ethereumjs-wallet was a pain.  
+[The webpage found here had the solution](https://stackoverflow.com/questions/15126050/running-python-on-windows-for-node-js-dependencies)  
 
-Add a native way to keep track of the nonce associated with each keystore file maintained by the device. This would be a huge time saver because now we are required to go online with MyEtherWallet on a different device to get it, and oddly, MyEtherWallet does not run on my old phone so until this is done (or until I get a new phone), a computer is required for each transaction unless of course we keep the nonce updated manually in a text file on the pi, which is what I am doing now.  
-Also there needs to be a native method to edit the nonce value as well, in case another device was used to make an outgoing transaction from the account associated with a keystore file in the pi or in case the transaction does not go through for some reason.  
-The secure brick will need to query the user about this after producing the encrypted transaction instructions.  
-One huge benifit of keeping track of the nonce is that you will know if someone else is using your private key.  
+Done: Change the Paper wallet so that it prints nicely on the Nano Printer.
 
-Make the user aware of how the gas price works and make the field match the Gas Price slider.   
+Not Now: Disable the notice that MEW is not connected to the Internet.  
+It will always be offline so there is no need for the message.  
+Maybe keep the message. It's an extra check to ensure that the brick is not connecting to the net.
+
+Not Now: Trying to remove the ENS tab:  
+Right now the screen used to access the Ethereum Name Service will not disappear when **mew** is set to false in globalService.js  
+Taylor says it will be complicated to remove this particular tab.  
+She suggested wiping the tab clear and using it for something else.  
+Perhaps I can use this tab for implementing secure messaging.  
 
 All aspects of verification seem to be working. 
-A wallet (it doesn't matter which one) must be unlocked in order for verifictation to work.  
+A wallet (it doesn't matter which one) must be unlocked in order for verifictation to work.
+I would use a test account for this that doesn't have any eth in it.
 This seems like an oversite that one should need to unlock a wallet in order to verify a message.  
-Also, beware of the plugin version of MEW - it looks like an Internet connection is required in order to verify a message.
-Also, the plugin seems to require an Internet connection in order to access a wallet.
+I don't think this is the fault of MEW but rather one of the underlying packages that performs verification.
 
 Generate a qr-code when a message is signed so that it can be passed out of the pi.  
 Also find, or better, make a qr-code generator for the phone that will allow me to pass a signed message into the pi.  
 This could just be another modified version of MEW set up for online functionality only.
+
+Add PGP Messaging utility where encrypted messages are passed in and out  of the device using QR-Code.  
+We will need this so that people can send private keys via email.  
+Maybe even something that allows the exchange of encrypted messages on the block chain.  
+This should not be too costly if only encrypted private keys are being exchanged this way.
+In this way, an email account is not even required - only access to MEW online some other means of interacting with smart contracts in order to get the encrypted message and convert it to a QR-Code scanning into the secure brick.     
 
 Add a native way to associate a photograph with a with public addresses for use as an additional blockie. This will prevent sending ether to the wrong address when selecting public addresses from lists or better from a database on the pi.  
 Doing this defeats an attack where different addresses might produce similar looking blockies. But the biggest advantage will be to keep users from getting confused between different accounts that they normally use. I understand that accounts can now be associated with human friendly names but not every account will have this so overall, I think this will be well worth doing.
@@ -1062,6 +1059,8 @@ Add database functionality to handle public addresses and associated Photo-block
 Add a native onscreen virtual keyboard using AngularJS although Florence works ok for now. The keyboard should be Hex or alphanumeric where appropriate, should have cut and paste buttons, database functionality, QR-Code read start and stop buttons, QR-Code generate buttons, OCR controls where appropriate and should pop open when stepping onto a data entry field. MEW should position the data entry field at the top of the screen and the virtual keyboard should position itself underneath the data entry field. This will save on screen clutter which is a big problem with a small screen.  
 
 When tabing - MEW should move to the next field, position it at the top of the screen and open the virtual keyboard with the appropriate layout for that field.  
+
+Make the user aware of how the gas price works and make the field match the Gas Price slider.
 
 Consider adding OCR to the camera functionality.  
 * OCR **Start** and **Stop** buttons  
