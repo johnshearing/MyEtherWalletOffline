@@ -16,6 +16,7 @@ window.marked                = marked;
 var ethUtil                  = require('ethereumjs-util');
 ethUtil.crypto               = require('crypto');
 ethUtil.Tx                   = require('ethereumjs-tx');
+ethUtil.keyStoreUtil         = require('ethereumjs-wallet');
 ethUtil.scrypt               = require('scryptsy');
 ethUtil.uuid                 = require('uuid');
 ethUtil.solidityCoder        = require('./solidity/coder');
