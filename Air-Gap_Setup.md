@@ -1009,13 +1009,7 @@ Thank you MEW. This was almost completely done for me. Only minor additions to M
 
 Done: Change the Paper wallet so that it prints nicely on the Nano Printer.  
 
-All aspects of verification seem to be working. 
-A wallet (it doesn't matter which one) must be unlocked in order for verifictation to work.
-I would use a test account for this that doesn't have any eth in it.
-This seems like an oversite that one should need to unlock a wallet in order to verify a message.  
-I don't think this is the fault of MEW but rather one of the underlying packages that performs verification.
-
-Generate a qr-code when a message is signed so that it can be passed out of the pi.  
+Done: Generate a qr-code when a message is signed so that it can be passed out of the pi.  
 Also find, or better, make a qr-code generator for the phone that will allow me to pass a signed message into the pi.  
 This could just be another modified version of MEW set up for online functionality only.
 
@@ -1044,34 +1038,24 @@ Add a native onscreen virtual keyboard using AngularJS although Florence works o
 
 When tabing - MEW should move to the next field, position it at the top of the screen and open the virtual keyboard with the appropriate layout for that field.  
 
-Make the user aware of how the gas price works and make the field match the Gas Price slider.
-
-Consider adding OCR to the camera functionality.  
-* OCR **Start** and **Stop** buttons  
-* This would be useful for importing smart contract code when packaging an offline transaction although this is probably best done with QR-Code. This would be a terrible idea for entering a recipient's public address because a mistake in the OCR process would result in ether going to the wrong address. This would be just fine, however, for entering the private key because the result would simply be a rejected transaction. The main purpose however would be transfer of smart contract code which could easily be checked by hashing and then making a blockie of the hash. 
-
-128 Photo login screen for entering private keys  
-* One advantage is short passwords   
-  * 128 available thumbnail photos shortens private key entry to 8 clicks.  
-    * Photos must selected using a randomized method.   
-  * The formula is n^r where n = base or radix and r = the length of the character string
-  * For a hex string (base 16) 64 characters in length, the permutations are 1.6 followed by 77 zeros.
-  * For 128 characters (128 photos) where 8 must be selected in a certain order, the permutations are 7 followed by 16 zeros.  
-  * That's still a lot of permutations so I might use the idea. 
-  * This could eliminate the need for brain wallets if it turns out that humans are good at remembering an ordinal arangement of photographs.    
+Make the user aware of how the gas price works and make the field match the Gas Price slider.   
   
-128 Photo Blockie for Account numbers
-* This method can be used to make custom blockies where several photos are used to assemble a panorama.  
-  * An error would leave a blank spot in the panorama.  
-  * This protects against attacks where similar looking account numbers are switched with the intended recipient account numbers  
-  * This method would be used in addition to regular blockies not as a replacement.  
-  * It would be better to use a photo of the person of whom you are doing business with as a blockie of their account number in addition as opposed to a panorama of some random photo but in the case where you don't know what the account holder looks like, the panorama would work well.
+Photo Blockie for Account numbers  
+* This protects against attacks where similar looking account numbers are switched with the intended recipient account numbers  
+* This method would be used in addition to regular blockies not as a replacement.  
+* It would be better to use a photo of the person of whom you are doing business with as a blockie of their account number in addition as opposed to a panorama of some random photo but in the case where you don't know what the account holder looks like perhaps a jpg of the person's name.
   
 Use more than one blockie for extra verification by hashing twice   
 * Protects against similar-looking-account-number/similar-looking-blockie attack  
 * or consider using converting to Radix 128 custom Blockie system using photos.   
 
-Add the ability to SHA3 Hash any field, and turn that into a public address, and make a blockie of that. That will make it possible to compare imported smart contract code with code sent to ensure nothing has changed.  
+Add the ability to SHA3 Hash any field, and turn that into a public address, and make a blockie of that.  
+Keep a version of this on an online machine and one on the air-gapped machine for comparison.
+That will make it possible to compare imported smart contract code with code sent to ensure nothing has changed.  
+
+Look into posting a smart contract using offline transaction screen.  
+
+Figure out how to pass large contracts out of the brick using multiple qr-codes.
 
 #### Possible changes to the packaging  
 The version with built in printer is already created.
