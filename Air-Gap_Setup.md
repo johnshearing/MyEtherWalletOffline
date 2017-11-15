@@ -936,7 +936,7 @@ You already installed this package if you have been following along.
 
 ## Todo List  
 
-Get rid of unencrypted files that hold private keys and make keystore files instead.  
+Done: Get rid of unencrypted files that hold private keys and make keystore files instead.  
 
 Search SD Card for instances of private key using grep.  
 Check History file and the node history file as well.  
@@ -957,8 +957,8 @@ If you would like to see which files are about to be deleted, simply remove the 
 
 Holy Shit. my private keys are showing up in a lot of log files and some files grep can't look at because permission is denied.  
 OK no more working with private keys at the command line or at the node console.
-This means generating private keys with MyEtherWallet or importing keys from a thumb drive.
-The keys from the thumbdrive could be made on the pi using node and an SD card/OS which is destroyed after the keystores are made.  
+This means generating private keys with MyEtherWallet.
+This is now done. I have modified MyEtherWallet so that keystore files can be made from a private key and password.
 
 Executing grep without the -s switch shows all the places where grep was unable to look - probably because the OS is using those files. This makes me realize that the only way to find out if the system is secure is to scan the SD card while in a different machine while the OS is not running. I need to find out how to do this. Actually, trying to keep track of all these log files is probably unmanageable. Now Full Disk Encryption is starting to make sense. Full Disk Encryption will make it impossible to extract information from all these copies of private keys that show up in all theses log files. Which brings us to the next todo item: Install an SSD drive with full disk encryption.  
 
@@ -970,7 +970,7 @@ Implement an SSD drive with full disk encryption.
 https://www.youtube.com/watch?v=wuKgWK7O9p8  
 It turns out there is no difference between a thumb drive and an SD card except that an SD card can not be removed without disassembling the device. Also, the pi 3 is the only one that will boot off a thumb drive. So we are stuck with using an SD card and swaping out the card for different people would be very cumbersome. A Solid State Drive is far better than a thumb drive or an SD card because it is much more sophisticated even though the basic technology is the same. A SSD is faster, will last longer, because it is built like a mini RAID system. The extra speed of an SSD may even make full disk encryption practical for this project. 
 
-Consider charging the battery with a photovoltaic cell or with a wireless charger.  
+Consider charging the battery with a wireless charger.  
 
 Consider the Raspberry Pi Module 3 for it's smaller size in future builds.  
 
@@ -980,13 +980,7 @@ Consider adding a lid and lock to the next build.
 
 Consider adding some kind of notification on bootup if the device has been opened.  
 
-#### Software Items To Add Next Time  
-
-Remove the run option from the main menu.  
-
-Add the new Distribution and all source of MyEtherWallet to the SD card.  
-
-Add printer drivers to the SD card.   
+#### Software Items To Add Next Time    
 
 Make one button show up at a time for scan start and scan stop such that scan stop replaces scan start while the scan process is running and scan start replaces scan stop when the scan process has stopped. This will save on screen real estate and helps the user understand if the scan process is running or not.
 
@@ -1006,34 +1000,14 @@ Set up a timer to logout the user after a period of inactivity.
 
 Add GUI GPG Utility for file encryption. 
 This is to protect any files that have private keys or other sensitive information without having to encrypt the whole drive.  
-Even though the whole drive is to be encrypted it makes sense to have encryption at the file level too in case the user walks away from the device while it is running.  
-
-Maybe autostart Chrome/MyEtherWallet on bootup.
-[This Thread should help](https://raspberrypi.stackexchange.com/questions/38515/auto-start-chromium-on-raspbian-jessie-11-2015)  
+Even though the whole drive is to be encrypted it makes sense to have encryption at the file level too in case the user walks away from the device while it is running.   
 
 #### Changes to MyEtherWallet  
 
-Done: Add a native way to generate keystore files (UTC / JSON) from a private key.  
-Turns out that this is built into the plugin.  
-Unfortunatley, the plugin seems to require an Internet connection in order to gain access to a wallet.  
-So the plugin can not be used offline.  
-Luit recommends: Make a script and let NodeJS prompt for the private key saving the result as a keystore file by including fs.  
-This should leave no log files.  
-I imagine this script can be added to MEW as utility. 
-20171110: Just put this into MEW. Adding the package ethereumjs-wallet was a pain.  
-[The webpage found here had the solution](https://stackoverflow.com/questions/15126050/running-python-on-windows-for-node-js-dependencies)  
+Done: Add a native way to generate keystore files (UTC / JSON) from a private key.
+Thank you MEW. This was almost completely done for me. Only minor additions to MEW were needed to accomplish this.  
 
-Done: Change the Paper wallet so that it prints nicely on the Nano Printer.
-
-Not Now: Disable the notice that MEW is not connected to the Internet.  
-It will always be offline so there is no need for the message.  
-Maybe keep the message. It's an extra check to ensure that the brick is not connecting to the net.
-
-Not Now: Trying to remove the ENS tab:  
-Right now the screen used to access the Ethereum Name Service will not disappear when **mew** is set to false in globalService.js  
-Taylor says it will be complicated to remove this particular tab.  
-She suggested wiping the tab clear and using it for something else.  
-Perhaps I can use this tab for implementing secure messaging.  
+Done: Change the Paper wallet so that it prints nicely on the Nano Printer.  
 
 All aspects of verification seem to be working. 
 A wallet (it doesn't matter which one) must be unlocked in order for verifictation to work.
@@ -1044,6 +1018,16 @@ I don't think this is the fault of MEW but rather one of the underlying packages
 Generate a qr-code when a message is signed so that it can be passed out of the pi.  
 Also find, or better, make a qr-code generator for the phone that will allow me to pass a signed message into the pi.  
 This could just be another modified version of MEW set up for online functionality only.
+
+Not Now: Disable the notice that MEW is not connected to the Internet.  
+It will always be offline so there is no need for the message.  
+Maybe keep the message. It's an extra check to ensure that the brick is not connecting to the net.
+
+Not Now: Trying to remove the ENS tab:  
+Right now the screen used to access the Ethereum Name Service will not disappear when **mew** is set to false in globalService.js  
+Taylor says it will be complicated to remove this particular tab.  
+She suggested wiping the tab clear and using it for something else.  
+Perhaps I can use this tab for implementing secure messaging.  
 
 Add PGP Messaging utility where encrypted messages are passed in and out  of the device using QR-Code.  
 We will need this so that people can send private keys via email.  
