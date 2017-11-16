@@ -934,33 +934,7 @@ At some point soon I will build this utility into MyEtherWallet.
 (Here is a link to the Node Package required)[https://github.com/ethereumjs/ethereumjs-wallet]  
 You already installed this package if you have been following along.  
 
-## Todo List  
-
-Done: Get rid of unencrypted files that hold private keys and make keystore files instead.  
-
-Search SD Card for instances of private key using grep.  
-Check History file and the node history file as well.  
-`grep -r -s "Enter private key here without 0x in front"`  
-or perhaps try  
-`sudo grep -r -s "Enter private key here without 0x in front"`  
-The -r is for recursive and -s supresses error messages.  
-
-Bash command to search SD Card for instances of private key using grep and a way to delete or overwrite those files.  
-`grep -lrIZ foo . | xargs -0 rm -f --`  
--l prints file names of files matching the search pattern.  
--r performs a recursive search for the pattern foo in the given directory ..  If this doesn't work, try -R.  
--I (capital i) causes binary files like PDFs to be skipped.  
--Z ensures that file names are zero- (i.e., nul-)terminated so that a name containing white space does not get interpreted in the wrong way (i.e., as multiple names instead of one).  
-xargs -0 feeds the file names from grep to rm -f, separating words by zero (nul) bytes (remember the -Z option from grep).  
--- is often forgotten but it is very important to mark the end of options and allow for removal of files whose names begin with -.  
-If you would like to see which files are about to be deleted, simply remove the | xargs -0 rm -f -- part, and leave off the Z option to grep.  
-
-Holy Shit. my private keys are showing up in a lot of log files and some files grep can't look at because permission is denied.  
-OK no more working with private keys at the command line or at the node console.
-This means generating private keys with MyEtherWallet.
-This is now done. I have modified MyEtherWallet so that keystore files can be made from a private key and password.
-
-Executing grep without the -s switch shows all the places where grep was unable to look - probably because the OS is using those files. This makes me realize that the only way to find out if the system is secure is to scan the SD card while in a different machine while the OS is not running. I need to find out how to do this. Actually, trying to keep track of all these log files is probably unmanageable. Now Full Disk Encryption is starting to make sense. Full Disk Encryption will make it impossible to extract information from all these copies of private keys that show up in all theses log files. Which brings us to the next todo item: Install an SSD drive with full disk encryption.  
+## Todo List   
 
 #### Hardware Items Todo  
 Install a momentary **Scan** button on the face of the brick.
@@ -974,21 +948,17 @@ Consider charging the battery with a wireless charger.
 
 Consider the Raspberry Pi Module 3 for it's smaller size in future builds.  
 
-Consider finger print reader for the next build.  
-
-Consider adding a lid and lock to the next build.  
+Consider adding a lid and lock to the next build and consider putting an integrated keyboard into the lid.  
 
 Consider adding some kind of notification on bootup if the device has been opened.  
 
-#### Software Items To Add Next Time    
+#### OS Software Items To Add Next Time    
 
 Make one button show up at a time for scan start and scan stop such that scan stop replaces scan start while the scan process is running and scan start replaces scan stop when the scan process has stopped. This will save on screen real estate and helps the user understand if the scan process is running or not.
 
 Stop scan process after a good scan.  
 
-Put up a window showing what the camera sees while the scan process is running and make the window disapear when the scan stops either because a good scan has been achived or because the user stopped the scan. This will help the user understand if there is too much glare to get a good scan or if the focal distance is not correct. 
-
-Install Buttons on the Application Launch Bar to take photographs.
+Put up a window showing what the camera sees while the scan process is running and make the window disapear when the scan stops either because a good scan has been achived or because the user stopped the scan. This will help the user understand if there is too much glare to get a good scan or if the focal distance is not correct.  
 
 Install Buttons on the Application Launch Bar to Enable and Disable Two Finger Right Click Functionality.  
 For now, enable by executing the following command at the terminal window.  
@@ -1000,7 +970,7 @@ Set up a timer to logout the user after a period of inactivity.
 
 Add GUI GPG Utility for file encryption. 
 This is to protect any files that have private keys or other sensitive information without having to encrypt the whole drive.  
-Even though the whole drive is to be encrypted it makes sense to have encryption at the file level too in case the user walks away from the device while it is running.   
+Even though the whole drive is to be encrypted it makes sense to have encryption at the file level too in case the user walks away from the device while it is running. File encryption will not protect an SD card from forensic analysis but it will protect the data from someone poking around on an open device. The problem is that the source file used to make the encrypted file can not be removed from the SD card using the shred command so the data could be recovered in a labratory. This is why full disk encryption is required to secure data on the device. For this reason I have added the ability to create encrypted KeyStore files using MyEtherWallet. If KeyStore files are used to hold private keys then there is no reason to keep unencrypted private keys on the device.
 
 #### Changes to MyEtherWallet  
 
@@ -1010,8 +980,7 @@ Thank you MEW. This was almost completely done for me. Only minor additions to M
 Done: Change the Paper wallet so that it prints nicely on the Nano Printer.  
 
 Done: Generate a qr-code when a message is signed so that it can be passed out of the pi.  
-Also find, or better, make a qr-code generator for the phone that will allow me to pass a signed message into the pi.  
-This could just be another modified version of MEW set up for online functionality only.
+Also load modified MEW onto my phone so that I can generate a qr-code for a signed message and pass it into the brick.
 
 Add PGP Messaging utility where encrypted messages are passed in and out  of the device using QR-Code.  
 We will need this so that people can send private keys via email.  
@@ -1060,14 +1029,8 @@ Perhaps I can use this tab for implementing secure messaging.
 #### Possible changes to the packaging  
 The version with built in printer is already created.
 
-The small printerless version is as follows: Think simple, small, thin, pocket sized digital camera - that will be the final form of the secure brick. A camera on the front (no zoom, nothing fancy) and a touch screen on the back. No buttons (maybe one for power). The package will be waterproof, Tempest certified, and cheap to make. The parts have already arrived
+The small printerless version is as follows: Think simple, small, thin, pocket sized digital camera - that will be the final form of the secure brick. A camera on the front (no zoom, nothing fancy) and a touch screen on the back. No buttons (maybe one for power). The package will be waterproof, Tempest certified, and cheap to make. The parts have already arrived 
 
-A welded steel case for Tempest certification.   
-
-Power switch is capacitive touch switch so that the case stays waterproof, flat in form, and so that the switch can not be used as a point of entry into the case.
-
-Cooling:  
-* Once a fully enclosed tamper-proof/Tempest-Certified steel case is built cooling may become an issue. Pressurize enclosure with helium to aid cooling. This would transfer heat from the chips to the steel case about 6 times faster than air and would have the extra benefit of ensuring a waterproof enclosure. Oxygen and or light entering the case because of tampering could set of a device that burns the SD Card like in Mission Impossible. Just kidding but maybe people would love it :)
 
 #### Issues  
 
@@ -1081,6 +1044,28 @@ If we want to be sure we're clearing the history file, even with the histappend 
 While history -c clears the current session history, the -w option overwrites the history file.  
 Clearing the history may be required, as we want to keep the command history protected in the case of theft.  
 The logout script for root (/root/.bash_logout) could contain these two lines to ensure no bash history is maintained after logout for root.  
+
+Search SD Card for instances of private key using grep.  
+Check History file and the node history file as well.  
+`grep -r -s "Enter private key here without 0x in front"`  
+or perhaps try  
+`sudo grep -r -s "Enter private key here without 0x in front"`  
+The -r is for recursive and -s supresses error messages.  
+
+Bash command to search SD Card for instances of private key using grep and a way to delete or overwrite those files.  
+`grep -lrIZ foo . | xargs -0 rm -f --`  
+-l prints file names of files matching the search pattern.  
+-r performs a recursive search for the pattern foo in the given directory ..  If this doesn't work, try -R.  
+-I (capital i) causes binary files like PDFs to be skipped.  
+-Z ensures that file names are zero- (i.e., nul-)terminated so that a name containing white space does not get interpreted in the wrong way (i.e., as multiple names instead of one).  
+xargs -0 feeds the file names from grep to rm -f, separating words by zero (nul) bytes (remember the -Z option from grep).  
+-- is often forgotten but it is very important to mark the end of options and allow for removal of files whose names begin with -.  
+If you would like to see which files are about to be deleted, simply remove the | xargs -0 rm -f -- part, and leave off the Z option to grep.  
+
+Executing grep without the -s switch shows all the places where grep was unable to look - probably because the OS is using those files. This makes me realize that the only way to find out if the system is secure is to scan the SD card while in a different machine while the OS is not running. I need to find out how to do this. Actually, trying to keep track of all these log files is probably unmanageable. Now Full Disk Encryption is starting to make sense. Full Disk Encryption will make it impossible to extract information from all these copies of private keys that show up in all theses log files. Which brings us to the next todo item: Install an SSD drive with full disk encryption.  
+
+
+
 
 Cool way to reboot:  
 sudo shutdown --halt now --reboot  
