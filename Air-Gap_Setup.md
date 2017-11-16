@@ -1013,16 +1013,6 @@ Done: Generate a qr-code when a message is signed so that it can be passed out o
 Also find, or better, make a qr-code generator for the phone that will allow me to pass a signed message into the pi.  
 This could just be another modified version of MEW set up for online functionality only.
 
-Not Now: Disable the notice that MEW is not connected to the Internet.  
-It will always be offline so there is no need for the message.  
-Maybe keep the message. It's an extra check to ensure that the brick is not connecting to the net.
-
-Not Now: Trying to remove the ENS tab:  
-Right now the screen used to access the Ethereum Name Service will not disappear when **mew** is set to false in globalService.js  
-Taylor says it will be complicated to remove this particular tab.  
-She suggested wiping the tab clear and using it for something else.  
-Perhaps I can use this tab for implementing secure messaging.  
-
 Add PGP Messaging utility where encrypted messages are passed in and out  of the device using QR-Code.  
 We will need this so that people can send private keys via email.  
 Maybe even something that allows the exchange of encrypted messages on the block chain.  
@@ -1055,7 +1045,17 @@ That will make it possible to compare imported smart contract code with code sen
 
 Look into posting a smart contract using offline transaction screen.  
 
-Figure out how to pass large contracts out of the brick using multiple qr-codes.
+Figure out how to pass large contracts out of the brick using multiple qr-codes.  
+
+Not Now: Disable the notice that MEW is not connected to the Internet.  
+It will always be offline so there is no need for the message.  
+Maybe keep the message. It's an extra check to ensure that the brick is not connecting to the net.
+
+Not Now: Trying to remove the ENS tab:  
+Right now the screen used to access the Ethereum Name Service will not disappear when **mew** is set to false in globalService.js  
+Taylor says it will be complicated to remove this particular tab.  
+She suggested wiping the tab clear and using it for something else.  
+Perhaps I can use this tab for implementing secure messaging.  
 
 #### Possible changes to the packaging  
 The version with built in printer is already created.
@@ -1116,7 +1116,7 @@ My public key on Ethereum
 [Here is the github repository for my offline version of MEW]{https://github.com/johnshearing/MyEtherWalletOffline}  
 
 Cool Github commands:  
-[This Video Tutorial series gets you up and running on GitHub quickly.](https://www.youtube.com/watch?v=BCQHnlnPusY&list=PLRqwX-V7Uu6ZF9C0YMKuns9sLDzK6zoiV&index=1)
+[This Video Tutorial series gets you up and running on GitHub quickly.](https://www.youtube.com/watch?v=BCQHnlnPusY&list=PLRqwX-V7Uu6ZF9C0YMKuns9sLDzK6zoiV&index=1)  
 `git status` Check if any files need to be added to the index.  
 `git add <filename>` Add any files shown by status.  
 `git add -A` Adds: New files, Updated files, and Deleted files to the index.  
