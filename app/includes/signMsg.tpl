@@ -40,6 +40,14 @@
         <h5 translate="MSG_signature"> Signature </h5>
         <textarea class="form-control" rows="4" readonly>{{ signMsg.signedMsg }}</textarea>
       </div>
+
+
+      <div class="col-xs-6">
+        <h5 translate="x_SignedMessage">Signed Message:</h5>
+        <div class="qr-code" qr-code="{{signMsg.signedMsg}}" watch-var="signMsg.signedMsg" width="100%"></div>
+      </div>
+
+
     </section>
     <!-- / Sign Message Stuff -->
 

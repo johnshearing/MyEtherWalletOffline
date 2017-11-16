@@ -362,11 +362,6 @@
           </div>
 
           <a class="btn btn-info btn-block" href="{{blobEnc}}" download="{{encFileName}}" translate="x_Download"> DOWNLOAD </a>          
-
-          <!-- Line below commented out in favor of the line above.
-          <a class="btn btn-info btn-block" ng-click="validatePassword()" translate="x_GenerateKeyStoreButtonTxt" ng-show="wallet!=null"> Generate KeyStore File </a>
-          -->
-
         </section>
         <!-- End of: Defines button to generate a KeyStore file -->
 
@@ -510,11 +505,6 @@
           </div>
 
           <a class="btn btn-info btn-block" href="{{blobEnc}}" download="{{encFileName}}" translate="x_Download"> DOWNLOAD </a>          
-
-          <!-- Line below commented out in favor of the line above.
-          <a class="btn btn-info btn-block" ng-click="validatePassword()" translate="x_GenerateKeyStoreButtonTxt" ng-show="wallet!=null"> Generate KeyStore File </a>
-          -->
-
         </section>
         <!-- End of: Defines button to generate a KeyStore file -->
 
@@ -603,6 +593,14 @@
         <h5 translate="MSG_signature"> Signature </h5>
         <textarea class="form-control" rows="4" readonly>{{ signMsg.signedMsg }}</textarea>
       </div>
+
+
+      <div class="col-xs-6">
+        <h5 translate="x_SignedMessage">Signed Message:</h5>
+        <div class="qr-code" qr-code="{{signMsg.signedMsg}}" watch-var="signMsg.signedMsg" width="100%"></div>
+      </div>
+
+
     </section>
     <!-- / Sign Message Stuff -->
 

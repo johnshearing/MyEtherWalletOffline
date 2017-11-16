@@ -1,18 +1,9 @@
-## Website: https://www.MyEtherWallet.com
-## Chrome Extension: https://chrome.google.com/webstore/detail/myetherwallet-cx/nlbmnnijcnlegkjjpcfjclmcfggfefdm
-## Download the Latest Release: https://github.com/kvhnuke/etherwallet/releases/latest
-- dist-vX.X.X.X.zip is the smaller package containing the gh-pages branch aka MyEtherWallet.com
-- chrome-extension-vX.X.X.X.zip is the chrome extension package
-- source code is the full source for developers to get started with (although cloning or forking the mercury branch is probably a better choice)
+## This is a modified version of MyEtherWallet. It is optimised for use with [The Secure Brick - An Air-Gapped Rasberry Pi](https://github.com/johnshearing/MyEtherWalletOffline/blob/master/Air-Gap_Setup.md). 
 
-## `mercury` is the development branch. gh-pages contains only the smaller dist folder only and is served to MyEtherWallet.com via CloudFlare.
+[The repository from which this was taken can be found here](https://github.com/kvhnuke/etherwallet)  
+[The orignal online version of this software can be found here](https://www.MyEtherWallet.com)  
 
-## Help
-- https://myetherwallet.groovehq.com/help_center
-- https://www.myetherwallet.com/#help
-- support at myetherwallet dot com
-
-
+The following text is excerpts taken from [the original MyEtherWallet README.md.](https://github.com/kvhnuke/etherwallet/blob/mercury/README.md)  
 ### MyEtherWallet
 
 MyEtherWallet is an open source, javascript, client-side tool for generating Ether wallets. It was created and is maintained by [kvhnuke](https://github.com/kvhnuke) and [tayvano](https://github.com/tayvano) aka [insomniasexx](https://www.reddit.com/user/insomniasexx).

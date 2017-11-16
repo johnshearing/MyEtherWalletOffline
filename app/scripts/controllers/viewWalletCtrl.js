@@ -14,72 +14,7 @@ var viewWalletCtrl = function($scope, walletService) {
     $scope.ajaxReq = ajaxReq;
 
 
-
-    /* Start of: Generate Keystore File 
-    First Try - This didn't work out. 
-
-    $scope.$watch('newKeyStoreFilepassword',function() {       
-        $scope.validatePassword();
-    });
-
-
-
-
-    $scope.validatePassword = function() 
-    {
-        if (!$scope.isStrongPass()) 
-        {
-            $scope.notifier.danger(globalFuncs.errorMsgs[1]);
-        } 
-        else 
-        {
-            $scope.generateKeyStoreFile();
-        }
-    }
-
-
-
-
-    $scope.isStrongPass = function() 
-    {
-        return globalFuncs.isStrongPass($scope.newKeyStoreFilepassword);
-    } 
-
-
-
-
-    $scope.generateKeyStoreFile = function() 
-    {
-        var key = Buffer.from($scope.wallet.getPrivateKeyString(), 'hex');  
-        var keyStoreUtilObj = ethUtil.keyStoreUtil.fromPrivateKey(key); 
-        $scope.finishedKeyStoreText = keyStoreUtilObj.toV3String('password', {n: 1024});
-        $scope.finishedKeyStoreFilename = $scope.keyStoreFilename();
-        alert($scope.finishedKeyStoreText);
-        alert($scope.finishedKeyStoreFilename);
-
-    }
-
-
-
-
-    $scope.keyStoreFilename = function()
-    {
-        var curTime = new Date();
-        var utcTime = curTime.toISOString();
-        var dateStr = utcTime.split("T");
-        var date = dateStr[0];
-        var hour = curTime.getUTCHours();
-        var minute = curTime.getUTCMinutes();
-        var second = curTime.getUTCSeconds();
-        var millisecond = curTime.getUTCMilliseconds();
-        var fileName = "UTC--" + date + "T" + hour + "-" + minute + "-" + second + "." + millisecond + "Z" + "--" + $scope.wallet.getAddressString().substring(2);    
-        return fileName;
-    }
-
-     End of: Generate Keystore File - First try */
-
-
-    /* Start of: Generate KeyStore File - Second try */
+    /* Start of: Generate KeyStore File */
     $scope.$watch(function() {
         if ($scope.newKeyStoreFilepassword == "") return null;
         return $scope.newKeyStoreFilepassword;
@@ -96,7 +31,7 @@ var viewWalletCtrl = function($scope, walletService) {
             $scope.encFileName = $scope.wallet.getV3Filename();
         }
     });
-    /* End of: Generate KeyStore File - Second try */
+    /* End of: Generate KeyStore File */
 
 
     $scope.$watch(function() {

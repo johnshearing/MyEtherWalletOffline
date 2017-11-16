@@ -72,11 +72,6 @@
           </div>
 
           <a class="btn btn-info btn-block" href="{{blobEnc}}" download="{{encFileName}}" translate="x_Download"> DOWNLOAD </a>          
-
-          <!-- Line below commented out in favor of the line above.
-          <a class="btn btn-info btn-block" ng-click="validatePassword()" translate="x_GenerateKeyStoreButtonTxt" ng-show="wallet!=null"> Generate KeyStore File </a>
-          -->
-
         </section>
         <!-- End of: Defines button to generate a KeyStore file -->
 
