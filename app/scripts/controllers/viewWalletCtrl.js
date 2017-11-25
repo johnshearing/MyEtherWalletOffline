@@ -1,37 +1,82 @@
 'use strict';
 var viewWalletCtrl = function($scope, walletService) {
-    $scope.usdBalance = "loading";
-    $scope.eurBalance = "loading";
-    $scope.btcBalance = "loading";
-    $scope.etherBalance = "loading";
-    $scope.tokenVisibility = "hidden";
     $scope.pkeyVisible = false;
     $scope.newKeyStoreFilepassword = "";
     $scope.finishedKeyStoreText = '';
     $scope.finishedKeyStoreFilename = '';
+    $scope.isDone = true;
+    $scope.wallet = null;
+    $scope.blob = $scope.blobEnc = "";
+    $scope.showWallet = false;
     walletService.wallet = null;
     walletService.password = '';
-    $scope.ajaxReq = ajaxReq;
 
 
-    /* Start of: Generate KeyStore File */
-    $scope.$watch(function() {
-        if ($scope.newKeyStoreFilepassword == "") return null;
-        return $scope.newKeyStoreFilepassword;
-    }, function() {
-        if ($scope.newKeyStoreFilepassword.length < 9) return;
-        $scope.wallet = walletService.wallet;
-        $scope.wd = true;
-        if (walletService.wallet.type == "default") $scope.blob = globalFuncs.getBlob("text/json;charset=UTF-8", $scope.wallet.toJSON());
-        if ($scope.newKeyStoreFilepassword != '') {
-            $scope.blobEnc = globalFuncs.getBlob("text/json;charset=UTF-8", $scope.wallet.toV3($scope.newKeyStoreFilepassword, {
-                kdf: globalFuncs.kdf,
-                n: globalFuncs.scrypt.n
-            }));
+    /* Start of: Generate KeyStore File - Third attempt - This one worked */
+
+    $scope.isStrongPass = function() {
+        return globalFuncs.isStrongPass($scope.newKeyStoreFilepassword);
+    } 
+
+
+
+
+    $scope.genWalletBlob = function() {
+        if ($scope.isDone) {
+            $scope.blob = $scope.blobEnc = null;
+            $scope.wallet = walletService.wallet;
+            var key = Buffer.from($scope.wallet.getPrivateKeyString(), 'hex');  
+            var keyStoreUtilObj = ethUtil.keyStoreUtil.fromPrivateKey(key); 
+            if (!$scope.$$phase) $scope.$apply();
+            $scope.isDone = false;
+            //$scope.wallet = Wallet.generate(false);
+            $scope.showWallet = true;
+            $scope.blobEnc = globalFuncs.getBlob("text/json;charset=UTF-8", keyStoreUtilObj.toV3($scope.newKeyStoreFilepassword, {n: 1024}));
             $scope.encFileName = $scope.wallet.getV3Filename();
+            if (parent != null)
+                parent.postMessage(JSON.stringify({ address: $scope.wallet.getAddressString(), checksumAddress: $scope.wallet.getChecksumAddressString() }), "*");
+            $scope.isDone = true;
+            if (!$scope.$$phase) $scope.$apply();
         }
-    });
-    /* End of: Generate KeyStore File */
+    }    
+
+
+
+
+    $scope.keyStoreFilename = function()
+    {
+        var curTime = new Date();
+        var utcTime = curTime.toISOString();
+        var dateStr = utcTime.split("T");
+        var date = dateStr[0];
+        var hour = curTime.getUTCHours();
+        var minute = curTime.getUTCMinutes();
+        var second = curTime.getUTCSeconds();
+        var millisecond = curTime.getUTCMilliseconds();
+        var fileName = "UTC--" + date + "T" + hour + "-" + minute + "-" + second + "." + millisecond + "Z" + "--" + $scope.wallet.getAddressString().substring(2);    
+        return fileName;
+    }   
+
+
+
+
+    $scope.generateKeyStoreFile = function() 
+    {
+        //Bail out if password is weak.
+        if (!$scope.isStrongPass()) 
+        {
+            $scope.notifier.danger(globalFuncs.errorMsgs[1]);
+            return;
+        } 
+
+        //Password is strong so generate the KeyStore object.     
+        $scope.genWalletBlob();   
+        $scope.finishedKeyStoreFilename = $scope.keyStoreFilename();       
+    }
+
+    /* End of: Generate KeyStore File - Third attempt - This one worked */
+
+
 
 
     $scope.$watch(function() {
@@ -50,20 +95,7 @@ var viewWalletCtrl = function($scope, walletService) {
             }));
             $scope.encFileName = $scope.wallet.getV3Filename();
         }
-        $scope.wallet.setBalance();
-        $scope.wallet.setTokens();
     });
-
-
-
-
-    $scope.$watch('ajaxReq.key', function() {
-        if ($scope.wallet) {
-            $scope.wallet.setBalance();
-            $scope.wallet.setTokens();
-        }
-    });
-
 
 
 
@@ -74,7 +106,6 @@ var viewWalletCtrl = function($scope, walletService) {
             private: $scope.wallet.getPrivateKeyString()
         }]));
     }
-
 
 
 
@@ -92,9 +123,6 @@ var viewWalletCtrl = function($scope, walletService) {
         walletService.password = '';
         $scope.blob = $scope.blobEnc = $scope.password = "";
     }
-
-
-
 
 };
 module.exports = viewWalletCtrl;
