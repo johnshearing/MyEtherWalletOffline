@@ -62,10 +62,13 @@
   * Description: Runs on a computer that never connects to the Internet  
   * Example: PrivateKeyVault  
   * Vulnerability:  
-    * Tempest,  
-    * Cameras on the Operator,  
+    * Tempest    
+    * Cameras on the Operator  
     * Installing a bug on the device  
-. * Advantages: The Private Key Vault scans in qr-codes from your phone, or from hard copy. It outputs qr-codes to the touchscreen for scanning into your mobile device. All data moving in or out of the device stands for your inspection and approval before proceeding. No radios of any kind are installed in the device and there are no exposed cable jacks for data transfer.  
+  * Advantages:  
+    * All data moving in or out of the device stands for your inspection and approval before proceeding.  
+    * No radios of any kind are installed in the device  
+    * there are no exposed cable jacks for data transfer.  
 
 
 Various Things the Vault Can Do That the Ledger Can't
