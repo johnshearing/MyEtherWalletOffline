@@ -1,17 +1,16 @@
-#Arguments and General information use to promote the PivateKeyVault
+# Arguments and General information use to promote the PivateKeyVault  
 
-###Types of Wallets and Access to Private Keys
-
-BlockChain Clients
-   (Perform Mining)
-   Examples: 
-      Geth, 
-      Parity, 
-   Vulnerability: 
-      Remote control, Key loggers, 
-      Network monitoring for when an account gets unlocked, 
-      Bugs in Parity software cause loss of Ether
-   Articles on the subject:
+### Types of Wallets and Access to Private Keys  
+Type: BlockChain Clients  
+* Description: Perform Mining  
+* Examples:  
+  * Geth,  
+  * Parity,  
+ * Vulnerability:  
+   * Remote control, Key loggers,  
+   * Network monitoring for when an account gets unlocked,  
+   * Bugs in Parity software cause loss of Ether  
+ * Articles on the subject:  
 
 Command Line Tools
    (Anything that runs at the command prompt or at the NodeJS Console)
