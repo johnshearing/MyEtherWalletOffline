@@ -71,13 +71,11 @@
     * there are no exposed cable jacks for data transfer.  
 
 
-Various Things the Vault Can Do That the Ledger Can't
+### Various Things the Vault Can Do That the Ledger Can't
 
 
-Against the ledger
-Life Savings Stolen from Second-hand Ledger Hardware Wallet
-https://cointelegraph.com/news/life-savings-stolen-from-second-hand-ledger-hardware-wallet
-
+### Arguments Against the ledger
+[Life Savings Stolen from Second-hand Ledger Hardware Wallet](https://cointelegraph.com/news/life-savings-stolen-from-second-hand-ledger-hardware-wallet)  
 
 
 Against any computer using Intel, ARM, AMD 
