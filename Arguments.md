@@ -1,56 +1,67 @@
-# Arguments and General information use to promote the PivateKeyVault  
+# Arguments and General information used to promote the PivateKeyVault  
 
 ### Types of Wallets and Access to Private Keys  
-Type: BlockChain Clients  
-* Description: Perform Mining  
-* Examples:  
-  * Geth,  
-  * Parity,  
- * Vulnerability:  
-   * Remote control, Key loggers,  
-   * Network monitoring for when an account gets unlocked,  
-   * Bugs in Parity software cause loss of Ether  
- * Articles on the subject:  
+* Type: BlockChain Clients  
+  * Description: Perform Mining  
+  * Examples:  
+    * Geth,  
+    * Parity,  
+   * Vulnerability:  
+     * Remote control, Key loggers,  
+     * Network monitoring for when an account gets unlocked,  
+     * Bugs in Parity software cause loss of Ether  
+   * Articles on the subject:  
 
-Command Line Tools
-   (Anything that runs at the command prompt or at the NodeJS Console)
-   Examples: 
-      Web3js 
-      Any library that is used to make or work with keypairs at the command line.
-   Vulnerability: 
-      Remote control, Key loggers, 
-      Network monitoring for when an account gets unlocked,
-      Private keys retained in log files 
-   Articles on the subject:
+* Type: Command Line Tools  
+  * Description: Anything that runs at the command prompt or at the NodeJS Console  
+  * Examples:  
+    * Web3js 
+    * Any library that is used to make or work with keypairs at the command line.  
+  * Vulnerability:  
+    * Remote control, Key loggers,  
+    * Network monitoring for when an account gets unlocked,  
+    * Private keys retained in log files  
+  * Articles on the subject:  
 
-Digital Wallet
-   (runs on your computer) 
-   Examples: 
-      MyEtherWallet, 
-      Mist,
-   Vulnerability: 
-      Fishing Attacks, 
-      Remote control, 
-      Key loggers, 
-      Network monitoring for when an account gets unlocked, 
+* Type: Digital Wallet  
+  * Description: Runs on your computer  
+  * Examples:  
+    * MyEtherWallet  
+    * Mist  
+  * Vulnerability:  
+    * Fishing Attacks,  
+    * Remote control,  
+    * Key loggers,  
+    * Network monitoring for when an account gets unlocked,  
+  * Articles on the subject:    
 
-Hardware Wallet 
-   (runs on a piece of hardware that you plug into your computer)
-   Ex: Nano Ledger, Trezor
+* Type: Hardware Wallet  
+  * Description: Runs on a piece of hardware that you plug into your computer  
+  * Examples:  
+    * Nano Ledger  
+    * Trezor  
+  * Vulnerability:  
+  
+* Type: Paper Wallet  
+  * Description: Private key pairs stored on paper  
+  * Examples:  
+    * Receipts printed out on the Vault or from any instance of MyEtherWallet  
+  * Vulnerability:   
+    * Unencrypted   
+    * Thermal paper will turn black if kept in a hot environment.  
+  * Articles on the subject:  
 
-Cold storage 
-   (private key pairs stored under a mountain) 
-   
+* Type: Cold storage   
+  * Description: Private key pairs stored under a mountain usually as paper wallets  
+  * Examples:   
+  * Vulnerability:  Centrally located - Fat Target   
+  * Articles on the subject:  
 
-Paper Wallet
-
-
-
-AirGapped Wallet
-   Runs on a computer that never connects to the Internet
-   Ex: PrivateKeyVault
-   Vulnerability: Tempest, Cameras on the Operator, Installing a bug on the device
-. The Private Key Vault scans in qr-codes from your phone, or from hard copy. It outputs qr-codes to the touchscreen for scanning into your mobile device. All data moving in or out of the device stands for your inspection and approval before proceeding. No radios of any kind are installed in the device and there are no exposed cable jacks for data transfer.
+* Type: AirGapped Wallet
+  * Description: Runs on a computer that never connects to the Internet
+  * Example: PrivateKeyVault
+  * Vulnerability: Tempest, Cameras on the Operator, Installing a bug on the device
+.   *The Private Key Vault scans in qr-codes from your phone, or from hard copy. It outputs qr-codes to the touchscreen for scanning into your mobile device. All data moving in or out of the device stands for your inspection and approval before proceeding. No radios of any kind are installed in the device and there are no exposed cable jacks for data transfer.
 
 
 Various Things the Vault Can Do That the Ledger Can't
