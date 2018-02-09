@@ -234,10 +234,14 @@ Screen blanking is a security risk because if a screen goes dark then the user m
 
 #### Disable text terminals from blanking  
 change two settings in /etc/kbd/config  
+Sadly in Stretch I was unable to find this directory.
 ```
 BLANK_TIME=0  
 POWERDOWN_TIME=0  
 ```  
+#### Install xscreensaver
+`sudo apt-get install xscreensaver`
+
 
 #### Disable Xsession from blanking  
 Add these lines to:   
