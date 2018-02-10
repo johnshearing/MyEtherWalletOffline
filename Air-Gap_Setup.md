@@ -201,7 +201,8 @@ When the pi wakes up again, the Florence virtual keyboard will be available in t
 One of the virtual keys bears the icon of a wrench. This opens your settings dialog. Under **Layout** I selected the **Standard** keyboard with the **Navigation** **Numeric** and **Florence** keyboard extensions. Under **Behavior** I selected **Mouse** as the input method and nothing was selected in the **Auto hide** checkbox group.  Under **Window** in the **Features** checkbox group **Transparent**, **Task bar**, and **Floating icon** were deselected.  
 
 #### Install an icon to start the Florence virtual keyboard in the Application Launch Bar  
-No need to do this now since we are not using the Florence keyboard.
+No need to do this now since we are not using the Florence keyboard.  
+The process is documented here only in order to show how to add an icon to the **Application Launch Bar**  
 Start this process by right clicking on the **Task Bar**, then click on **Panel Settings**, Then click on the **Panel Applets** tab, then select **Application Launch Bar** Then click the **Preferences** button. Then under **Universal Access** pick the **Florence** virtual keyboard and then press the **Add** button. Once added, the icon can be positioned with the **Up** and **Down** buttons.
 
 #### Install the GDM3 Display Manager
@@ -226,31 +227,26 @@ Install an Application for changing GDM3 settings and other settings in GNOME
 `sudo apt-get install dconf-tools.`  
 
 #### Screen lockers are a Security Risk  
-Logging out and then back in again accomplished by selecting the **Shutdown** option on the main menu and then selecting the **Exit to command line** button. This will log the user out and then present the user with a login screen to start a new session if desired. This is fail safe because if the login service crashes or is hacked no one is logged in. But if a screen lock is used then the user is still logged in so if the screen lock crashes or is hacked then the users's session becomes accessable to the attacker. [Jamie Zawinski explains in detail here](https://www.jwz.org/xscreensaver/toolkits.html)  
+Logging out and then back in again is accomplished by selecting the **Shutdown** option on the main menu and then selecting the **Logout** button. This will log the user out and then present the user with a login screen to start a new session if desired. This is fail safe because if the login service crashes or is hacked no one is logged in. But if a screen lock is used then the user is still logged in so if the screen lock crashes or is hacked then the users's session becomes accessable to the attacker. Obviously, applications are closed when the user logs out so logging out is a bit inconvenient when compared with a screen saver but the extra security makes the effort worthwhile. [Jamie Zawinski explains in detail here](https://www.jwz.org/xscreensaver/toolkits.html)  
 
 #### Preventing Screen Blanking  
 Screen blanking is a security risk because if a screen goes dark then the user might mistakenly think that the machine is off when infact a mere touch will bring the screen back to life with the users session available.  
 
- #### Prevent Xsession and Display Power Management Signaling from blanking the screen:  
-Add these lines to:   
-`/home/pi/.config/lxsession/LXDE-pi/autostart`  
-```  
-@xset s noblank   
-@xset s off   
-@xset -dpms  
-```  
-Use the leafpad text editor to accomplish this as follows.  
-Paste the following line into the pi's command line interface.  
-`sudo leafpad /home/pi/.config/lxsession/LXDE-pi/autostart`  
+#### Prevent Xsession and Display Power Management Signaling from blanking the screen:  
+Run the following command in xTerminal to edit lightdm.conf:  
+`sudo leafpad /etc/lightdm/lightdm.conf`  
 
-#### Prevent Display Power Management Signaling from blanking the screen  
-At the pi's command line interface (xTerminal) you could execute the following to accomplish the same thing but it will only be in effect for the current session.  
+in section [Seat:*] add or adjust line to say:  
+`xserver-command=X -s 0 -dpms`  
+
+#### Using xset to working with Xsession and DPMS at runtime:  
+At the pi's command line interface (xTerminal) you could execute the following to accomplish the same thing as above but it will only be in effect for the current session.  
 `xset s off -dpms`  
 
 To view your Xsession settings, use this command:  
 `xset q` 
 
-[More on Xsession and DPMS here](https://wiki.archlinux.org/index.php/Display_Power_Management_Signaling)   
+[More on xset, Xsession, and DPMS here](https://wiki.archlinux.org/index.php/Display_Power_Management_Signaling)   
 
 #### Setup MyEtherWallet  
 [For developers and regular users, the entire project is found here](https://github.com/kvhnuke/etherwallet#download-the-latest-release-httpsgithubcomkvhnukeetherwalletreleaseslatest).  
@@ -312,7 +308,7 @@ Small sharp sissors are good for turning the retaining ring.
 Some force will be required to break the dots of glue that hold the retaining ring in place.  
 The focus comes set at infinity.  
 Counter clock wise moves the focus closer.  
-I adjusted the focus to about 1 foot.  
+I adjusted the focus to about 8 inches.  
 It might be good to put a dot of super glue on the retaining ring when finished adjusting the focus.  
 This whole process is best done before putting the camera in it's housing.  
 To see what is possible with raspistill execute `raspistill --help`  
@@ -352,8 +348,8 @@ Three files are involved:
 First, create a file in the pi directory called ld_qr_reader.sh  
 The name stands for Load QR-Code Reader.  
 The location of the file is important.  
-Using the Terminal Window, navigate to the pi directory and execute the following command.  
-`sudo leafpad ld_qr_reader.sh`  
+Using the Terminal Window, execute the following command:  
+`sudo leafpad /home/pi/ld_qr_reader.sh`  
 
 Paste the following into the file and save it to the pi directory:  
 ```
@@ -365,7 +361,7 @@ zbarcam --nodisplay --raw --quiet -Sdisable -Sqrcode.enable --verbose --prescale
 
 Next, Grant read, write, and execute permissions to every one.  
 Execute the following command in the pi's terminal window:  
-`sudo chmod 777 ld_qr_reader.sh`  
+`sudo chmod 777 /home/pi/ld_qr_reader.sh`  
 
 Second File: Get a nice icon from the internet to represent the QR-Code reader and save it to the following directory:  
 `/usr/share/icons/`  
@@ -375,7 +371,7 @@ We will refer to the icon later by this name.
 
 Next, Grant read, write, and execute permissions to every one.  
 Execute the following command in the pi's terminal window:  
-`sudo chmod 777 QR-Code.png`
+`sudo chmod 777 /usr/share/icons/QR-Code.png`
 
 Third File: The Desktop file - This is file determines the properties of the short cut.  
 Execute the following command in the pi's terminal window   
@@ -397,9 +393,9 @@ Categories=Utility;
 
 Next, Grant read, write, and execute permissions to every one.  
 Execute the following command in the pi's terminal window:  
-`sudo chmod 777 ld_qr_reader.desktop`
+`sudo chmod 777 /home/pi/.local/share/applications/ld_qr_reader.desktop`
 
-Reboot the pi and then right click on the Application Launch Bar so that you can edit its properties.  
+Reboot the pi and then right click on the Application Launch Bar so that you can edit its properties in the same way that was shown for the Florence virtual keyboard above.  
 Select your new desktop item (It can be found in accessories) and place it onto the Application Launch Bar.  
  
 #### Put another button on the Application Launch Bar to kill the zbarcam process.  
@@ -426,7 +422,7 @@ The name stands for Kill QR-Code Reader.
 We will refer to the file by this name.  
 The location of the file is important too.  
 Using the Terminal Window, navigate to the pi directory and execute the following command.  
-`sudo leafpad kill_qr_reader.sh`  
+`sudo leafpad /home/pi/kill_qr_reader.sh`  
 
 Paste the following into the file and save it to the pi directory:  
 ```
@@ -438,7 +434,7 @@ sudo killall zbarcam
 
 Next, Grant read, write, and execute permissions to every one.  
 Execute the following command in the pi's terminal window:  
-`sudo chmod 777 kill_qr_reader.sh` 
+`sudo chmod 777 /home/pi/kill_qr_reader.sh` 
 
 Third File: The Desktop file - This is file determines the properties of the short cut.  
 Execute the following command in the pi's terminal window   
@@ -462,7 +458,7 @@ Next, Grant read, write, and execute permissions to every one.
 Execute the following command in the pi's terminal window:  
 `sudo chmod 777 /home/pi/.local/share/applications/kill_qr_reader.desktop` 
 
-Reboot the pi and then right click on the Application Launch Bar so that you can edit its properties.  
+Reboot the pi and then right click on the Application Launch Bar so that you can edit its properties in the same way that was shown for the Florence virtual keyboard above.  
 Select your new desktop item (It can be found in accessories) and place it onto the Application Launch Bar.  
 
 At some point in the future it might fun to have the buttons which turn on and off the QR-Code scanner behave like radio buttons where the active button is depressed.    
