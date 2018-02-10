@@ -225,38 +225,32 @@ This is a long install during which you will be asked to verify switching from L
 Install an Application for changing GDM3 settings and other settings in GNOME  
 `sudo apt-get install dconf-tools.`  
 
-#### GDM3 is Safe but Screen lockers are a Security Risk  
-Logging out and then back in again with GDM3 is accomplished by selecting the **Shutdown** option on the main menu and then selecting the **Exit to command line** button. This will log the user out and then present the user with the GDM3 login screen to start a new session if desired. This is fail safe because if the login service crashes or is hacked no one is logged in. But if a screen lock is used then the user is still logged in so if the screen lock crashes or is hacked then the users's session becomes accessable to the attacker. [Jamie Zawinski explains in detail here](https://www.jwz.org/xscreensaver/toolkits.html)  
+#### Screen lockers are a Security Risk  
+Logging out and then back in again accomplished by selecting the **Shutdown** option on the main menu and then selecting the **Exit to command line** button. This will log the user out and then present the user with a login screen to start a new session if desired. This is fail safe because if the login service crashes or is hacked no one is logged in. But if a screen lock is used then the user is still logged in so if the screen lock crashes or is hacked then the users's session becomes accessable to the attacker. [Jamie Zawinski explains in detail here](https://www.jwz.org/xscreensaver/toolkits.html)  
 
 #### Preventing Screen Blanking  
 Screen blanking is a security risk because if a screen goes dark then the user might mistakenly think that the machine is off when infact a mere touch will bring the screen back to life with the users session available.  
 
-#### Disable text terminals from blanking  
-change two settings in /etc/kbd/config  
-Sadly in Stretch I was unable to find this directory.
-```
-BLANK_TIME=0  
-POWERDOWN_TIME=0  
-```  
-#### Install xscreensaver
-`sudo apt-get install xscreensaver`
-
-
-#### Disable Xsession from blanking  
+ #### Prevent Xsession and Display Power Management Signaling from blanking the screen:  
 Add these lines to:   
-/etc/xdg/lxsession/LXDE/autostart  
-and also to:  
-/etc/xdg/lxsession/LXDE-pi/autostart
-```
+`/home/pi/.config/lxsession/LXDE-pi/autostart`  
+```  
 @xset s noblank   
 @xset s off   
 @xset -dpms  
-```
+```  
+Use the leafpad text editor to accomplish this as follows.  
+Paste the following line into the pi's command line interface.  
+`sudo leafpad /home/pi/.config/lxsession/LXDE-pi/autostart`  
 
-[More on DPMS here](https://wiki.archlinux.org/index.php/Display_Power_Management_Signaling)
+#### Prevent Display Power Management Signaling from blanking the screen  
+At the pi's command line interface (xTerminal) you could execute the following to accomplish the same thing but it will only be in effect for the current session.  
+`xset s off -dpms`  
 
-To view your Xsession screen saver setting, use this command (must be used from xterminal)  
-`xset q`    
+To view your Xsession settings, use this command:  
+`xset q` 
+
+[More on Xsession and DPMS here](https://wiki.archlinux.org/index.php/Display_Power_Management_Signaling)   
 
 #### Setup MyEtherWallet  
 [For developers and regular users, the entire project is found here](https://github.com/kvhnuke/etherwallet#download-the-latest-release-httpsgithubcomkvhnukeetherwalletreleaseslatest).  
