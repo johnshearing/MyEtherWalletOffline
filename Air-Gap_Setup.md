@@ -201,9 +201,11 @@ When the pi wakes up again, the Florence virtual keyboard will be available in t
 One of the virtual keys bears the icon of a wrench. This opens your settings dialog. Under **Layout** I selected the **Standard** keyboard with the **Navigation** **Numeric** and **Florence** keyboard extensions. Under **Behavior** I selected **Mouse** as the input method and nothing was selected in the **Auto hide** checkbox group.  Under **Window** in the **Features** checkbox group **Transparent**, **Task bar**, and **Floating icon** were deselected.  
 
 #### Install an icon to start the Florence virtual keyboard in the Application Launch Bar  
+No need to do this now since we are not using the Florence keyboard.
 Start this process by right clicking on the **Task Bar**, then click on **Panel Settings**, Then click on the **Panel Applets** tab, then select **Application Launch Bar** Then click the **Preferences** button. Then under **Universal Access** pick the **Florence** virtual keyboard and then press the **Add** button. Once added, the icon can be positioned with the **Up** and **Down** buttons.
 
 #### Install the GDM3 Display Manager
+No need to do any of this. GDM3 is only useful for the onscreen keyboard we needed when there was no actual keyboard.
 The display manager is responsible for managing the user authentication screen. The Raspian OS comes with the LightDM display manager which does not have a virtual keyboard for password entry. The Florence virtual keyboard we just installed will not work either because there is no apparent way to load it before the login screen shows up. So we will switch out LightDM with GDM3 which does have an integrated virtual keyboard.  
 [More info about that here.](https://askubuntu.com/questions/829108/what-is-gdm3-kdm-lightdm-how-to-install-and-remove-them)  
 
