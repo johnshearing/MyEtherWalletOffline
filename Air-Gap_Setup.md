@@ -633,7 +633,7 @@ Install and compile twofing
 `make && sudo make install`  
 
 Create a new rule-file  
-`sudo nano /etc/udev/rules.d/70-touchscreen-raspberrypi.rules`  
+`sudo leafpad /etc/udev/rules.d/70-touchscreen-raspberrypi.rules`  
 
 Add the following line  
 `KERNEL=="event*",ATTRS{name}=="FT5406 memory based driver",SYMLINK+="twofingtouch",MODE="0440"`  
