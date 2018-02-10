@@ -114,35 +114,34 @@ The previously untitled SD card is now called boot.
 
 The disk imager has the ability to create hashes if required.
 
-#### Enable SSH.
+#### Enable SSH.  
+Now that we are using a keyboard it is unnecessary to us SSH and it is a security risk.  
+But I am leaving this section in just in case there is reason to use SSH in the future.  
 Open NotePad and type some random characters into the document. It doesn't matter what the characters are as long as there is something to save.  
 
 Click **Save**, navigate to the SD card, and then select **All Files** from the **File type** pulldown menu.  
 
-Save the file as `"ssh"` (the quotation marks are included in the name). The reason for the quotation marks is to ensure that the file is created without any extensions appended to the file name.
+Save the file as `"ssh"` (the quotation marks are included in the name). The reason for the quotation marks is to ensure that the file is created without any extensions appended to the file name.  
 
-In order for ssh to work on a raspberry pi this file must exist in the root directory of the SD card.
+In order for ssh to work on a raspberry pi this file must exist in the root directory of the SD card.  
+
+Putty.exe would be the application to use on your windows machine if you wish to SSH into your pi.  
+Connect the two devices with an ethernet cable and boot up the pi  
+Get the IP address of your pi by taping on the Networking icon near the upper right of the Task Bar and enter this into putty.  
+Putty will then prompt you for user name and password.  
+That's it! Your in.  
 
 #### Booting the Pi For the First Time  
 Now eject the SD card from your computer and insert it into the pi.  
 
 Insert one end of the Ethernet cable into the pi and the other end into your computer.  
 Energize the pi and let it cook for a minute or more.  
-Future boots will go much faster.  
-
-After the pi boots, the IP address can be discovered by tapping on the network icon at the right side of the menu bar.  
+Future boots will go much faster.   
 
 Important Note: When using your finger to resize windows: tap **on the title bar of the window near an edge** until the cursor changes to become two arrow heads pointing in opposite directions. Now you will know that the window is ready to be resized. Touch the cursor again and hold your finger for a short moment on the cursor. Now move your finger to resize the window. If you do not follow this method exactly then resizing the window can be maddeningly difficult.  
 
-#### First SSH Session: Chose interfacing options, Expand File System.    
-
-Open Putty, input the IP address, and click on the **Open** button.  
-
-Click yes if there is a warning to add the host's key to Putty's cache.  
-
-A terminal window will appear and you will be prompted for a user name and password.  
-
-Enter `pi` when prompted for a user name and `raspberry` when prompted for the password.  
+#### Chose interfacing options, Expand File System.  
+Open a Terminal window by clicking the Terminal Window icon on the taskbar.  
 
 Next type: `sudo raspi-config` at the command prompt and press **Enter**  
 You will only be able to access this utility from the keyboard. The mouse will not work.  
@@ -156,10 +155,7 @@ Next under **Interfacing Options**, Enable VNC and Camera.
 
 Under **Advanced Options**, Select **Expand File System**.  
 
-Select **Finish** and accept the offer to reboot.  
-
-As the pi reboots, your ssh terminal session will cease to function of course.  
-Close the SSH terminal window.   
+Select **Finish** and accept the offer to reboot.     
 
 #### Setup WiFi    
 Insert your WiFi dongle and reboot the pi again (yes, reboot it again).  
@@ -174,17 +170,18 @@ After the pi reboots, start an new VNC session via Ethernet as described below.
 VNC can be used to configure your pi and to transfer files from PC.  
 
 Make sure there is an Ethernet cable plugged in between your computer and your pi.  
-
+Get the IP address of your pi by taping on the Networking icon near the upper right of the Task Bar.  
 Double click on **VNC-Viewer-6.1.1-Windows-64bit.exe** in the **PiSetup** folder on your computer.  
-
-Enter the IP address and press **Enter** on your keyboard.  Your remote VNC session will start.  
+Enter the IP address of your pi into the VNC window on your PC and press **Enter** on the keyboard.  
+Your remote VNC session will start.  
 Remember you can find out your Ethernet IP address by clicking the WiFi icon one or more times slowly until it shows up. The IP address for the Ethernet connection will be labeled **eth0**. This is the one you want to enter into the VNC dialog box on your computer. The IP address associated with your WiFi dongle will be labled **wlan0**. This is for access to the Internet - it is not used for connecting to your computer.  
 
 You may get some security questions the first time you login with VNC because the VNC client has never seen that host before. Select responses that indicate that you trust the pi and you will be allowed to continue.  
 
 At the command prompt, login in with the username pi and with the new password you just created.   
 
-#### Install the Florence virtual keyboard  
+#### Install the Florence virtual keyboard 
+Since we are using a keyboard now there is no reason to install Florence. So skip this section.  
 From the VNC session you just created, open the command line interpreter (AKA Terminal Window) on your pi.  
 To do this, click the icon on your pi's task bar that looks like a terminal window.  
 You can also find it on in your pi's menu under **Accessories**.  
