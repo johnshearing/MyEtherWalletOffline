@@ -11,10 +11,10 @@ There are two versions:
 
 The plan now is to teach clients how to set up with their own accounts in person for a fee or teach them [for free via YouTube](https://www.youtube.com/channel/UCQlQRc9muSqPZIXSfugN43A).  
 Then sell them a clean machine, or they can build their own using this repository for instructions.  
-Now they can set up their own accounts in their own homes or businesses when they are alone.  
+Then they can set up their own accounts in their own homes or businesses when they are alone.  
 In this way there is never any doubt that the only person who has the keys is the client.  
 
-For original prototype (no secure case and no printer but no special machining either) you will need a raspberry pi 2 board, the official raspberry pi 7 inch touchscreen, the SmartiPi Case for the pi, a camera, the smartiPi case for the camera, a 16 G-bite SD card, a power adaptor, ethernet cable, and a WiFi dongle.  
+For original prototype you will need a raspberry pi 2 board, the official raspberry pi 7 inch touchscreen, the SmartiPi Case for the pi, a camera, the smartiPi case for the camera, a 16 G-bite SD card, a power adaptor, ethernet cable, and a WiFi dongle.  
 
 A material list with links for the lastest working prototype with built in printer is forthcoming.  
 Specially machined parts will be made available or the fully assembled device already loaded with software can be purchased.  
