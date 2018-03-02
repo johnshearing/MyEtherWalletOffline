@@ -226,6 +226,11 @@ This is a long install during which you will be asked to verify switching from L
 Install an Application for changing GDM3 settings and other settings in GNOME  
 `sudo apt-get install dconf-tools.`  
 
+#### Switch to American keyboard layout if you are American  
+At the command line, execute the following line of code.  
+`sudo leafpad /etc/default/keyboard`  
+Then change `XKBLAYOUT="gb"` to `XKBLAYOUT="us"`  
+
 #### Screen lockers are a Security Risk  
 Logging out and then back in again is accomplished by selecting the **Shutdown** option on the main menu and then selecting the **Logout** button. This will log the user out and then present the user with a login screen to start a new session if desired. This is fail safe because if the login service crashes or is hacked no one is logged in. But if a screen lock is used then the user is still logged in so if the screen lock crashes or is hacked then the users's session becomes accessable to the attacker. Obviously, applications are closed when the user logs out so logging out is a bit inconvenient when compared with a screen saver but the extra security makes the effort worthwhile. [Jamie Zawinski explains in detail here](https://www.jwz.org/xscreensaver/toolkits.html)  
 
