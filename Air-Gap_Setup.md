@@ -612,6 +612,9 @@ The printer will print "This is a test."
 The following command will print a picture:  
 `lpr -o fit-to-page /usr/share/raspberrypi-artwork/raspberry-pi-logo.png`  
 
+The following command will print a text file:  
+`lp -o cpi=8 filename`  
+
 [Here are some command line options for the printer.](https://www.cups.org/doc/options.html)
 
 
