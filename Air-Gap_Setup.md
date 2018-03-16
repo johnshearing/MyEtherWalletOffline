@@ -188,7 +188,7 @@ You can also find it on in your pi's menu under **Accessories**.
 
 Now install Florence.  
 Execute the following in the pi's terminal window.  
-`sudo apt-get install florence`  
+`sudo apt-get update && sudo apt-get install florence`  
 
 Florence will not run correctly unless you install the **at-spi2-core** package.  
 Execute the following line of code in your pi's terminal window.  
