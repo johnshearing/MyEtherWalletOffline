@@ -9,8 +9,7 @@ There are two versions:
 * The second version is much smaller but has no printer. The parts have arrived for this.  
 * A laser cut case if forthcoming for both versions. The CAD files will also be made available here for those people that would like to cut their own cases.
 
-The plan now is to teach clients how to set up with their own accounts in person for a fee or teach them [for free via YouTube](https://www.youtube.com/channel/UCQlQRc9muSqPZIXSfugN43A) if they prefer.  
-Then sell them a clean machine, or they can build their own using this repository for instructions.  
+The plan now is to teach clients how to set up with their own accounts in person for a fee or teach them [for free via YouTube](https://www.youtube.com/channel/UCQlQRc9muSqPZIXSfugN43A) if they prefer. Then sell them a clean machine, or they can build their own using this repository for instructions.  
 Now they can set up their own accounts in their own homes or businesses when they are alone.  
 In this way there is never any doubt that the only person who has the keys is the client.  
 
