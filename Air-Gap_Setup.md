@@ -30,7 +30,7 @@ Make a folder and name it perhaps **PiSetup**
 [Download 7-zip found here](http://www.7-zip.org/) to **PiSetup**and install it.  
 
 [Download Raspinan Jessie with Pixel found here](https://www.raspberrypi.org/downloads/raspbian/) to **PiSetup**   
-**Do not** download Stretch (the latest version of raspbian) as of this writting. I have not yet heard of anyone achiving LUKS full disk encryption when using Stretch as the operating system.  
+**Do not** download Stretch (the latest version of raspbian). As of this writting. I have not yet heard of anyone achiving LUKS full disk encryption when using Stretch as the operating system without using a second Linux computer to do the encryption.   
 
 If you want to, you can use the Win32 Disk Imager to check that the SHA1 hash of your zip file is the same as the SHA1 hash listed on the raspberry pi website (this is the easiest option). Or you can use NodeJS at the command line to check that the downloaded zip file has not been tampered with. This takes a bit more time but it is good to have two completely different methods to hash a file.  
 Assuming NodeJS is installed - Open your favorite command line interpreter. I use PowerShell.  
@@ -84,6 +84,9 @@ If you are satisfied that the hash matches what is published then continue.
 Look up Hasha on NPM to learn about other ways to use this utility.  
 
 ### Write the image to the SD Card  
+
+Purchase the higest quality SD card that you can afford.  
+I can not make a recommendation execept to say do some research online.  
 
 Ensure that the write protection switch on the SD card adaptor is set to allow writing to the SD card.  
 
@@ -152,7 +155,67 @@ Then change `XKBLAYOUT="gb"` to `XKBLAYOUT="us"`
 The following is the written tutorial from which these notes are made.  
 [Raspberry Pi LUKS Root Encryption](https://robpol86.com/raspberry_pi_luks.html)  
 
+These instructions for encryption are unique because it shows a method of encrypting the entire SD card (your entire operating system) without the need of a second Linux computer. Everything is done on the raspberry pi. The only extra item you will need is a thumbdrive.  
+An overview of the process:  
+Install software on your Raspberry Pi’s Raspbian OS.  
+Build a custom and boot into the initramfs.  
+Shrink your main file system.  
+Back up your main file system from the SD card to the USB drive.  
+Wipe SD card and create an empty encrypted partition.  
+Copy back your backed-up file system from USB on to your encrypted SD card.  
 
+**Warning**  
+This guide involves backing up your data to a USB drive and destroying all data on your SD card. Though slim there is a possibility of failure. Be sure to have proper backups of your Raspberry Pi in case something goes wrong. Also note that all data on your USB drive will be destroyed during the process since it will temporarily hold all of your Raspberry Pi’s data.  
+
+First install some software:  
+We’ll begin by installing software and creating a new initramfs for your Raspberry Pi. This new initramfs will have the cryptsetup program needed to unlock the encrypted partition on every boot. We’ll also include other tools to assist in the initial encryption of your existing data.  
+
+Execute the following at the raspberry pi command prompt:  
+`sudo apt-get install busybox cryptsetup initramfs-tools`  
+
+Next we’ll need to add a kernel post-install script. Since Raspbian doesn’t normally use an initrd/initramfs it doesn’t auto-update the one we’re about to create when a new kernel version comes out. Our initramfs holds kernel modules since they’re needed before the encrypted root file system can be mounted. When the kernel version changes it won’t be able to find its new modules. To fix this we will create the following script.  
+
+Execute the following at the raspberry pi command prompt to open the leafpad text editor:  
+`/etc/kernel/postinst.d/initramfs-rebuild`  
+
+Now paste the following into the open text editor window and then save and exit:  
+``` 
+#!/bin/sh -e
+
+# Rebuild initramfs.gz after kernel upgrade to include new kernel's modules.
+# https://github.com/Robpol86/robpol86.com/blob/master/docs/_static/initramfs-rebuild.sh
+# Save as (chmod +x): /etc/kernel/postinst.d/initramfs-rebuild
+
+# Remove splash from cmdline.
+if grep -q '\bsplash\b' /boot/cmdline.txt; then
+  sed -i 's/ \?splash \?/ /' /boot/cmdline.txt
+fi
+
+# Exit if not building kernel for this Raspberry Pi's hardware version.
+version="$1"
+current_version="$(uname -r)"
+case "${current_version}" in
+  *-v7+)
+    case "${version}" in
+      *-v7+) ;;
+      *) exit 0
+    esac
+  ;;
+  *+)
+    case "${version}" in
+      *-v7+) exit 0 ;;
+    esac
+  ;;
+esac
+
+# Exit if rebuild cannot be performed or not needed.
+[ -x /usr/sbin/mkinitramfs ] || exit 0
+[ -f /boot/initramfs.gz ] || exit 0
+lsinitramfs /boot/initramfs.gz |grep -q "/$version$" && exit 0  # Already in initramfs.
+
+# Rebuild.
+mkinitramfs -o /boot/initramfs.gz "$version"
+```  
 
 #### Setup WiFi    
 Insert your WiFi dongle and reboot the pi again (yes, reboot it again).  
