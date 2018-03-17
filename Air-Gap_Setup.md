@@ -15,7 +15,7 @@ In this way there is never any doubt that the only person who has the keys is th
 
 The items you will need for the most basic setup with no printer, no battery, and no smart power management is as follows. A material list with links for a setup with all of the above features included will be forth coming when we have settled on a final design. But to get started, you will need a raspberry pi 2 board, the official raspberry pi 7 inch touchscreen, the SmartiPi Case for the pi, a camera, the smartiPi case for the camera, a 16 G-bite SD card, a power adaptor, ethernet cable, and a WiFi dongle, a 32Mb thumbdrive, and a power adapter.  
  
-Specially machined parts will be made available for purchase and CAD files will be posted here so you can make them yourself. Also the fully assembled device already loaded with software can be purchased from me or you can set up your own business to do the same.  
+Specially machined parts will be made available for purchase and CAD files will be freely posted here so you can make them yourself. Also the fully assembled device already loaded with software can be purchased from me or you can set up your own business to do the same.  
 
 The following is the written tutorial from which these notes are made.  
 [Setup Headless, Security, WiFi, VNC, Camera, and Much More](http://thezanshow.com/electronics-tutorials/raspberry-pi)
