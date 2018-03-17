@@ -30,9 +30,9 @@ Make a folder and name it perhaps **PiSetup**
 [Download 7-zip found here](http://www.7-zip.org/) to **PiSetup**and install it.  
 
 [Download Raspinan Jessie with Pixel found here](https://www.raspberrypi.org/downloads/raspbian/) to **PiSetup**   
+**Do not** download Stretch (the latest version of raspbian) as of this writting. I have not yet heard of anyone achiving LUKS full disk encryption when using Stretch as the operating system.  
 
-
-You can use the Win32 Disk Imager to check that the SHA1 hash of your zip file is the same as the SHA1 hash listed on the raspberry pi website (this is the easiest option). Or you can use NodeJS at the command line to check that the downloaded zip file has not been tampered with. This takes a bit more time but it is good to have two completely different methods to hash a file.  
+If you want to, you can use the Win32 Disk Imager to check that the SHA1 hash of your zip file is the same as the SHA1 hash listed on the raspberry pi website (this is the easiest option). Or you can use NodeJS at the command line to check that the downloaded zip file has not been tampered with. This takes a bit more time but it is good to have two completely different methods to hash a file.  
 Assuming NodeJS is installed - Open your favorite command line interpreter. I use PowerShell.  
 
 `cd` to the directory where downloaded zip file is located.  
@@ -110,7 +110,7 @@ Insert one end of the Ethernet cable into the pi and the other end into your com
 Energize the pi and let it cook for a minute or more.  
 Future boots will go much faster.   
 
-Important Note: When using your finger to resize windows: tap **on the title bar of the window near an edge** until the cursor changes to become two arrow heads pointing in opposite directions. Now you will know that the window is ready to be resized. Touch the cursor again and hold your finger for a short moment on the cursor. Now move your finger to resize the window. If you do not follow this method exactly then resizing the window can be maddeningly difficult.  
+Important Note: When using your finger to resize windows: tap **on the title bar of the window near an edge** until the cursor changes to become a two headed arrow with heads pointing in opposite directions. Now you will know that the window is ready to be resized. Touch the cursor again and hold your finger for a short moment on the cursor. Now move your finger to resize the window. If you do not follow this method exactly then resizing the window can be maddeningly difficult.  
 
 #### Chose interfacing options, Expand File System.  
 Open a Terminal window by clicking the Terminal Window icon on the taskbar.  
@@ -128,15 +128,6 @@ Next under **Interfacing Options**, Enable VNC and Camera.
 Under **Advanced Options**, Select **Expand File System**.  
 
 Select **Finish** and accept the offer to reboot.     
-
-#### Setup WiFi    
-Insert your WiFi dongle and reboot the pi again (yes, reboot it again).  
-
-After the pi reboots, you will see a WiFi icon in the task bar near the right side.  
-Click on the icon and follow the prompts for connecting to your router.  
-It will now be possible to use the browser and to download files from the Internet.   
-
-After the pi reboots, start an new VNC session via Ethernet as described below.  
 
 #### Setting up VNC  
 VNC can be used to configure your pi and to transfer files from PC.  
@@ -156,6 +147,21 @@ At the command prompt, login in with the username pi and with the new password y
 At the command line, execute the following line of code.  
 `sudo leafpad /etc/default/keyboard`  
 Then change `XKBLAYOUT="gb"` to `XKBLAYOUT="us"`  
+
+#### Setup LUKS Full Disk Encryption  
+The following is the written tutorial from which these notes are made.  
+[Raspberry Pi LUKS Root Encryption](https://robpol86.com/raspberry_pi_luks.html)  
+
+
+
+#### Setup WiFi    
+Insert your WiFi dongle and reboot the pi again (yes, reboot it again).  
+
+After the pi reboots, you will see a WiFi icon in the task bar near the right side.  
+Click on the icon and follow the prompts for connecting to your router.  
+It will now be possible to use the browser and to download files from the Internet.   
+
+After the pi reboots, start an new VNC session via Ethernet as described below.  
 
 #### Screen lockers are a Security Risk  
 Logging out and then back in again is accomplished by selecting the **Shutdown** option on the main menu and then selecting the **Logout** button. This will log the user out and then present the user with a login screen to start a new session if desired. This is fail safe because if the login service crashes or is hacked no one is logged in. But if a screen lock is used then the user is still logged in so if the screen lock crashes or is hacked then the users's session becomes accessable to the attacker. Obviously, applications are closed when the user logs out so logging out is a bit inconvenient when compared with a screen saver but the extra security makes the effort worthwhile. [Jamie Zawinski explains in detail here](https://www.jwz.org/xscreensaver/toolkits.html)  
