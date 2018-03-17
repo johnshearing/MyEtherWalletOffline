@@ -176,7 +176,7 @@ Execute the following at the raspberry pi command prompt:
 Next we’ll need to add a kernel post-install script. Since Raspbian doesn’t normally use an initrd/initramfs it doesn’t auto-update the one we’re about to create when a new kernel version comes out. Our initramfs holds kernel modules since they’re needed before the encrypted root file system can be mounted. When the kernel version changes it won’t be able to find its new modules. To fix this we will create the following script.  
 
 Execute the following at the raspberry pi command prompt to open the leafpad text editor:  
-`/etc/kernel/postinst.d/initramfs-rebuild`  
+`sudo leafpad /etc/kernel/postinst.d/initramfs-rebuild`  
 
 Now paste the following into the open text editor window and then save and exit:  
 ``` 
@@ -216,6 +216,60 @@ lsinitramfs /boot/initramfs.gz |grep -q "/$version$" && exit 0  # Already in ini
 # Rebuild.
 mkinitramfs -o /boot/initramfs.gz "$version"
 ```  
+
+Now we want resize2fs and fdisk to be included in our initramfs so we’ll need to create a hook file.  
+Execute the following at the raspberry pi command prompt to open the leafpad text editor:  
+`sudo leafpad /etc/initramfs-tools/hooks/resize2fs`  
+
+Now paste the following into the open text editor window and then save and exit:  
+```  
+#!/bin/sh -e
+
+# Copy resize2fs, fdisk, and other kernel modules into initramfs image.
+# https://github.com/Robpol86/robpol86.com/blob/master/docs/_static/resize2fs.sh
+# Save as (chmod +x): /etc/initramfs-tools/hooks/resize2fs
+
+COMPATIBILITY=false  # Set to false to skip copying other kernel's modules.
+
+PREREQ=""
+prereqs () {
+  echo "${PREREQ}"
+}
+case "${1}" in
+  prereqs)
+    prereqs
+    exit 0
+  ;;
+esac
+
+. /usr/share/initramfs-tools/hook-functions
+
+copy_exec /sbin/resize2fs /sbin
+copy_exec /sbin/fdisk /sbin
+
+# Raspberry Pi 1 and 2+3 use different kernels. Include the other.
+if ${COMPATIBILITY}; then
+  case "${version}" in
+    *-v7+) other_version="$(echo ${version} |sed 's/-v7+$/+/')" ;;
+    *+) other_version="$(echo ${version} |sed 's/+$/-v7+/')" ;;
+    *)
+      echo "Warning: kernel version doesn't end with +, ignoring."
+      exit 0
+  esac
+  cp -r /lib/modules/${other_version} ${DESTDIR}/lib/modules/
+fi
+```  
+
+Finally let’s build the new initramfs and make sure our utilities have been installed. The mkinitramfs command may print some WARNINGs from cryptsetup, but that should be fine since we’re using `CRYPTSETUP=y`. As long as cryptsetup itself is present in the `initramfs` it won’t be a problem.  
+
+Execute the following commands at the raspberry pi command prompt one at a time.    
+The first two commands grant permission to execute the scripts on the next two lines.  
+`sudo chmod +x /etc/kernel/postinst.d/initramfs-rebuild`  
+`sudo chmod +x /etc/initramfs-tools/hooks/resize2fs`  
+`sudo -E CRYPTSETUP=y mkinitramfs -o /boot/initramfs.gz`  
+`lsinitramfs /boot/initramfs.gz |grep -P "sbin/(cryptsetup|resize2fs|fdisk)"`  
+
+
 
 #### Setup WiFi    
 Insert your WiFi dongle and reboot the pi again (yes, reboot it again).  
