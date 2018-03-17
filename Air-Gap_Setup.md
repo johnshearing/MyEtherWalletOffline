@@ -9,14 +9,13 @@ There are two versions:
 * The second version is much smaller but has no printer. The parts have arrived for this.  
 * A laser cut case if forthcoming for both versions. The CAD files will also be made available here for those people that would like to cut their own cases.
 
-The plan now is to teach clients how to set up with their own accounts in person for a fee or teach them [for free via YouTube](https://www.youtube.com/channel/UCQlQRc9muSqPZIXSfugN43A).  
+The plan now is to teach clients how to set up with their own accounts in person for a fee or teach them [for free via YouTube](https://www.youtube.com/channel/UCQlQRc9muSqPZIXSfugN43A) if they prefer.  
 Then sell them a clean machine, or they can build their own using this repository for instructions.  
-Then they can set up their own accounts in their own homes or businesses when they are alone.  
+Now they can set up their own accounts in their own homes or businesses when they are alone.  
 In this way there is never any doubt that the only person who has the keys is the client.  
 
-For original prototype you will need a raspberry pi 2 board, the official raspberry pi 7 inch touchscreen, the SmartiPi Case for the pi, a camera, the smartiPi case for the camera, a 16 G-bite SD card, a power adaptor, ethernet cable, and a WiFi dongle.  
-
-A material list with links for the lastest working prototype with built in printer is forthcoming.  
+The items you will need for the most basic setup with no printer, no battery, and no smart power management is as follows. A material list with links for a setup with all of the above features included will be forth coming when we have settled on a final design. But to get started, you will need a raspberry pi 2 board, the official raspberry pi 7 inch touchscreen, the SmartiPi Case for the pi, a camera, the smartiPi case for the camera, a 16 G-bite SD card, a power adaptor, ethernet cable, and a WiFi dongle, a 32Mb thumbdrive, and a power adapter.  
+ 
 Specially machined parts will be made available or the fully assembled device already loaded with software can be purchased.  
 
 The following is the written tutorial from which these notes are made.  
@@ -55,22 +54,13 @@ fs.createReadStream('/some/file/name.zip').pipe(crypto.createHash('sha1').setEnc
 })
 ```  
 After a minute or two, the hash of the zip file will appear at the console output. Be patient.  
-If you are satisfied that the SHA1 hashes match then extract the file to the same directory using 7-zip.  
-
-[Download Putty.exe found here](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html) to  **PiSetup**.  
-Look under **Alternative Binary Files**  
-Download Putty.exe - the SSH/Telnet client.  
-I am using the 64 bit version. You should too if you are using a 64 bit machine.  
-This exe is ready to run. No need to install.  
-The SHA1 hash can be checked using NodeJS the same way that the Raspian OS was checked or you can use the Win32 Disk Imager.  
-There is a link at the very bottom of the download page that will take you to a listing of all the SHA1 hashes for the various downloads offered.  
-I have read that getting the SHA1 hash from the same website that the downloaded file comes from is a pretty useless exercise if the website has been compromised but I am doing it anyway because at least it ensures that the file has not been tampered with during the download process.  
+If you are satisfied that the SHA1 hashes match then extract the file to the same directory using 7-zip.   
 
 [Download VNC client found here](https://www.realvnc.com/download/viewer/) to **PiSetup**  
 No install is required.  
 The SHA256 hash is given just below the download button. Node does not have native ability to run a SHA256 hash so I found this package **Hasha** which seem to be very popular. Keep in mind that The Win32 Disk Imager can accomplish the same thing but it's good to have several different methods of getting a hash.  
 
-Installing and using Hasha:  
+Installing and using Hasha if you want to:  
 Using your favorite Command Line interpreter, `cd` into your **PiSetup** directory.  
 
 Assuming NPM is installed, Initialize a project.  
@@ -112,24 +102,7 @@ Click on the **Write** button and then click **Yes** button.
 
 The previously untitled SD card is now called boot.  
 
-The disk imager has the ability to create hashes if required.
-
-#### Enable SSH.  
-Now that we are using a keyboard it is unnecessary to us SSH and it is a security risk.  
-But I am leaving this section in just in case there is reason to use SSH in the future.  
-Open NotePad and type some random characters into the document. It doesn't matter what the characters are as long as there is something to save.  
-
-Click **Save**, navigate to the SD card, and then select **All Files** from the **File type** pulldown menu.  
-
-Save the file as `"ssh"` (the quotation marks are included in the name). The reason for the quotation marks is to ensure that the file is created without any extensions appended to the file name.  
-
-In order for ssh to work on a raspberry pi this file must exist in the root directory of the SD card.  
-
-Putty.exe would be the application to use on your windows machine if you wish to SSH into your pi.  
-Connect the two devices with an ethernet cable and boot up the pi  
-Get the IP address of your pi by taping on the Networking icon near the upper right of the Task Bar and enter this into putty.  
-Putty will then prompt you for user name and password.  
-That's it! Your in.  
+The disk imager has the ability to create hashes if required.  
 
 #### Booting the Pi For the First Time  
 Now eject the SD card from your computer and insert it into the pi.  
@@ -178,53 +151,7 @@ Remember you can find out your Ethernet IP address by clicking the WiFi icon one
 
 You may get some security questions the first time you login with VNC because the VNC client has never seen that host before. Select responses that indicate that you trust the pi and you will be allowed to continue.  
 
-At the command prompt, login in with the username pi and with the new password you just created.   
-
-#### Install the Florence virtual keyboard 
-Since we are using a keyboard now there is no reason to install Florence. So skip this section.  
-From the VNC session you just created, open the command line interpreter (AKA Terminal Window) on your pi.  
-To do this, click the icon on your pi's task bar that looks like a terminal window.  
-You can also find it on in your pi's menu under **Accessories**.  
-
-Now install Florence.  
-Execute the following in the pi's terminal window.  
-`sudo apt-get update && sudo apt-get install florence`  
-
-Florence will not run correctly unless you install the **at-spi2-core** package.  
-Execute the following line of code in your pi's terminal window.  
-`sudo apt-get install at-spi2-core`  
-
-Finally, reboot your pi.  
-
-When the pi wakes up again, the Florence virtual keyboard will be available in the pi's menu under **Universal Access**  
-
-One of the virtual keys bears the icon of a wrench. This opens your settings dialog. Under **Layout** I selected the **Standard** keyboard with the **Navigation** **Numeric** and **Florence** keyboard extensions. Under **Behavior** I selected **Mouse** as the input method and nothing was selected in the **Auto hide** checkbox group.  Under **Window** in the **Features** checkbox group **Transparent**, **Task bar**, and **Floating icon** were deselected.  
-
-#### Install an icon to start the Florence virtual keyboard in the Application Launch Bar  
-No need to do this now since we are not using the Florence keyboard.  
-The process is documented here only in order to show how to add an icon to the **Application Launch Bar**  
-Start this process by right clicking on the **Task Bar**, then click on **Panel Settings**, Then click on the **Panel Applets** tab, then select **Application Launch Bar** Then click the **Preferences** button. Then under **Universal Access** pick the **Florence** virtual keyboard and then press the **Add** button. Once added, the icon can be positioned with the **Up** and **Down** buttons.
-
-#### Install the GDM3 Display Manager
-No need to do any of this. GDM3 is only useful for the onscreen keyboard we needed when there was no actual keyboard.
-The display manager is responsible for managing the user authentication screen. The Raspian OS comes with the LightDM display manager which does not have a virtual keyboard for password entry. The Florence virtual keyboard we just installed will not work either because there is no apparent way to load it before the login screen shows up. So we will switch out LightDM with GDM3 which does have an integrated virtual keyboard.  
-[More info about that here.](https://askubuntu.com/questions/829108/what-is-gdm3-kdm-lightdm-how-to-install-and-remove-them)  
-
-From the VNC session you just created, open the command line interpreter (AKA Terminal Window) on your pi.  
-To do this, click the icon on your pi's task bar that looks like a terminal window.  
-You can also find it on in your pi's menu under **Accessories**.  
-
-Make your pi aware of the latest packages available for install.  
-Execute the following line of code in your pi's terminal window.  
-`sudo apt-get update`  
-
-Now install the GDM3 display manager.  
-`sudo apt-get install gdm3`  
-
-This is a long install during which you will be asked to verify switching from LightDM to GDM3. 
-
-Install an Application for changing GDM3 settings and other settings in GNOME  
-`sudo apt-get install dconf-tools.`  
+At the command prompt, login in with the username pi and with the new password you just created.    
 
 #### Switch to American keyboard layout if you are American  
 At the command line, execute the following line of code.  
