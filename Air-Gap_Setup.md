@@ -151,6 +151,15 @@ At the command line, execute the following line of code.
 `sudo leafpad /etc/default/keyboard`  
 Then change `XKBLAYOUT="gb"` to `XKBLAYOUT="us"`  
 
+#### Setup WiFi    
+Insert your WiFi dongle and reboot the pi again (yes, reboot it again).  
+
+After the pi reboots, you will see a WiFi icon in the task bar near the right side.  
+Click on the icon and follow the prompts for connecting to your router.  
+It will now be possible to use the browser and to download files from the Internet.   
+
+After the pi reboots, start an new VNC session via Ethernet as described below.  
+
 #### Setup LUKS Full Disk Encryption  
 The following is the written tutorial from which these notes are made.  
 [Raspberry Pi LUKS Root Encryption](https://robpol86.com/raspberry_pi_luks.html)  
@@ -284,19 +293,6 @@ Execute the following at the raspberry pi command prompt to open the leafpad tex
 Then append `cryptdevice=/dev/mmcblk0p2:sdcard` to the end of the line.  
 Next replace `root=Whatever_it_says_here with root=/dev/mapper/sdcard`  
 Finally, save and exit the text editor.  
-
-
-
-
-
-#### Setup WiFi    
-Insert your WiFi dongle and reboot the pi again (yes, reboot it again).  
-
-After the pi reboots, you will see a WiFi icon in the task bar near the right side.  
-Click on the icon and follow the prompts for connecting to your router.  
-It will now be possible to use the browser and to download files from the Internet.   
-
-After the pi reboots, start an new VNC session via Ethernet as described below.  
 
 #### Screen lockers are a Security Risk  
 Logging out and then back in again is accomplished by selecting the **Shutdown** option on the main menu and then selecting the **Logout** button. This will log the user out and then present the user with a login screen to start a new session if desired. This is fail safe because if the login service crashes or is hacked no one is logged in. But if a screen lock is used then the user is still logged in so if the screen lock crashes or is hacked then the users's session becomes accessable to the attacker. Obviously, applications are closed when the user logs out so logging out is a bit inconvenient when compared with a screen saver but the extra security makes the effort worthwhile. [Jamie Zawinski explains in detail here](https://www.jwz.org/xscreensaver/toolkits.html)  
