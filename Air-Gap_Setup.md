@@ -147,14 +147,16 @@ You may get some security questions the first time you login with VNC because th
 When prompted, login in with the username pi and with the new password you just created.    
 
 #### Switch to American keyboard layout if you are American  
-Open the raspberry pi's command line interpreter. It's the forth icon from the top left on the menu bar.
+Open the raspberry pi's command line interpreter.  
+It's the forth icon from the top left on the menu bar.  
 At the command line, execute the following line of code.  
 `sudo leafpad /etc/default/keyboard`  
 Then change `XKBLAYOUT="gb"` to `XKBLAYOUT="us"`  
 
 #### Setup WiFi    
 Insert your WiFi dongle and reboot the pi.  
-After the pi reboots, you will see a WiFi icon in the task bar near the right side. You will recognize the icon as a blue up arrow and a down arrow next to each other.  
+After the pi reboots, you will see a WiFi icon in the task bar near the right side.  
+You will recognize the icon as a blue up arrow and a down arrow next to each other.  
 Click on the icon.  
 After a few seconds your wireless router will appear in a dropdown list.  
 Click on the list item representing your router.  
