@@ -171,7 +171,7 @@ First install some software:
 We’ll begin by installing software and creating a new initramfs for your Raspberry Pi. This new initramfs will have the cryptsetup program needed to unlock the encrypted partition on every boot. We’ll also include other tools to assist in the initial encryption of your existing data.  
 
 Execute the following at the raspberry pi command prompt:  
-`sudo apt-get install busybox cryptsetup initramfs-tools`  
+`sudo apt-get update && sudo apt-get install busybox cryptsetup initramfs-tools`  
 
 Next we’ll need to add a kernel post-install script. Since Raspbian doesn’t normally use an initrd/initramfs it doesn’t auto-update the one we’re about to create when a new kernel version comes out. Our initramfs holds kernel modules since they’re needed before the encrypted root file system can be mounted. When the kernel version changes it won’t be able to find its new modules. To fix this we will create the following script.  
 
