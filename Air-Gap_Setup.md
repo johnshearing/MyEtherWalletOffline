@@ -144,21 +144,26 @@ Remember you can find out your Ethernet IP address by clicking the WiFi icon one
 
 You may get some security questions the first time you login with VNC because the VNC client has never seen that host before. Select responses that indicate that you trust the pi and you will be allowed to continue.  
 
-At the command prompt, login in with the username pi and with the new password you just created.    
+When prompted, login in with the username pi and with the new password you just created.    
 
 #### Switch to American keyboard layout if you are American  
+Open the raspberry pi's command line interpreter. It's the forth icon from the top left on the menu bar.
 At the command line, execute the following line of code.  
 `sudo leafpad /etc/default/keyboard`  
 Then change `XKBLAYOUT="gb"` to `XKBLAYOUT="us"`  
 
 #### Setup WiFi    
-Insert your WiFi dongle and reboot the pi again (yes, reboot it again).  
-
-After the pi reboots, you will see a WiFi icon in the task bar near the right side.  
-Click on the icon and follow the prompts for connecting to your router.  
+Insert your WiFi dongle and reboot the pi.  
+After the pi reboots, you will see a WiFi icon in the task bar near the right side. You will recognize the icon as a blue up arrow and a down arrow next to each other.  
+Click on the icon.  
+After a few seconds your wireless router will appear in a dropdown list.  
+Click on the list item representing your router.  
+A dialoge box will appear asking for your router's password.  
+Enter the password and the pi will connect to the Internet through your router.  
 It will now be possible to use the browser and to download files from the Internet.   
 
-After the pi reboots, start an new VNC session via Ethernet as described below.  
+Now start an new VNC session between this computer and your raspberry pi via Ethernet cable.
+This will allow you to cut and paste commands from this document into the raspberry pi's command line interpreter.
 
 #### Setup LUKS Full Disk Encryption  
 The following is the written tutorial from which these notes are made.  
