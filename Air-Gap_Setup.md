@@ -164,7 +164,7 @@ A dialoge box will appear asking for your router's password.
 Enter the password and the pi will connect to the Internet through your router.  
 It will now be possible to use the browser and to download files from the Internet.   
 
-Now start an new VNC session between this computer and your raspberry pi via Ethernet cable.
+Now start an new VNC session between this computer and your raspberry pi via Ethernet cable.  
 This will allow you to cut and paste commands from this document into the raspberry pi's command line interpreter.
 
 #### Setup LUKS Full Disk Encryption  
