@@ -165,7 +165,8 @@ Enter the password and the pi will connect to the Internet through your router.
 It will now be possible to use the browser and to download files from the Internet.   
 
 Now start an new VNC session between this computer and your raspberry pi via Ethernet cable.  
-This will allow you to cut and paste commands from this document into the raspberry pi's command line interpreter.
+This will allow you to copy and paste commands from this document into the raspberry pi's command line interpreter.  
+
 
 #### Setup LUKS Full Disk Encryption  
 The following is the written tutorial from which these notes are made.  
@@ -188,10 +189,12 @@ We’ll begin by installing software and creating a new initramfs for your Raspb
 
 Execute the following at the raspberry pi command prompt:  
 `sudo apt-get update && sudo apt-get install busybox cryptsetup initramfs-tools`  
+The first part of the command updates the catalog of programs available for download.  
+The second part of the command installs the software necessary to encrypt your SD card.  
 
 Next we’ll need to add a kernel post-install script. Since Raspbian doesn’t normally use an initrd/initramfs it doesn’t auto-update the one we’re about to create when a new kernel version comes out. Our initramfs holds kernel modules since they’re needed before the encrypted root file system can be mounted. When the kernel version changes it won’t be able to find its new modules. To fix this we will create the following script.  
 
-Execute the following at the raspberry pi command prompt to open the leafpad text editor:  
+sudo Execute the following at the raspberry pi command prompt to open the leafpad text editor:  
 `sudo leafpad /etc/kernel/postinst.d/initramfs-rebuild`  
 
 Now paste the following into the open text editor window and then save and exit:  
@@ -283,8 +286,8 @@ The first two commands grant permission to execute the scripts on the next two l
 `sudo chmod +x /etc/kernel/postinst.d/initramfs-rebuild`  
 `sudo chmod +x /etc/initramfs-tools/hooks/resize2fs`  
 `sudo -E CRYPTSETUP=y mkinitramfs -o /boot/initramfs.gz`  
+Don't wory about any warnings you might have seen.  
 `lsinitramfs /boot/initramfs.gz |grep -P "sbin/(cryptsetup|resize2fs|fdisk)"`  
-
 Make sure you see `sbin/resize2fs`, `sbin/cryptsetup`, and `sbin/fdisk` in the output.  
 
 Prepare Boot Files:
@@ -300,6 +303,27 @@ Execute the following at the raspberry pi command prompt to open the leafpad tex
 Then append `cryptdevice=/dev/mmcblk0p2:sdcard` to the end of the line.  
 Next replace `root=Whatever_it_says_here with root=/dev/mapper/sdcard`  
 Finally, save and exit the text editor.  
+
+Execute the following at the raspberry pi command prompt to open the leafpad text editor:  
+`sudo leafpad /etc/fstab`  
+The directions from which I made these notes reads as follows  
+`Replace /dev/mmcblk0p2 with /dev/mapper/sdcard`  
+The problem I had is that there was no such text to replace.  
+But on the third line you will see text that looks something like the following:  
+`PARTUUID=f464b34e-02  /               ext4    defaults,noatime  0       1`  
+Replace `PARTUUID=f464b34e-02` or the similar text with `/dev/mapper/sdcard`  
+Finally, save and exit the text editor.  
+
+Execute the following at the raspberry pi command prompt to open the leafpad text editor:  
+`sudo leafpad /etc/crypttab`  
+Append `sdcard  /dev/mmcblk0p2  none    luks` to the end of the file  
+Finally, save and exit the text editor.  
+
+Now run `sudo reboot`.  
+The Raspberry Pi will fail to boot and drop you into the initramfs shell.
+Don't Panic: Everything is good.  
+
+
 
 #### Screen lockers are a Security Risk  
 Logging out and then back in again is accomplished by selecting the **Shutdown** option on the main menu and then selecting the **Logout** button. This will log the user out and then present the user with a login screen to start a new session if desired. This is fail safe because if the login service crashes or is hacked no one is logged in. But if a screen lock is used then the user is still logged in so if the screen lock crashes or is hacked then the users's session becomes accessable to the attacker. Obviously, applications are closed when the user logs out so logging out is a bit inconvenient when compared with a screen saver but the extra security makes the effort worthwhile. [Jamie Zawinski explains in detail here](https://www.jwz.org/xscreensaver/toolkits.html)  
