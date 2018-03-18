@@ -269,6 +269,24 @@ The first two commands grant permission to execute the scripts on the next two l
 `sudo -E CRYPTSETUP=y mkinitramfs -o /boot/initramfs.gz`  
 `lsinitramfs /boot/initramfs.gz |grep -P "sbin/(cryptsetup|resize2fs|fdisk)"`  
 
+Make sure you see `sbin/resize2fs`, `sbin/cryptsetup`, and `sbin/fdisk` in the output.  
+
+Prepare Boot Files:
+Next step is to make some changes to some configuration files telling the Raspberry Pi to boot our soon-to-be-created encrypted partition. We’ll make these changes first since they’re relatively easily reversible if you mount your SD card on another computer, should you wish to abort this process. Edit these files with these changes:  
+
+Execute the following at the raspberry pi command prompt to open the leafpad text editor:  
+`sudo leafpad /boot/config.txt`  
+Then append `initramfs initramfs.gz followkernel` to the end of the file.  
+Finally, save and exit the text editor.  
+
+Execute the following at the raspberry pi command prompt to open the leafpad text editor:  
+`sudo leafpad /boot/cmdline.txt`  
+Then append `cryptdevice=/dev/mmcblk0p2:sdcard` to the end of the line.  
+Next replace `root=Whatever_it_says_here with root=/dev/mapper/sdcard`  
+Finally, save and exit the text editor.  
+
+
+
 
 
 #### Setup WiFi    
