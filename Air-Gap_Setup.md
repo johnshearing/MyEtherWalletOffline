@@ -484,15 +484,15 @@ Everything should look as it did before.
 **Don't Panic. Everything is fine**   
 Type `clear` and press Enter. That looks nicer.  
 You’ll need to run `cryptsetup luksOpen /dev/mmcblk0p2 sdcard` on every boot from now on.  
-Type the command above carefully check your work before pressing the Enter button.  
+Type the command above carefully and check your work before pressing the Enter button.  
 Enter the strong password you created when prompted.  
 **You are not done yet**   
 Now type `exit` and press the enter button.  
 **The pi should boot up as normal.**  
+
 Wow! that was a big pain in the ass.  
 But all your private information is now safe from even the most aggressive criminals and goverment agencies.  
-The only way to get the information on your device now is to force you to reveal it or to trick you in to revealing your password.  
-They can also catch you at a time when you are using the device and take it from you before you have a chance to turn it off.  
+The only way to get the information on your device now is to force you to reveal it or to trick you in to revealing your password. They can also catch you at a time when you are using the device and take it from you before you have a chance to turn it off.  
 
 
 
