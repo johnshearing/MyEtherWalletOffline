@@ -320,8 +320,66 @@ Append `sdcard  /dev/mmcblk0p2  none    luks` to the end of the file
 Finally, save and exit the text editor.  
 
 Now run `sudo reboot`.  
-The Raspberry Pi will fail to boot and drop you into the initramfs shell.
-Don't Panic: Everything is good.  
+The Raspberry Pi will fail to boot and drop you into the initramfs shell.  
+**Don't Panic: Everything is good.**  
+Your raspberry pi is not broken  
+I doesn't look like it, but you are now at the command prompt.  
+Type `clear` and then press the Enter button.  
+Now it looks like you are at the command prompt.  
+
+Now we are going to shrink the OS, copy it to the thumbdrive, encrypt the SD card, and then copy everything back.  
+Since we are going to do all this on the pi which has limited computing power, it's going to take a long time.  
+Have a cup of coffee between steps - or maybe a nap.  
+
+Also, during the following operations you will not be able to cut and paste between your computer and your pi using VNC. So you will need to type the following commands into your pi manually. Type carefully and check your work before entering each command.  
+
+First we’ll shrink and copy to the USB drive.  
+**Insert your USB drive** and run the following commands one at a time.  
+
+Check SD card for errors.  
+`e2fsck -f /dev/mmcblk0p2`  
+This command took less than two minutes to run on my pi 2 and output 7 lines of information about what it was doing and what it found. The final output line read as follows for me:  
+/dev/mmcblk0p2: 128525/9499664 files (0.1% non-contiguous), 1073182/3854592 blocks  
+You should see something similar.  
+
+Next Shrink the file system on the SD card.  
+Note: When running resize2fs (the next command) it will print out the new size of the file system.  
+Keep track of the number of 4k blocks it tells you since you need to give that number to dd.  
+For reference my resize2fs said:  
+```  
+The file system on /dev/mmcblk0p2 is now 1516179 (4k) blocks long.  
+So “1516179” is my number of interest.  
+```  
+Execute the following command in the pi's terminal window.  
+Don't forget to record the number of 4k blocks that the command reports.  
+`resize2fs -fM /dev/mmcblk0p2`   
+This command took less than a minute to run on my pi 2.  
+It reported: The filesystem on /dev/mmcblk0p2 is now 1516179 (4k) blocks long.  
+It will likely report a different number for you.  
+Be sure to write down the number of 4k blocks that the command reports.  
+
+The next command is going to report the sha1sum of your operating system.  
+This number will be used to verify that the operating system is copied correcty to your thumbdrive in the next step.  
+Execute the following command substituting the count parameter for the result you got in the previous step.  
+Also be sure to record the output.  
+This command is going to run for a long time. Be patient and wait for the result.  
+**Do not enter the following command verbatim**  
+**Substitute the count parameter for the number of 4k blocks the previous step reported to you**  
+Type carefully and check your work before hitting the Enter button.  
+`dd bs=4k count=1516179 if=/dev/mmcblk0p2 |sha1sum`  
+This command took less than 9 minutes to run on my pi 2.  
+There were three lines of output.  
+The last line of output is the sha1sum.  
+Take a picture of the sha1sum so that you can refer to it later.  
+
+The next command is going to format your thumbdrive.  
+The format opperation will destroy all the information that currently exists on your thumbdrive and will make it ready to receive the operating system that is currently stored on your pi's SD card.  
+`fdisk -l /dev/sda`  
+
+
+
+
+
 
 
 
