@@ -171,8 +171,10 @@ This will allow you to copy and paste commands from this document into the raspb
 #### Setup LUKS Full Disk Encryption  
 The following is the written tutorial from which these notes are made.  
 [Raspberry Pi LUKS Root Encryption](https://robpol86.com/raspberry_pi_luks.html)  
+I have rewritten it below, changing the wording a bit to make it less confusing.  
 
-These instructions for encryption are unique because it shows a method of encrypting the entire SD card (your entire operating system) without the need of a second Linux computer. Everything is done on the raspberry pi. The only extra item you will need is a thumbdrive.  
+These instructions for encryption are unique because it shows a method of encrypting the entire root partition on the SD card (your operating system) without the need of a second Linux computer. Everything is done on the raspberry pi. The only extra item you will need is a thumbdrive.  
+
 An overview of the process:  
 Install software on your Raspberry Pi’s Raspbian OS.  
 Build a custom and boot into the initramfs.  
@@ -368,7 +370,7 @@ If you hit any other key to turn the screen on again you will wind up with some 
 **Do not enter the following command verbatim**  
 **Substitute the count parameter for the number of 4k blocks the previous step reported to you**  
 Type carefully and check your work before hitting the Enter button.  
-`dd bs=4k count=1516179 if=/dev/mmcblk0p2 |sha1sum`  
+`dd bs=4k count=1516179 if=/dev/mmcblk0p2 | sha1sum`  
 This command took less than 9 minutes to run on my pi 2.  
 There were three lines of output.  
 The last line of output is the sha1sum.  
@@ -401,11 +403,97 @@ Don't worry if your screen goes blank while the command is running. Just hit the
 **Do not enter the following command verbatim**  
 **Substitute the count parameter for the number of 4k blocks reported to you earlier**  
 Type carefully and check your work before hitting the Enter button.  
-`dd bs=4k count=1516179 if=/dev/sda |sha1sum`   
-This command took less than 10 minutes to run on my pi 2.
+`dd bs=4k count=1516179 if=/dev/sda | sha1sum`   
+This command took less than 10 minutes to run on my pi 2.  
 The output produced the sha1sum of the operating system that was copied to the thumbdrive.  
 Check this value against the sha1sum of the operating system which is sitting on your pi's SD card.  
-if the values are the same then the operating system has been copied from the SD card to the thumbdrive without errors.  
+If the values are the same then the operating system has been copied from the SD card to the thumbdrive without errors.  
+
+Now it’s time to wipe your SD card’s main partition and create an empty encrypted one in its place.  
+The next command will prompt you for the password you want to use for your encrypted partition.  
+Make sure it’s a strong one.  
+Only a completely random string of at least 12 characters that you have never used before anywhere is a strong password.  
+Type the following command carefully and check your work before hitting the Enter button.  
+`cryptsetup --cipher aes-cbc-essiv:sha256 luksFormat /dev/mmcblk0p2`  
+The pi will ask you to confirm that you want to wipe out your operating system and replace it with an encrypted partition.  
+Answer `YES`. You must type YES in UPPERCASE letters and then press the Enter button to continue.  
+If you used the caps lock to type YES then be sure to set it back to lowercase. 
+Otherwise, in the next step you may enter your new password in all UPPERCASE without realizing what you have done.  
+
+Next you will be prompted for a new password.  
+Type in a strong password.  
+Type it in again when prompted.  
+In less then a minute the format will be completed.  
+
+This next command will mount your new encrypted file system.  
+Type the following command carefully and check your work before hitting the Enter button.  
+`cryptsetup luksOpen /dev/mmcblk0p2 sdcard`  
+Enter your strong password when prompted.  
+Nothing much will happen but don't worry - everything is proceeding nicely.  
+
+The next command copies the operating system back to the SD card from the thumbdrive.  
+This command is going to run for a long time. Be patient and wait for the result.  
+Don't worry if your screen goes blank while the command is running. Just hit the Shift key to turn the screen on again.  
+**Do not enter the following command verbatim**  
+**Substitute the count parameter for the number of 4k blocks reported to you earlier**  
+Type carefully and check your work before hitting the Enter button.  
+`dd bs=4k count=1516179 if=/dev/sda of=/dev/mapper/sdcard `  
+As this command runs you will see various output on your screen every few minutes which might seem to indicate that your system is hung. 
+**Do not believe these messages.  
+Everything is fine. 
+Your system is happily copying your operating system from your thumbdrive to your SD card.**  
+This command took less then 15 minutes to run on my pi 2.  
+
+The next command will report the sha1sum of the operating system which has just been copied to your root partition.     
+You will compare the result with the sha1sum of the operating system that was sitting on your SD card originally.  
+Remember? 
+You took a picture of it in an earlier step.  
+If the results are the same then you know that the operating system was copied from your thumbdrive back to your SD card without errors.   
+This command is going to run for a long time.   
+Be patient and wait for the result.   
+Don't worry if your screen goes blank while the command is running.  
+Just hit the Shift key to turn the screen on again.  
+**Do not enter the following command verbatim**  
+**Substitute the count parameter for the number of 4k blocks reported to you earlier**  
+Type carefully and check your work before hitting the Enter button.  
+`dd bs=4k count=1516179 if=/dev/mapper/sdcard | sha1sum`   
+This command took a less than 30 minutes to run on my pi 2.  
+The output produced the sha1sum of the operating system.  
+Check this value against the sha1sum of the operating system when we first started the encryption process.  
+Remember? You have a photo of it.  
+If the values are the same then the operating system has been copied from the SD card to the thumbdrive without errors.  
+
+The next command will check that the SD card itself is free of errors.  
+Type carefully and check your work before hitting the Enter button.  
+`e2fsck -f /dev/mapper/sdcard`   
+The process finishes in less than a minute and produces 7 lines of output.  
+
+The next command expands the encrypted file system back to full size.  
+Type carefully and check your work before hitting the Enter button.  
+`resize2fs -f /dev/mapper/sdcard`  
+This command takes less than a minute to run.  
+
+You can now remove the thumbdrive from your pi. It is no longer needed.  
+Remember, any information on the thumbdrive is not encrypted so if you have any private information on the thumbdrive, you should secure it in a very safe place until you can test your new encrypted partition. And after you are sure that everything is working correctly, that you can still access all your important information, and that your encrypted information is backed up, then you may want to destroy the thumbdrive.  
+
+Finally type Exit and press the Enter button and we are done.   
+Continue to boot into your encrypted SD card.  
+Everything should look as it did before.  
+
+**IMPORTANT** - the next time you boot up you will find yourself back at the initramfs command prompt after some delay.  
+**Don't Panic. Everything is fine**   
+Type `clear` and press Enter. That looks nicer.  
+You’ll need to run `cryptsetup luksOpen /dev/mmcblk0p2 sdcard` on every boot from now on.  
+Type the command above carefully check your work before pressing the Enter button.  
+Enter the strong password you created when prompted.  
+**You are not done yet**   
+Now type `exit` and press the enter button.  
+**The pi should boot up as normal.**  
+Wow! that was a big pain in the ass.  
+But all your private information is now safe from even the most aggressive criminals and goverment agencies.  
+The only way to get the information on your device now is to force you to reveal it or to trick you in to revealing your password.  
+They can also catch you at a time when you are using the device and take it from you before you have a chance to turn it off.  
+
 
 
 #### Screen lockers are a Security Risk  
