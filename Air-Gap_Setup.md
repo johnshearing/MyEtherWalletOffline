@@ -363,6 +363,7 @@ This number will be used to verify that the operating system is copied correcty 
 Execute the following command substituting the count parameter for the result you got in the previous step.  
 Also be sure to record the output.  
 This command is going to run for a long time. Be patient and wait for the result.  
+Don't worry if your screen goes blank while the command is running. Just hit the escape key to turn the screen on again.  
 **Do not enter the following command verbatim**  
 **Substitute the count parameter for the number of 4k blocks the previous step reported to you**  
 Type carefully and check your work before hitting the Enter button.  
@@ -373,11 +374,22 @@ The last line of output is the sha1sum.
 Take a picture of the sha1sum so that you can refer to it later.  
 
 The next command is going to format your thumbdrive.  
-The format opperation will destroy all the information that currently exists on your thumbdrive and will make it ready to receive the operating system that is currently stored on your pi's SD card.  
+The format operation will destroy all the information that currently exists on your thumbdrive and will make it ready to receive the operating system that is currently stored on your pi's SD card.  
+Execute the following line in your pi's terminal window.  
+**Note: That is the letter el in the command below. It is not the number one.**  
 `fdisk -l /dev/sda`  
+This command finished instantly.  
+It produced four lines of output.  
 
-
-
+The next command is going to copy the operating system from your pi's SD card to the thumbdrive.  
+This command is going to take a long time to run.  
+Don't worry if your screen goes blank while the command is running. Just hit the escape key to turn the screen on again.  
+Go have a nap after you enter the command.
+Execute the following line in your pi's terminal window. 
+**Do not enter the following command verbatim**  
+**Substitute the count parameter for the number of 4k blocks you recorder earlier.**  
+Type carefully and check your work before hitting the Enter button.  
+`dd bs=4k count=1516179 if=/dev/mmcblk0p2 of=/dev/sda`  
 
 
 
