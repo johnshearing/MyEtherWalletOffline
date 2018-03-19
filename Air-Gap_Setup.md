@@ -482,11 +482,13 @@ Everything should look as it did before.
 
 **IMPORTANT** - the next time you boot up you will find yourself back at the initramfs command prompt after some delay.  
 **Don't Panic. Everything is fine**   
-Type `clear` and press Enter. That looks nicer.  
+Type `clear` and press Enter.  
+That looks nicer.  
 You’ll need to run `cryptsetup luksOpen /dev/mmcblk0p2 sdcard` on every boot from now on.  
 Type the command above carefully and check your work before pressing the Enter button.  
 Enter the strong password you created when prompted.  
-**You are not done yet**   
+**WTF Nothing happend!**  
+**That's because you are not done yet**   
 Now type `exit` and press the enter button.  
 **The pi should boot up as normal.**  
 
