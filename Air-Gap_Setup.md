@@ -363,7 +363,8 @@ This number will be used to verify that the operating system is copied correcty 
 Execute the following command substituting the count parameter for the result you got in the previous step.  
 Also be sure to record the output.  
 This command is going to run for a long time. Be patient and wait for the result.  
-Don't worry if your screen goes blank while the command is running. Just hit the escape key to turn the screen on again.  
+Don't worry if your screen goes blank while the command is running. Just hit the Shift key to turn the screen on again.  
+If you hit any other key to turn the screen on again you will wind up with some meaningless characters in the command prompt. No worries you can just hit the backspace button to get rid of them. It will not disturb the process that is running.  
 **Do not enter the following command verbatim**  
 **Substitute the count parameter for the number of 4k blocks the previous step reported to you**  
 Type carefully and check your work before hitting the Enter button.  
@@ -383,16 +384,28 @@ It produced four lines of output.
 
 The next command is going to copy the operating system from your pi's SD card to the thumbdrive.  
 This command is going to take a long time to run.  
-Don't worry if your screen goes blank while the command is running. Just hit the escape key to turn the screen on again.  
-Go have a nap after you enter the command.
-Execute the following line in your pi's terminal window. 
+Don't worry if your screen goes blank while the command is running. Just hit the Shift key to turn the screen on again.  
+Go have a nap after you enter the command.  
+Execute the following line in your pi's terminal window.  
 **Do not enter the following command verbatim**  
 **Substitute the count parameter for the number of 4k blocks you recorder earlier.**  
 Type carefully and check your work before hitting the Enter button.  
 `dd bs=4k count=1516179 if=/dev/mmcblk0p2 of=/dev/sda`  
+This command took less than an hour to run on my pi 2.  
+It produced 2 lines of output which reported the number of records in and the number of records out.  
 
-
-
+The next command is going to report the sha1sum of the operating system that is now sitting on your thumbdrive.  
+You will compare the result with the sha1sum of the operating system that is sitting on your SD card. Remember? You took a picture of it in an earlier step. If the results are the same then you know that the operating system was copied from your SD card to your thumbdrive without errors.   
+This command is going to run for a long time. Be patient and wait for the result.  
+Don't worry if your screen goes blank while the command is running. Just hit the Shift key to turn the screen on again.  
+**Do not enter the following command verbatim**  
+**Substitute the count parameter for the number of 4k blocks reported to you earlier**  
+Type carefully and check your work before hitting the Enter button.  
+`dd bs=4k count=1516179 if=/dev/sda |sha1sum`   
+This command took less than 10 minutes to run on my pi 2.
+The output produced the sha1sum of the operating system that was copied to the thumbdrive.  
+Check this value against the sha1sum of the operating system which is sitting on your pi's SD card.  
+if the values are the same then the operating system has been copied from the SD card to the thumbdrive without errors.  
 
 
 #### Screen lockers are a Security Risk  
