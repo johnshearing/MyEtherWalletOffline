@@ -540,7 +540,7 @@ Next navigate to the downloads folder.
 You will see an icon that reads MyEtherWalletOffline-master.zip  
 Double click on that.  
 An application called called Xarchiver will open.  
-Xarchiver looks alot like a file manager.  
+Xarchiver looks a lot like a file manager.  
 We will use Xarchiver to extract files from the ZIP file we just downloaded.  
 Click on the **Action** menu option.  
 Then click on the **Extract** menu item.  
