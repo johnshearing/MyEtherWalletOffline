@@ -526,7 +526,7 @@ To view your Xsession settings, use this command:
 Using the Chrome Browser on your Raspberry Pi navigate to the following repository:  
 https://github.com/johnshearing/MyEtherWalletOffline    
 
-We going to download the repository onto you raspberry pi.  
+We are going to download the repository onto you raspberry pi.  
 Look on the right side and scroll down a bit until you see a green button that reads **Clone or download**  
 Click on that button.  
 A small popup window will appear under the button.  
