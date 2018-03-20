@@ -493,23 +493,25 @@ Now type `exit` and press the enter button.
 **The pi should boot up as normal.**  
 
 Wow! that was a big pain in the ass.  
-But all your private information is now safe from even the most aggressive criminals and goverment agencies.  
-The only way to get the information on your device now is to force you to reveal it or to trick you in to revealing your password. They can also catch you at a time when you are using the device and take it from you before you have a chance to turn it off.  
-
-
+But all your private information is now safe from even the most aggressive criminals and oppressive goverments.  
+The only way to get the information on your device now is to force you to hand it over or to trick you in to revealing your password. They can also catch you at a time when you are using the device and take it from you before you have a chance to turn it off.  
 
 #### Screen lockers are a Security Risk  
 Logging out and then back in again is accomplished by selecting the **Shutdown** option on the main menu and then selecting the **Logout** button. This will log the user out and then present the user with a login screen to start a new session if desired. This is fail safe because if the login service crashes or is hacked no one is logged in. But if a screen lock is used then the user is still logged in so if the screen lock crashes or is hacked then the users's session becomes accessable to the attacker. Obviously, applications are closed when the user logs out so logging out is a bit inconvenient when compared with a screen saver but the extra security makes the effort worthwhile. [Jamie Zawinski explains in detail here](https://www.jwz.org/xscreensaver/toolkits.html)  
 
-#### Preventing Screen Blanking  
-Screen blanking is a security risk because if a screen goes dark then the user might mistakenly think that the machine is off when infact a mere touch will bring the screen back to life with the users session available.  
+#### Screen Blanking is a Security Risk  
+Screen blanking is a security risk because if a screen goes dark then the user might mistakenly think that the machine is off when in fact a mere touch will bring the screen back to life with the users session available.  
 
-#### Prevent Xsession and Display Power Management Signaling from blanking the screen:  
+#### Prevent Xsession and Display Power Management from Blanking the Screen:  
 Run the following command in xTerminal to edit lightdm.conf:  
 `sudo leafpad /etc/lightdm/lightdm.conf`  
 
 in section [Seat:*] add or adjust line to say:  
 `xserver-command=X -s 0 -dpms`  
+
+I was having trouble getting the pi to stop blanking the screen untill I put the above line of code in every section of the file.  
+Now the screen stays on all the time.  
+That's what I want.  
 
 #### Using xset to working with Xsession and DPMS at runtime:  
 At the pi's command line interface (xTerminal) you could execute the following to accomplish the same thing as above but it will only be in effect for the current session.  
@@ -520,8 +522,67 @@ To view your Xsession settings, use this command:
 
 [More on xset, Xsession, and DPMS here](https://wiki.archlinux.org/index.php/Display_Power_Management_Signaling)   
 
-#### Setup MyEtherWallet  
-[For developers and regular users, the entire project is found here](https://github.com/kvhnuke/etherwallet#download-the-latest-release-httpsgithubcomkvhnukeetherwalletreleaseslatest).  
+#### Setup This Custom Version of MyEtherWallet On Your Pi Which Has Been Optimized For This Project  
+Using the Chrome Browser on your Raspberry Pi navigate to the following website:  
+https://github.com/johnshearing/MyEtherWalletOffline    
+
+We going to download the repository onto you raspberry pi.  
+Look on the right side and scroll down a bit until you see a green button that reads **Clone or download**  
+Click on that button.  
+A small pop up window will appear under the button.  
+Click on the link which reads **Download ZIP**  
+The ZIP file will download into your Downloads folder.  
+
+Now we are going to extract the files.  
+Now open your file manager by clicking on the third icon from the upper left on your Start Bar.  
+The icon looks like a folder. Click on that.  
+Next navigate to the downloads folder.  
+You will see an icon that reads MyEtherWalletOffline-master.zip  
+Double click on that.  
+An application called called Xarchiver will open.  
+Xarchiver looks alot like a file manager.  
+We will use Xarchiver to extract files from the ZIP file we just downloaded.  
+Click on the **Action** menu option.  
+Then click on the **Extract** menu item.  
+A dialog box will open entitled **Extract Files**  
+Click on the button on the bottom right labled **Extract**  
+Wait a few seconds for the Xarchiver to extract the file and then close the Xarchiver applicaiton.  
+
+You will now see a new folder next to the zip file that you downloaded.  
+This new folder is labled **MyEtherWalletOffline-master**  
+Double click on this new folder to open it.  
+Now you will see a folder labled **dist**.  
+We are going to rename this folder **MEW**.  
+Click once on the **dist** folder just to highlight it.  
+Then open the **Edit** menu at the upper left and select the **Rename** menu option.  
+When the **Rename** dialog box opens, rename the **dist** folder **MEW**.   
+
+Finally we are going to move the newly named **MEW** folder up to the **pi** directory.  
+Click the newly named **MEW** folder once just to highlight it.  
+Then on the **Edit** menu select **Cut**.  
+Now navigate up to the **pi** folder and select **Paste** from the Edit menu.  
+The **MEW** folder has now been moved up into the **pi** folder.  
+
+**Do not change anything inside the MEW folder**  
+If you change anything inside the MEW folder it my break the application.  
+
+#### Change the Chrome Browser Settings So That MyEtherWallet Will Run When Chrome Starts.  
+Open the **Chrome** browser by clicking the second icon from the top left on the **Start Bar**.  
+The icon is round and blue and with lines of lattitude and Longitude. It looks like a globe.  
+Click on that to open the browser.   
+
+Click the browser control icon at the right - it's the vertical ellipsis. It's three dots arranged vertically.  
+The **Control** menu will open.  
+Select settings from the menu options. This will bring you to the settings page.  
+On the **On Startup** options: select the radio button marked "Open a specific page or set of pages".  
+Then click the link next to the radio button marked "Set pages".  
+Assuming you downloaded and extracted MyEtherWallet into the same directory I did then entering the following into the **Startup Pages** dialog box will cause your local copy of MyEtherWallet to load.  
+`file:///home/pi/MEW/index.html#offline-transaction`  
+Now close the browser and open it again.  
+When it opens again the **MyEtherWallet** application should be open.  
+
+#### Setup MyEtherWallet Using the Original Repository.
+[For developers and users, the latest MEW project unaltered by me is found here](https://github.com/kvhnuke/etherwallet#download-the-latest-release-httpsgithubcomkvhnukeetherwalletreleaseslatest).  
 
 Read everything on that page and then click on the link near the top of the readme file entitled **Download the Latest Release**   
 
@@ -562,14 +623,6 @@ Don't put any private keys into MyEtherWallet until you have finished working th
 At some point soon I will provide a modified distribution of MyEtherWallet which is optimized for use on the raspberry pi as an air-gapped computer for making offline transactions. This will be an open source fork of MyEtherWallet.  
 
 Soon I will also make available for a very reasonable price a case for the raspberry pi which makes it impossible to connect to the Internet. This air-gapped pi will be the safest device you can get for storing your private keys, for making Ethereum offline transactions, and for sending contracts to the Ethereum blockchain. Plans for making this device will be made available for free as an open source project.  
-
-#### Change Browser Settings    
-Click the browser control icon at the right - it's the vertical ellipsis.  
-Select settings from the menu options. This will bring you to the settings page.  
-On the **Startup** options: select the radio button marked "Open a specific page or set of pages".  
-Then click the link next to the radio button marked "Set pages".  
-Assuming you downloaded and extracted MyEtherWallet into the same directory I did then entering the following into the **Startup Pages** dialog box will cause your local copy of MyEtherWallet to load.  
-`file:///home/pi/MEW/index.html#offline-transaction`  
 
 #### Install the Camera and QR-Code reader  
 If you have been following along then the camera was already enabled using `sudo raspi-config`  
