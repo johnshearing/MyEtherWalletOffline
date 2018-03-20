@@ -523,13 +523,13 @@ To view your Xsession settings, use this command:
 [More on xset, Xsession, and DPMS here](https://wiki.archlinux.org/index.php/Display_Power_Management_Signaling)   
 
 #### Setup This Custom Version of MyEtherWallet On Your Pi Which Has Been Optimized For This Project  
-Using the Chrome Browser on your Raspberry Pi navigate to the following website:  
+Using the Chrome Browser on your Raspberry Pi navigate to the following repository:  
 https://github.com/johnshearing/MyEtherWalletOffline    
 
 We going to download the repository onto you raspberry pi.  
 Look on the right side and scroll down a bit until you see a green button that reads **Clone or download**  
 Click on that button.  
-A small pop up window will appear under the button.  
+A small popup window will appear under the button.  
 Click on the link which reads **Download ZIP**  
 The ZIP file will download into your Downloads folder.  
 
