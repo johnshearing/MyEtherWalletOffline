@@ -581,7 +581,13 @@ Assuming you downloaded and extracted MyEtherWallet into the same directory I di
 Now close the browser and open it again.  
 When it opens again the **MyEtherWallet** application should be open.  
 
-#### Setup MyEtherWallet Using the Original Repository.
+**Important**  
+Don't put any private keys into MyEtherWallet until you have finished working through this document and you have committed to disconnecting your pi from the Internet. Once your private keys have been entered into the pi you must **never ever** connect the pi to the Internet nor to any other device. If you do, you will likely lose all your ether.  
+**You Have Been Warned**  
+
+#### Setup MyEtherWallet Using the Original Repository.  
+**Normal users can skip this section.**  
+This section is only for developers and users who do not want to use my customized fork of the MyEtherWallet repository. If you have already installed my fork of the MyEtherWallet repository as instructed in the last section of this document then you can skip this section and go on to the next.  
 [For developers and users, the latest MEW project unaltered by me is found here](https://github.com/kvhnuke/etherwallet#download-the-latest-release-httpsgithubcomkvhnukeetherwalletreleaseslatest).  
 
 Read everything on that page and then click on the link near the top of the readme file entitled **Download the Latest Release**   
@@ -616,13 +622,8 @@ To use MyEtherWallet on your pi, run index.html in your browser.
 Assuming you downloaded and extracted MyEtherWallet into the same directory I did then the following command in the terminal window will run it.  
 `chromium-browser --app=URL file:///home/pi/MEW/index.html#offline-transaction`  
 
-
-Don't put any private keys into MyEtherWallet until you have finished working through this document and you committed to disconnecting your pi from the Internet. Once your private keys have been entered into the pi you must **never ever** connect the pi to the Internet. If you do, you will lose all your ether.  
+Don't put any private keys into MyEtherWallet until you have finished working through this document and you have committed to disconnecting your pi from the Internet. Once your private keys have been entered into the pi you must **never ever** connect the pi to the Internet nor to any other device. If you do, you will likely lose all your ether.  
 **You Have Been Warned**
-
-At some point soon I will provide a modified distribution of MyEtherWallet which is optimized for use on the raspberry pi as an air-gapped computer for making offline transactions. This will be an open source fork of MyEtherWallet.  
-
-Soon I will also make available for a very reasonable price a case for the raspberry pi which makes it impossible to connect to the Internet. This air-gapped pi will be the safest device you can get for storing your private keys, for making Ethereum offline transactions, and for sending contracts to the Ethereum blockchain. Plans for making this device will be made available for free as an open source project.  
 
 #### Install the Camera and QR-Code reader  
 If you have been following along then the camera was already enabled using `sudo raspi-config`  
