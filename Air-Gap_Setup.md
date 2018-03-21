@@ -537,7 +537,7 @@ Now we are going to extract the files.
 Now open your file manager by clicking on the third icon from the upper left on your Start Bar.  
 The icon looks like a folder. Click on that.  
 Next navigate to the downloads folder.  
-You will see an icon that reads MyEtherWalletOffline-master.zip  
+You will see an icon that reads **MyEtherWalletOffline-master.zip**  
 Double click on that.  
 An application called called Xarchiver will open.  
 Xarchiver looks a lot like a file manager.  
@@ -565,6 +565,10 @@ The **MEW** folder has now been moved up into the **pi** folder.
 
 **Do not change anything inside the MEW folder**  
 If you change anything inside the MEW folder it my break the application.  
+
+If you want to, you may now go back to your **Downloads** folder and delete the ZIP file: **MyEtherWalletOffline-master.zip**.  
+You may also delete the extracted folder: **MyEtherWalletOffline-master**.
+You will not need these anymore.  
 
 #### Change the Chrome Browser Settings So That MyEtherWallet Will Run When Chrome Starts.  
 Open the **Chrome** browser by clicking the second icon from the top left on the **Start Bar**.  
