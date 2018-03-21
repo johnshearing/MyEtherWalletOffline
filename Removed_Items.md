@@ -1,3 +1,8 @@
+Implement an SSD drive with full disk encryption.  
+As of March 18 2018 full disk encryption has been implemented on the SD card. It seems to work fine. I don't see a need to go further by implementing an SSD because it is easy enough to make backup images of the encrypted SD card.  
+https://www.youtube.com/watch?v=wuKgWK7O9p8  
+It turns out there is no difference between a thumb drive and an SD card except that an SD card can not be removed without disassembling the device. Also, the pi 3 is the only one that will boot off a thumb drive. So we are stuck with using an SD card and swaping out the card for different people would be very cumbersome. A Solid State Drive is far better than a thumb drive or an SD card because it is much more sophisticated even though the basic technology is the same. A SSD is faster, will last longer, because it is built like a mini RAID system. The extra speed of an SSD may even make full disk encryption practical for this project. 
+
 [Download Putty.exe found here](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html) to  **PiSetup**.  
 Look under **Alternative Binary Files**  
 Download Putty.exe - the SSH/Telnet client.  
