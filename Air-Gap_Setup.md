@@ -938,6 +938,7 @@ The following command will print a picture:
 `lpr -o fit-to-page /usr/share/raspberrypi-artwork/raspberry-pi-logo.png`  
 
 The following command will print a text file:  
+This command can be used to print out a keystore file which is a password protected paper wallet.  
 `lp -o cpi=8 filename`  
 
 [Here are some command line options for the printer.](https://www.cups.org/doc/options.html)
@@ -1269,10 +1270,6 @@ You already installed this package if you have been following along.
 #### Hardware Items Todo  
 Install a momentary **Scan** button on the face of the brick.
 Pressing the button starts the scan. Releasing the button ends the scan.
-
-Implement an SSD drive with full disk encryption.  
-https://www.youtube.com/watch?v=wuKgWK7O9p8  
-It turns out there is no difference between a thumb drive and an SD card except that an SD card can not be removed without disassembling the device. Also, the pi 3 is the only one that will boot off a thumb drive. So we are stuck with using an SD card and swaping out the card for different people would be very cumbersome. A Solid State Drive is far better than a thumb drive or an SD card because it is much more sophisticated even though the basic technology is the same. A SSD is faster, will last longer, because it is built like a mini RAID system. The extra speed of an SSD may even make full disk encryption practical for this project. 
 
 Consider charging the battery with a wireless charger.  
 
