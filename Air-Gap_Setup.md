@@ -1273,13 +1273,18 @@ To use it, use the command line tool `gpg` or `gpg2`
 To read about these tools on your raspberry pi execute the command `man gpg` or `man gpg2`  
 The folowing links are good online resources on how to use gpg:  
 [Super Short Quick Start Document](https://www.techrepublic.com/article/how-to-easily-encryptdecrypt-a-file-in-linux-with-gpg/)  
-[30 Minute Quick Start - YouTube](https://youtu.be/ZSa-d_9O5DA)  
-[In Depth YouTube Playlist](https://youtu.be/AZZ9THLkNgY)  
-[Input to GPG from Stdin / GPG Output to Stdout](https://stackoverflow.com/questions/5504721/how-do-i-encrypt-plaintext-with-gnupg)  
+[30 Minute QuickStart - YouTube](https://youtu.be/ZSa-d_9O5DA)  
+[In Depth Tutorials - YouTube Playlist](https://youtu.be/AZZ9THLkNgY)  
+[Keeping It At The Console - Input to GPG from Stdin / GPG Output to Stdout](https://stackoverflow.com/questions/5504721/how-do-i-encrypt-plaintext-with-gnupg)  
 
-Digital Signatures are privided by MyEtherWallet as well as by GPG.  
+Digital Signatures are provided by MyEtherWallet as well as by GPG.  
 We will go over how to use all this in video tutorials.  
 [Check my YouTube channel for my video tutorials as they are produced.](https://www.youtube.com/channel/UCQlQRc9muSqPZIXSfugN43A)  
+Using message encryption along with digital signatures makes the PrivateKeyVault a complete solution for secure messaging.  
+Full Disk Encryptions makes the PrivateKeyVault suitable for password management and for storage of private documents.  
+MyEtherWallet makes the PrivateKeyVault suitable for secure finacial transactions on the Ethereum Blockchain.  
+QR-Code functionality airgaps the PrivateKeyVault.  
+
 
 
 ## Todo List   
