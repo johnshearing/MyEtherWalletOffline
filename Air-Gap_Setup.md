@@ -1260,10 +1260,23 @@ The whole thing could be put in a script as shown below if you prefer.
 > var wallet = Wallet.fromPrivateKey(key);  
 > wallet.toV3String('password', {n: 1024});  
 ```   
-At some point soon I will build this utility into MyEtherWallet.
 
 (Here is a link to the Node Package required)[https://github.com/ethereumjs/ethereumjs-wallet]  
 You already installed this package if you have been following along.  
+
+Since writing this section I have actually built this fuctionality into MyEtherWallet.  
+So now it is possible to create a keystore file from a private key without leaving the MyEtherWallet application.  
+
+#### Encrypted Messaging  
+Encrypted messaging comes with the raspbian OS. So you have it already.  
+To use it, use the command line tool `gpg` or `gpg2`  
+To read about these tools on your raspberry pi execute the command `man gpg` or `man gpg2`  
+The folowing links are good online resources on how to use gpg:
+https://youtu.be/ZSa-d_9O5DA  
+https://youtu.be/AZZ9THLkNgY  
+https://www.techrepublic.com/article/how-to-easily-encryptdecrypt-a-file-in-linux-with-gpg/  
+https://stackoverflow.com/questions/5504721/how-do-i-encrypt-plaintext-with-gnupg  
+
 
 ## Todo List   
 
