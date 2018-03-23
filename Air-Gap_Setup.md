@@ -1274,7 +1274,7 @@ To read about these tools on your raspberry pi execute the command `man gpg` or 
 The folowing links are good online resources on how to use gpg:  
 [Super Short Quick Start Document](https://www.techrepublic.com/article/how-to-easily-encryptdecrypt-a-file-in-linux-with-gpg/)  
 [30 Minute QuickStart - YouTube](https://youtu.be/ZSa-d_9O5DA)  
-[In Depth Tutorials - YouTube Playlist](https://youtu.be/AZZ9THLkNgY)  
+[In Depth Tutorials - YouTube Playlist](https://www.youtube.com/watch?v=AZZ9THLkNgY&list=PLaIoXCTxbCRbYeYpPLuYOQ7YLfnSjLJlR&index=1)  
 [Keeping It At The Console - Input to GPG from Stdin / GPG Output to Stdout](https://stackoverflow.com/questions/5504721/how-do-i-encrypt-plaintext-with-gnupg)  
 
 Digital Signatures are provided by MyEtherWallet as well as by GPG.  
