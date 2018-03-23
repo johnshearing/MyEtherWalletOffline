@@ -1280,6 +1280,7 @@ The folowing links are good online resources on how to use gpg:
 Digital Signatures are provided by MyEtherWallet as well as by GPG.  
 We will go over how to use all this in video tutorials.  
 [Check my YouTube channel for my video tutorials as they are produced.](https://www.youtube.com/channel/UCQlQRc9muSqPZIXSfugN43A)  
+
 Using message encryption along with digital signatures makes the PrivateKeyVault a complete solution for secure messaging.  
 Full Disk Encryptions makes the PrivateKeyVault suitable for password management and for storage of private documents.  
 MyEtherWallet makes the PrivateKeyVault suitable for secure finacial transactions on the Ethereum Blockchain.  
