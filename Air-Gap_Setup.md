@@ -1,4 +1,4 @@
-## The Secure Brick - Instructions for setting up a raspberry pi with touch screen and camera installed as an optically isolated digital wallet for Ethereum offline transactions.  
+## The Private Key Vault - Instructions for setting up a raspberry pi with touch screen and camera installed as an optically isolated digital wallet for Ethereum offline transactions.  
 
 This is the start of fully open source documentation of the physical build and all the software.  
 Disk images are forthcoming but you don't need them. You can build from scratch using these instructions.  
@@ -1286,15 +1286,17 @@ QR-Code functionality airgaps the PrivateKeyVault.
 
 MyEtherWallet makes the PrivateKeyVault suitable for airgapped offline transactions on the Ethereum Blockchain.  
 
-Using GPG message encryption along with GPG or MEW digital signatures makes the PrivateKeyVault a complete solution for secure messaging.  
+Using GPG message encryption along with GPG or MEW digital signatures makes the PrivateKeyVault a complete solution for secure encrypted airgapped messaging.  
 
 Full Disk Encryptions makes the PrivateKeyVault suitable for cold storage of private keys, password management, and for storage of private documents.  
 
 ## Todo List   
 
 #### Hardware Items Todo  
-Install a momentary **Scan** button on the face of the brick.
-Pressing the button starts the scan. Releasing the button ends the scan.
+Install a momentary **Scan** button on the face of the brick.  
+Pressing the button starts the scan.  
+Releasing the button ends the scan.  
+Also achieving a good read ends the scan.  
 
 Consider charging the battery with a wireless charger.  
 
@@ -1334,11 +1336,11 @@ Done: Change the Paper wallet so that it prints nicely on the Nano Printer.
 Done: Generate a qr-code when a message is signed so that it can be passed out of the pi.  
 Also load modified MEW onto my phone so that I can generate a qr-code for a signed message and pass it into the brick.
 
-Add PGP Messaging utility where encrypted messages are passed in and out  of the device using QR-Code.  
+Add GPG Encrypted Messaging utility where encrypted messages are passed in and out of the device using QR-Code.  
 We will need this so that people can send private keys via email.  
 Maybe even something that allows the exchange of encrypted messages on the block chain.  
 This should not be too costly if only encrypted private keys are being exchanged this way.
-In this way, an email account is not even required - only access to MEW online some other means of interacting with smart contracts in order to get the encrypted message and convert it to a QR-Code scanning into the secure brick.     
+In this way, an email account is not even required - only access to MEW online some other means of interacting with smart contracts in order to get the encrypted message and convert it to a QR-Code scanning into the PrivateKeyVault.     
 
 Add a native way to associate a photograph with a with public addresses for use as an additional blockie. This will prevent sending ether to the wrong address when selecting public addresses from lists or better from a database on the pi.  
 Doing this defeats an attack where different addresses might produce similar looking blockies. But the biggest advantage will be to keep users from getting confused between different accounts that they normally use. I understand that accounts can now be associated with human friendly names but not every account will have this so overall, I think this will be well worth doing.
@@ -1383,6 +1385,8 @@ The version with built in printer is already created.
 
 The small printerless version is as follows: Think simple, small, thin, pocket sized digital camera - that will be the final form of the secure brick. A camera on the front (no zoom, nothing fancy) and a touch screen on the back. No buttons (maybe one for power). The package will be waterproof, Tempest certified, and cheap to make. The parts have already arrived 
 
+As small laptop version is also in the works.
+
 
 #### Issues  
 
@@ -1416,9 +1420,6 @@ If you would like to see which files are about to be deleted, simply remove the 
 
 Executing grep without the -s switch shows all the places where grep was unable to look - probably because the OS is using those files. This makes me realize that the only way to find out if the system is secure is to scan the SD card while in a different machine while the OS is not running. I need to find out how to do this. Actually, trying to keep track of all these log files is probably unmanageable. Now Full Disk Encryption is starting to make sense. Full Disk Encryption will make it impossible to extract information from all these copies of private keys that show up in all theses log files. Which brings us to the next todo item: Install an SSD drive with full disk encryption.  
 
-
-
-
 Cool way to reboot:  
 sudo shutdown --halt now --reboot  
 
@@ -1436,13 +1437,6 @@ Open PowerShell and enter `cd ` then paste in the directory location and press e
 Then execute the command `gulp`
 
 To Start MyEtherWallet for development navigate to the **dist** directory using the File Manager and double click on **index.html**.  
-
-
-
-
-
-
-
 
 My public key on Ethereum  
 13eC582A8E8A676e78f4E8e2Bf6B135bBE97c306   
