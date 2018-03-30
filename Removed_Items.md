@@ -1,3 +1,69 @@
+
+
+#### Graceful Shutdown on Low Battery While not Plugged In or If User Presses Power Button without Initiating Shutdown at Main Menu  
+First I need to measure the current:  
+* When the power button is in and the device is running,  
+* When the power button is in but the device has been shutdown at the main menu,  
+* When the power button is out.  
+ 
+This requires a small circuit which:  
+1. Holds the enable pins on the boost converters high (disconnects then from ground) when the power button is pressed in and the low battery pin is high which indicates the battery is charged.  
+2. Initiates shutdown first and then pulls the enable pin low (connects to ground) when the power button is pressed out or if the low battery pin goes low indicating that the battery will soon fail for lack of charge and the battery charger is not plugged in.  
+
+The materials required are  
+* An OR type logic gate to handle the three input signals (1.power switch, 2.low bat pin, and 3.the 5 Volts from the AC power supply) and output a shut down command by forcing some pin on the pi low (probably pin BCM 17) if the power switch is low or if the low battery pin is low and the power supply is not pluged in.
+* Hopefully some pin on the pi shows five volts when the pi is running and 0 volts when the pi has been shut down. If not I will need to make a circuit to pull the enable pins low on the boost converters which will remove power from everything except the charging circuit. 
+* Finally, a resistor will be needed to hold the enable pins high once power has been reapplied.
+
+Setting this up:  
+[Source for the following advice](http://www.stderr.nl/Blog/Hardware/RaspberryPi/PowerButton.html)
+Get and build the DT overlay.  
+If a file /boot/overlays/gpio-shutdown.dtbo is already available on your system, you can skip this step.  
+
+Download the devicetree overlay file. 
+The easiest is to run wget on the raspberry pi itself:  
+Run the following command in the pi's terminal window.
+`wget http://www.stderr.nl/static/files/Hardware/RaspberryPi/gpio-shutdown-overlay.dts`  
+
+Compile the devicetreefile:  
+Run the following command in the pi's terminal window.  
+`dtc -@ -I dts -O dtb -o gpio-shutdown.dtbo gpio-shutdown-overlay.dts`  
+Ignore any "Warning (unit_address_vs_reg): Node /fragment@0 has a unit name, but no reg property" messages you might get.  
+
+Copy the compiled file to /boot/overlays where the loader can find it:  
+Run the following command in the pi's terminal window.  
+`sudo cp gpio-shutdown.dtbo /boot/overlays/`  
+
+Enable the overlay by adding a line to /boot/config.txt:  
+`dtoverlay=gpio-shutdown`  
+If you need to use a different gpio, or different settings, see the dts file for available options and the Rpi devicetree docs for setting them.  
+
+Also in config.txt put the following line.  
+This will make pin 26 go high on bootup and low on halt.  
+Now pin 26 can be used shutdown power after the system has been halted.  
+`dtoverlay=gpio-poweroff,active_low `  
+
+If running systemd older than v225 (check with systemd --version), create a file called /etc/udev/rules.d/99-gpio-power.rules containing the following lines:
+```
+ACTION!="REMOVE", SUBSYSTEM=="input", KERNEL=="event*", SUBSYSTEMS=="platform", \
+    DRIVERS=="gpio-keys", ATTRS{keys}=="116", TAG+="power-switch"
+```   
+
+On systemd v225 and above (Raspbian stretch version 2017.08.16 and upwards) this should not be needed, but I have not tested this.
+
+Reboot your pi for changes to take effect.
+
+Then, if you connect a pushbutton to GPIO3 and GND (pin 5 and 6 on the 40-pin header), you can let your raspberry shutdown and startup using this button. Connecting pins 5 and 6 momentarily will cause the pi to shut down gracefully but it will still be drawing a small amount of current. At this point you can remove the power source without damaging the pi. Reapplying power or connecting pins 5 and 6 again momentarily will cause the pi to start again.
+
+All this was tested on a Rpi Zero W, a Rpi B, a Rpi B+ and a Rpi 2.
+
+This overlay was merged into the official kernel repository, so in the future step 1 above should no longer be needed. It is included in the 1.20170811-1 kernel release, which will hopefull be included in Raspbian images soon (but the 2017.08.16 image does not include it yet).
+
+When the new kernel is included in Raspbian, it would only leave a simple modification to /boot/config.txt to set this up :-D
+
+
+
+
 Implement an SSD drive with full disk encryption.  
 As of March 18 2018 full disk encryption has been implemented on the SD card. It seems to work fine. I don't see a need to go further by implementing an SSD because it is easy enough to make backup images of the encrypted SD card.  
 https://www.youtube.com/watch?v=wuKgWK7O9p8  
