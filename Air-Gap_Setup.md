@@ -167,6 +167,10 @@ It will now be possible to use the browser and to download files from the Intern
 Now start an new VNC session between this computer and your raspberry pi via Ethernet cable.  
 This will allow you to copy and paste commands from this document into the raspberry pi's command line interpreter.  
 
+Purge the Wolfram engine from your pi to save space on the SD card.  
+Execute the following line of code in you pi's terminal window:  
+`sudo apt-get purge wolfram-engine`  
+
 
 #### Setup LUKS Full Disk Encryption  
 The following is the written tutorial from which these notes are made.  
@@ -1030,6 +1034,58 @@ Press `CTRL + X` to quit Nano.
 
 We will see how to use this program shortly.  
 
+#### Getting Text and Files Into and Out Of the PrivateKeyVault Using QR-Code  
+Since the PrivateKeyVault does not connect to any other devices there must be a way to transfer text and files into and out of the device in some transparent maner that gives the user complete control and the ability to inspect what information is moving in and out of the device at every stage of the transfer. The following 4 minute video gives a general idea of how QR-Code is used to transfer information into and out of the PrivateKeyVault. It is also a full demonstration of how to securely send ether on the Ethereum block chain.  
+[Click here to see how QR-Codes are used to make secure transactions on the Ethereum block chain](https://www.youtube.com/watch?v=_vA4tTLdL2M)  
+
+Now we will see how to move screen text and large files into and out of the PrivateKeyVault using QR-Code.  
+The following instructions were made from information aquired from the following videos:  
+These videos are made for security experts and penetration testers.  
+These people, who work within the law, are hired to test network security by stealing information.  
+They then return the informaton and report on security weaknesses.  
+We are not doing any of that.  
+We are only using QR-Codes to optically transfer file into and out of the PrivateKeyVault.  
+[Alternative Sneaker Nets; Optics, Hak5 1506.1](https://youtu.be/Tr0v3DZVQ-k)  
+[Stealing Files With Optics? - Hak5 2320](https://youtu.be/sZpIiSfRMSw)  
+[Steal files with QR codes? Yes - Hak5 2322](https://youtu.be/WBkNgb-iPGE)  
+[Reconstructing QR-Exfiltrated Files - Hak5 2323](https://youtu.be/XHSOSqLwb-A)  
+
+To get started you will need to install the following software onto your PrivateKeyVault:  
+Execute the following commands:  
+First make sure the Raspbian catalog is up to date:  
+`sudo apt-get update`  
+Install command line utility for generating QR-Codes from onscreen text or from files:  
+`sudo apt-get install qrencode`  
+Install Eye of Gnome - an application for displaying QR-Codes on screen.  
+`sudo apt-get install eog`  
+
+If you have been following along then zbarcam should already be installed.   
+If not, look above in this document for how to install zbarcam and supporting libraries.  
+
+Now lets try moving text out of the PrivateKeyVault from the command line.  
+First we need the software  
+
+`qrencode -t ANSIUTF8 "hello world"`  
+`base64 TheNameOfMyFile | while read r; do echo $r | qrencode -t ANSIUTF8; sleep 1; done`  
+
+
+
+#### Encrypted Messaging  
+Encrypted messaging comes with the raspbian OS. So you have it already.  
+To use it, use the command line tool `gpg` or `gpg2`  
+To read about these tools on your raspberry pi execute the command `man gpg` or `man gpg2`  
+The folowing links are good online resources on how to use gpg:  
+[Super Short Quick Start Document](https://www.techrepublic.com/article/how-to-easily-encryptdecrypt-a-file-in-linux-with-gpg/)  
+[30 Minute QuickStart - YouTube](https://youtu.be/ZSa-d_9O5DA)  
+[In Depth Tutorials - YouTube Playlist](https://www.youtube.com/watch?v=AZZ9THLkNgY&list=PLaIoXCTxbCRbYeYpPLuYOQ7YLfnSjLJlR&index=1)  
+[Keeping It At The Console - Input to GPG from Stdin / GPG Output to Stdout](https://stackoverflow.com/questions/5504721/how-do-i-encrypt-plaintext-with-gnupg)  
+
+Digital Signatures are provided by MyEtherWallet as well as by GPG.  
+We will go over how to use all this in video tutorials.  
+[Check my YouTube channel for my video tutorials as they are produced.](https://www.youtube.com/channel/UCQlQRc9muSqPZIXSfugN43A)  
+
+Let's send a secret message using the Private Key Vault.  
+
 ## You are about to start working with Private Keys.  
 
 #### Copy all these notes over to the pi before pulling the plug on the Internet.
@@ -1205,22 +1261,6 @@ You already installed this package if you have been following along.
 
 Since writing this section I have actually built this fuctionality into MyEtherWallet.  
 So now it is possible to create a keystore file from a private key without leaving the MyEtherWallet application.  
-
-#### Encrypted Messaging  
-Encrypted messaging comes with the raspbian OS. So you have it already.  
-To use it, use the command line tool `gpg` or `gpg2`  
-To read about these tools on your raspberry pi execute the command `man gpg` or `man gpg2`  
-The folowing links are good online resources on how to use gpg:  
-[Super Short Quick Start Document](https://www.techrepublic.com/article/how-to-easily-encryptdecrypt-a-file-in-linux-with-gpg/)  
-[30 Minute QuickStart - YouTube](https://youtu.be/ZSa-d_9O5DA)  
-[In Depth Tutorials - YouTube Playlist](https://www.youtube.com/watch?v=AZZ9THLkNgY&list=PLaIoXCTxbCRbYeYpPLuYOQ7YLfnSjLJlR&index=1)  
-[Keeping It At The Console - Input to GPG from Stdin / GPG Output to Stdout](https://stackoverflow.com/questions/5504721/how-do-i-encrypt-plaintext-with-gnupg)  
-
-Digital Signatures are provided by MyEtherWallet as well as by GPG.  
-We will go over how to use all this in video tutorials.  
-[Check my YouTube channel for my video tutorials as they are produced.](https://www.youtube.com/channel/UCQlQRc9muSqPZIXSfugN43A)  
-
-Let's send a secret message using the Private Key Vault.  
 
 ## Conclusion:  
 QR-Code functionality airgaps the PrivateKeyVault.  
