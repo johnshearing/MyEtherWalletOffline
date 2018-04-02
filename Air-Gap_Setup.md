@@ -1055,18 +1055,33 @@ Execute the following commands:
 First make sure the Raspbian catalog is up to date:  
 `sudo apt-get update`  
 Install command line utility for generating QR-Codes from onscreen text or from files:  
-`sudo apt-get install qrencode`  
-Install Eye of Gnome - an application for displaying QR-Codes on screen.  
-`sudo apt-get install eog`  
-
-If you have been following along then zbarcam should already be installed.   
-If not, look above in this document for how to install zbarcam and supporting libraries.  
+`sudo apt-get install qrencode`   
 
 Now lets try moving text out of the PrivateKeyVault from the command line.  
-First we need the software  
-
+In this first example we will show the QR-Code representation of "hello world"  
+Execute the following command:  
 `qrencode -t ANSIUTF8 "hello world"`  
-`base64 TheNameOfMyFile | while read r; do echo $r | qrencode -t ANSIUTF8; sleep 1; done`  
+You should see a QR-Code on the screen.  
+If you scan this into you smartphone using any QR-Code scanning app you will see that this reads "hello world"  
+
+Now we will try outputing a file to the screen.  
+The following command will display several QR-codes on the touchscreen.  
+There will be one QR-Code for each line in the file.  
+Execute the following line of code substituting **TheNameOfMyFile** in the line below with the name of some file on your pi.  
+You can use any size file, but pick one with Maybe 30 lines of text for this demonstration.  
+`base64 TheNameOfMyFile | while read r; do echo $r | qrencode -t ANSIUTF8; sleep .3; done`  
+You should see several QR-Codes displayed sequencially on your touch screen.  
+The part of the command that reads `sleep .3` means display each QR-Code for .3 seconds.  
+You can change this value if you want.  
+If it's a large file it may take a while to show all the QR-Codes.  
+Press `Ctrl C` if you want to stop the parade of QR-Codes.  
+
+Now we will see how to transfer a file from one PrivateKeyVault to another using QR-Codes.  
+Here is a summary of what we will be doing:  
+
+Get your camera on your smartphone ready.  We are going to take a video of the QR-Codes displayed on screen.  
+
+
 
 
 
