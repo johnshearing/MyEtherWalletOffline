@@ -659,7 +659,7 @@ Download and compile "crikey. This takes output from the zbarcam and pipes it to
 `sudo cp crikey /usr/local/bin`  
 Help with crikey can be found by emailing fmft71 at yahoo dot es  
 
-Execute the following line of code in the pi's terminal window to make the pi cam visible to zbarcam.
+Execute the following line of code in the pi's terminal window to make the pi cam visible to zbarcam.  
 `sudo modprobe bcm2835-v4l2`  
 
 Even better, load the module at every boot  
