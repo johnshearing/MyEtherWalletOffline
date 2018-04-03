@@ -1076,12 +1076,18 @@ You can change this value if you want.
 If it's a large file it may take a while to show all the QR-Codes.  
 Press `Ctrl C` if you want to stop the parade of QR-Codes.  
 
+
+We ha
+What you have just done is the basis of sending encrypted files.  
+W
+
 Now we will see how to transfer a file from one PrivateKeyVault to another using QR-Codes.  
 Here is a summary of what we will be doing:  
 
-Get your camera on your smartphone ready.  We are going to take a video of the QR-Codes displayed on screen.  
+Get your camera on your smartphone ready.  
+We are going to take a video of the QR-Codes displayed on screen.  
 
-
+sudo apt-get install python-zbar
 
 
 
