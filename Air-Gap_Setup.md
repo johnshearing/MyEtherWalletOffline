@@ -1064,11 +1064,11 @@ Execute the following command:
 You should see a QR-Code on the screen.  
 If you scan this into you smartphone using any QR-Code scanning app you will see that this reads "hello world"  
 
-Now we will try outputing a file to the screen.  
-The following command will display several QR-codes on the touchscreen.  
+Now we will try outputing an entire file to the screen.  
+The following command will display several QR-codes sequentially on the touchscreen.  
 There will be one QR-Code for each line in the file.  
 Execute the following line of code substituting **TheNameOfMyFile** in the line below with the name of some file on your pi.  
-You can use any size file, but pick one with Maybe 30 lines of text for this demonstration.  
+You can specify a file of any type and size, but for this demonstration pick a text file with maybe 30 lines of text.  
 `base64 TheNameOfMyFile | while read r; do echo $r | qrencode -t ANSIUTF8; sleep .3; done`  
 You should see several QR-Codes displayed sequencially on your touch screen.  
 The part of the command that reads `sleep .3` means display each QR-Code for .3 seconds.  
@@ -1077,7 +1077,7 @@ If it's a large file it may take a while to show all the QR-Codes.
 Press `Ctrl C` if you want to stop the parade of QR-Codes.  
 
 
-We ha
+We have just passed
 What you have just done is the basis of sending encrypted files.  
 W
 
@@ -1087,7 +1087,7 @@ Here is a summary of what we will be doing:
 Get your camera on your smartphone ready.  
 We are going to take a video of the QR-Codes displayed on screen.  
 
-sudo apt-get install python-zbar
+`sudo apt-get install python-zbar`
 
 
 
