@@ -1092,6 +1092,10 @@ We are going to take a video of the QR-Codes displayed on screen.
 Record a video:  
 `raspivid -t 30000 -w 640 -h 480 -fps 25 -b 1200000 -p 0,0,640,480 -o pivideo.h264`  
 
+
+The following line installs MP4Box:  
+`sudo apt-get install -y gpac`  
+
 Convert the video to mp4 format:  
 `MP4Box -add pivideo.h264 pivideo.mp4`  
 
