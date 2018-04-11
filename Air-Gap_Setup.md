@@ -1087,7 +1087,24 @@ Here is a summary of what we will be doing:
 Get your camera on your smartphone ready.  
 We are going to take a video of the QR-Codes displayed on screen.  
 
-`sudo apt-get install python-zbar`
+`sudo apt-get install python-zbar`  
+
+Record a video:  
+`raspivid -t 30000 -w 640 -h 480 -fps 25 -b 1200000 -p 0,0,640,480 -o pivideo.h264`  
+
+Convert the video to mp4 format:  
+`MP4Box -add pivideo.h264 pivideo.mp4`  
+
+Play back the video:  
+`omxplayer pivideo.mp4`  
+
+If you want to look at a png file:  
+`eog gem4.png`  
+
+Check if two files are the same:  
+`diff /home/pi/test/gem4.png ./gem4.png`  
+
+
 
 
 
