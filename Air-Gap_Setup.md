@@ -1049,11 +1049,26 @@ We are only using QR-Codes to optically transfer files into and out of the Priva
 [Reconstructing QR-Exfiltrated Files - Hak5 2323](https://youtu.be/XHSOSqLwb-A)  
 
 To get started you will need to install the following software onto your PrivateKeyVault:  
-Execute the following commands:  
+Execute the following commands one at a time in your pi's terminal window:  
+
 First make sure the Raspbian catalog is up to date:  
 `sudo apt-get update`  
 Install command line utility for generating QR-Codes from onscreen text or from files:  
 `sudo apt-get install qrencode`   
+
+These packages will help your pi turn a video of QR-Codes back into a text file.
+`sudo apt-get install libzbar-dev`   
+`sudo apt-get install python-zbar`  
+`sudo pip install qrtools`  
+`sudo pip install pypng`    
+`sudo pip install pillow`  
+`sudo pip install argparse`  
+`sudo pip install progressbar  
+
+The following line installs MP4Box:  
+`sudo apt-get install -y gpac`  
+
+
 
 Now lets try moving text out of the PrivateKeyVault from the command line.  
 In this first example we will show the QR-Code representation of "hello world"  
@@ -1067,7 +1082,7 @@ Now we will try outputing an entire file to the screen.
 The following command will display several QR-codes sequentially on the touchscreen.  
 There will be one QR-Code for each line in the file.  
 Execute the following line of code substituting **TheNameOfMyFile** in the line below with the name of some file on your pi.  
-You can specify a file of any type and size, but for this demonstration pick a text file with maybe 30 lines of text.  
+You should be able to specify a file of any type and size, but for this demonstration create a text file with maybe 20 lines of text.  
 `base64 TheNameOfMyFile | while read r; do echo $r | qrencode -t ANSIUTF8; sleep .3; done`  
 You should see several QR-Codes displayed sequencially on your touch screen.  
 The part of the command that reads `sleep .3` means display each QR-Code for .3 seconds.  
@@ -1075,17 +1090,13 @@ You can change this value if you want.
 If it's a large file it may take a while to show all the QR-Codes.  
 Press `Ctrl C` if you want to stop the parade of QR-Codes.  
 
-Run the above command again but this time use your smartphone to make a video of the QR-Code parade. Email the video to a friend or email it to yourself for this demonstration. Or if you want don't email the video at all - the point is that you can get a text file out of Private Key Vault by taking a video of QR-Codes flashed on the screen and then send it to someone with another Private Key Vault and import it without ever connecting to another device as we will soon see. 
+Run the above command again but this time use your smartphone to make a video of the QR-Code parade. Email the video to a friend or email it to yourself for this demonstration. You don't need to email the video at all for the purposes of this demonstation - the point is for you to understand that you can get a text file out of Private Key Vault by taking a video of QR-Codes flashed on the screen and that you can send it to someone with another Private Key Vault and import it without ever connecting to the Internet and with out connecting to any other devices as we will soon see. 
 
 Now we will see how to transfer a file from one PrivateKeyVault to another using QR-Codes.  
 Here is a summary of what we will be doing:    
 
 Record a video:  
 `raspivid -t 30000 -w 640 -h 480 -fps 25 -b 1200000 -p 0,0,640,480 -o pivideo.h264`  
-
-
-The following line installs MP4Box:  
-`sudo apt-get install -y gpac`  
 
 Convert the video to mp4 format:  
 `MP4Box -add pivideo.h264 pivideo.mp4`  
@@ -1100,6 +1111,7 @@ Check if two files are the same:
 `diff /home/pi/test/gem4.png ./gem4.png`  
 
 `python QR_Code_Video_To_Text_File.py pivideo.mp4 output_data.txt`  
+`python QRCodeVideoToTextFile.py pivideo.mp4 outputData.txt`  
 
 
 
