@@ -1096,7 +1096,7 @@ Now paste the following program into your open text editor, save your work and t
 
 # This version has been modified from the original.
 # It's purpose is to reconstruct a text file from a video
-# of QR-codes each made from a line base64 encoded text 
+# of QR-codes each made from a line of base64 encoded text 
 # from the original file. 
 
 import argparse
