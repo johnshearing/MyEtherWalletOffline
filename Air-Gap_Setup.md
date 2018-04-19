@@ -1074,9 +1074,17 @@ The following line installs a png viewer.
 
 
 Next we will need to create the following python program in the directory or folder where you will keep the text files that you are importing into your pi from a video of QR-Codes.  
-At the teminal window of your pi execute the folowing instuctions:  
-mkdir 
+At the teminal window of your pi while in your home directory, execute the folowing instuctions:  
+Make a new directory:  
+`mkdir qrimport`  
 
+Navigate to the new directory:  
+`cd qrimport`  
+
+Create the python program needed to convert a video of QR-Codes back into a text file:  
+`sudo leafpad QRCodeVideoToTextFile.py`  
+
+Now paste the following program into your open text editor, save your work and then exit the text editor.   
 
 ```
 #Author: Tudor Gheorghiu, Prodicode
