@@ -1035,16 +1035,14 @@ Press `CTRL + X` to quit Nano.
 We will see how to use this program shortly.  
 
 #### Getting Text and Files Into and Out Of the PrivateKeyVault Using QR-Code  
-Since the PrivateKeyVault does not connect to any other devices there must be a way to transfer text and files into and out of the device in some transparent maner that gives the user complete control and the ability to inspect what information is moving in and out of the device at every stage of the transfer. The following 4 minute video gives a general idea of how QR-Code is used to transfer information into and out of the PrivateKeyVault. It is also a full demonstration of how to securely send ether on the Ethereum block chain.  
-[Click here to see how QR-Codes are used to make secure transactions on the Ethereum block chain](https://www.youtube.com/watch?v=_vA4tTLdL2M)  
+Since the PrivateKeyVault does not connect to any other devices there must be a way to transfer text and files into and out of the device in some transparent maner that gives the user complete control and the ability to inspect what information is moving in and out of the device at every stage of the transfer. The following 4 minute video gives a general idea of how QR-Code is used to transfer information into and out of the PrivateKeyVault. It is also a full demonstration of how to securely send ether on the Ethereum block chain. To see the video [click here](https://www.youtube.com/channel/UCQlQRc9muSqPZIXSfugN43A) to go to my YouTube channel and then click on the video entitled **Private Key Vault: an Air Gapped Computer For Ethereum Transactions**  
 
-Now we will see how to move screen text and large files into and out of the PrivateKeyVault using QR-Code.  
-The following instructions were made from information aquired from the following videos:  
+Now we will see how to move text typed in at the command line editor and also large files into and out of the PrivateKeyVault using QR-Code. The following instructions were made from information aquired from the following videos:  
 These videos are made for security experts and penetration testers.  
 These people, who work within the law, are hired to test network security by stealing information.  
 They then return the informaton and report on security weaknesses.  
 We are not doing any of that.  
-We are only using QR-Codes to optically transfer file into and out of the PrivateKeyVault.  
+We are only using QR-Codes to optically transfer files into and out of the PrivateKeyVault while maintaining the airgap.  
 [Alternative Sneaker Nets; Optics, Hak5 1506.1](https://youtu.be/Tr0v3DZVQ-k)  
 [Stealing Files With Optics? - Hak5 2320](https://youtu.be/sZpIiSfRMSw)  
 [Steal files with QR codes? Yes - Hak5 2322](https://youtu.be/WBkNgb-iPGE)  
@@ -1063,6 +1061,7 @@ Execute the following command:
 `qrencode -t ANSIUTF8 "hello world"`  
 You should see a QR-Code on the screen.  
 If you scan this into you smartphone using any QR-Code scanning app you will see that this reads "hello world"  
+So this is how you get text out of the Private Key Vault without connecting to other devices. 
 
 Now we will try outputing an entire file to the screen.  
 The following command will display several QR-codes sequentially on the touchscreen.  
@@ -1076,18 +1075,10 @@ You can change this value if you want.
 If it's a large file it may take a while to show all the QR-Codes.  
 Press `Ctrl C` if you want to stop the parade of QR-Codes.  
 
-
-We have just passed
-What you have just done is the basis of sending encrypted files.  
-W
+Run the above command again but this time use your smartphone to make a video of the QR-Code parade. Email the video to a friend or email it to yourself for this demonstration. Or if you want don't email the video at all - the point is that you can get a text file out of Private Key Vault by taking a video of QR-Codes flashed on the screen and then send it to someone with another Private Key Vault and import it without ever connecting to another device as we will soon see. 
 
 Now we will see how to transfer a file from one PrivateKeyVault to another using QR-Codes.  
-Here is a summary of what we will be doing:  
-
-Get your camera on your smartphone ready.  
-We are going to take a video of the QR-Codes displayed on screen.  
-
-`sudo apt-get install python-zbar`  
+Here is a summary of what we will be doing:    
 
 Record a video:  
 `raspivid -t 30000 -w 640 -h 480 -fps 25 -b 1200000 -p 0,0,640,480 -o pivideo.h264`  
@@ -1108,7 +1099,7 @@ If you want to look at a png file:
 Check if two files are the same:  
 `diff /home/pi/test/gem4.png ./gem4.png`  
 
-
+`python QR_Code_Video_To_Text_File.py pivideo.mp4 output_data.txt`  
 
 
 
