@@ -1075,7 +1075,9 @@ The following line installs a png viewer.
 
 Next we will need to create the following python program in the directory or folder where you will keep the text files that you are importing into your pi from a video of QR-Codes.  
 At the teminal window of your pi while in your home directory, execute the folowing instuctions:  
-Make a new directory:  
+
+The following command makes a directory called qrimport.  
+You can call what every you want.  
 `mkdir qrimport`  
 
 Navigate to the new directory:  
@@ -1084,7 +1086,7 @@ Navigate to the new directory:
 Create the python program needed to convert a video of QR-Codes back into a text file:  
 `sudo leafpad QRCodeVideoToTextFile.py`  
 
-Now paste the following program into your open text editor, save your work and then exit the text editor.   
+Now paste the following Python program into your open text editor, save the document and then exit the text editor.   
 
 ```
 #Author: Tudor Gheorghiu, Prodicode
@@ -1162,7 +1164,16 @@ os.remove("temp.jpg")
 cap.release()
 cv2.destroyAllWindows()
 print("Data written to "+args.output)
-```
+```  
+
+Finally we will need to install OpenCV 3 image processing software which does the work of reading all the QR-Codes from the video and converting each one back into text. This install takes about 3 hours on a pi 2. Most of this is time that the machine is compiling all the files. During this time you can have a nice nap.  
+
+Instructions for installing OpenCV 3 can be found at the link below:  
+[Raspberry_Pi_2_and_OpenCV_3_Tutorial_Part_1/Raspberry Pi 2 + OpenCV 3 Cheat Sheet.txt](https://github.com/johnshearing/Raspberry_Pi_2_and_OpenCV_3_Tutorial_Part_1/blob/master/Raspberry%20Pi%202%20%2B%20OpenCV%203%20Cheat%20Sheet.txt)  
+
+The companion video can be found here.
+[Raspberry Pi 2 and OpenCV 3 Tutorial Part 1](https://www.youtube.com/watch?v=6j-Wy9j0TCs)
+There is no part 2 in case you are wondering but I followed all the instructions and was rewarded with a successful install of OpenCV 3
 
 Now lets try moving text out of the PrivateKeyVault from the command line.  
 In this first example we will show the QR-Code representation of "hello world"  
