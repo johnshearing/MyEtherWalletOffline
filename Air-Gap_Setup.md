@@ -1152,7 +1152,7 @@ while(currentFrame <= total_frames):
     bar.update(currentFrame)
     currentFrame += 1
 
-# This strips out 3 unwanted characters that appear in the ouput file
+# This strips out 3 unwanted characters that appear at the begining of the ouput file.  
 # for some unknown reason. 
 fileString = open(args.output, "r").read()
 slicedFileString = fileString[3:]
@@ -1171,9 +1171,9 @@ Finally we will need to install OpenCV 3 image processing software which does th
 Instructions for installing OpenCV 3 can be found at the link below:  
 [Raspberry_Pi_2_and_OpenCV_3_Tutorial_Part_1/Raspberry Pi 2 + OpenCV 3 Cheat Sheet.txt](https://github.com/johnshearing/Raspberry_Pi_2_and_OpenCV_3_Tutorial_Part_1/blob/master/Raspberry%20Pi%202%20%2B%20OpenCV%203%20Cheat%20Sheet.txt)  
 
-The companion video can be found here.
-[Raspberry Pi 2 and OpenCV 3 Tutorial Part 1](https://www.youtube.com/watch?v=6j-Wy9j0TCs)
-There is no part 2 in case you are wondering but I followed all the instructions and was rewarded with a successful install of OpenCV 3
+The companion video can be found here.  
+[Raspberry Pi 2 and OpenCV 3 Tutorial Part 1](https://www.youtube.com/watch?v=6j-Wy9j0TCs)  
+There is no part 2 in case you are wondering but I followed the instructions and was rewarded with a successful install of OpenCV 3 and the ability to read QR-Codes from a video and turn it back into a text file.
 
 Now lets try moving text out of the PrivateKeyVault from the command line.  
 In this first example we will show the QR-Code representation of "hello world"  
@@ -1181,7 +1181,13 @@ Execute the following command:
 `qrencode -t ANSIUTF8 "hello world"`  
 You should see a QR-Code on the screen.  
 If you scan this into you smartphone using any QR-Code scanning app you will see that this reads "hello world"  
-So this is how you get text out of the Private Key Vault without connecting to other devices. 
+So this is how you get text out of the Private Key Vault without connecting to other devices.  
+
+Now we will see how to transfer a file from one PrivateKeyVault to another using QR-Codes.  
+Here is a summary of what we will be doing:  
+* Run a text file through a program that shows each line of text on the screen as a QR-Code.  
+* Make a video recording of this QR-Code parade on our smart phone.  
+
 
 Now we will try outputing an entire file to the screen.  
 The following command will display several QR-codes sequentially on the touchscreen.  
@@ -1195,10 +1201,7 @@ You can change this value if you want.
 If it's a large file it may take a while to show all the QR-Codes.  
 Press `Ctrl C` if you want to stop the parade of QR-Codes.  
 
-Run the above command again but this time use your smartphone to make a video of the QR-Code parade. Email the video to a friend or email it to yourself for this demonstration. You don't need to email the video at all for the purposes of this demonstation - the point is for you to understand that you can get a text file out of Private Key Vault by taking a video of QR-Codes flashed on the screen and that you can send it to someone with another Private Key Vault and import it without ever connecting to the Internet and with out connecting to any other devices as we will soon see. 
-
-Now we will see how to transfer a file from one PrivateKeyVault to another using QR-Codes.  
-Here is a summary of what we will be doing:    
+Run the above command again but this time use your smartphone to make a video of the QR-Code parade. Email the video to a friend or email it to yourself for this demonstration. You don't need to email the video at all for the purposes of this demonstation - the point is for you to understand that you can get a text file out of Private Key Vault by taking a video of QR-Codes flashed on the screen and that you can send it to someone with another Private Key Vault and import it without ever connecting to the Internet and with out connecting to any other devices as we will soon see.     
 
 Record a video:  
 `raspivid -t 30000 -w 640 -h 480 -fps 25 -b 1200000 -p 0,0,640,480 -o pivideo.h264`  
