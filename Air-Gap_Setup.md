@@ -1597,30 +1597,28 @@ Think carefully before using these.
 
 
 ## GPG Commands  
-gpg2 --version
-gpg2 --list-keys
-gpg2 --list-secret-keys
-gpg2 --fingerprint
-gpg2 --gen-key
-gpg2 --gen-revoke emailaddress@provider.com
-gpg2 --recv-keys emailaddress@provider.com
-gpg2 --import publickeyfile.asc
-gpg2 --send-keys keyID
-gpg2 --export --armor theiremailaddress@provider.com
-gpg2 --export --armor theiremailaddress@provider.com > filename.asc
-gpg2 --interactive --edit-key emailaddress@provider.com
-    sign, trust, save
-gpg2 --list-sigs your@email.address
-pg2 --export-secret-key --armor --output filename emailaddress@provider.com
-gpg2 --refresh-keys
-gpg2 filename.txt
-gpg2 --armor --encrypt --sign -r your@email.com -r recipient@email.com filename
-shred -uv -n 1 filename
-gpg2 --encrypt filename
-gpg2 --encrypt --sign -r your@email.com filename
-gpg --edit-key KeyID
-    revsig, save
-gpg --send-keys keyID
-gpg2 --delete-secret-keys KeyID
-gpg2 --delete--key KeyID
+gpg2 --version  
+gpg2 --list-keys  
+gpg2 --list-secret-keys  
+gpg2 --fingerprint  
+gpg2 --gen-key  
+gpg2 --gen-revoke emailaddress@provider.com  
+gpg2 --recv-keys emailaddress@provider.com  
+gpg2 --import publickeyfile.asc  
+gpg2 --send-keys keyID  
+gpg2 --export --armor theiremailaddress@provider.com  
+gpg2 --export --armor theiremailaddress@provider.com > filename.asc  
+gpg2 --interactive --edit-key emailaddress@provider.com sign, trust, save  
+gpg2 --list-sigs your@email.address  
+pg2 --export-secret-key --armor --output filename emailaddress@provider.com  
+gpg2 --refresh-keys  
+gpg2 filename.txt  
+gpg2 --armor --encrypt --sign -r your@email.com -r recipient@email.com filename  
+shred -uv -n 1 filename  
+gpg2 --encrypt filename  
+gpg2 --encrypt --sign -r your@email.com filename  
+gpg --edit-key KeyID  revsig, save  
+gpg --send-keys keyID  
+gpg2 --delete-secret-keys KeyID  
+gpg2 --delete--key KeyID  
 
