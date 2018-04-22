@@ -1218,7 +1218,7 @@ If you want to look at a png file:
 Check if two files are the same:  
 `diff /home/pi/test/gem4.png ./gem4.png`  
 
-`python QRCodeVideoToTextFile.py pivideo.mp4 outputData.txt`  
+`python QRCodeVideoToTextFile.py pivideo.mp4 outputdata.txt`  
 
 
 
