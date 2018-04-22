@@ -1569,7 +1569,9 @@ To start Gulp copy the directory location from the File Manager.
 Open PowerShell and enter `cd ` then paste in the directory location and press enter.
 Then execute the command `gulp`
 
-To Start MyEtherWallet for development navigate to the **dist** directory using the File Manager and double click on **index.html**.  
+To start MyEtherWallet for development navigate to the **dist** directory using the File Manager and double click on **index.html**.  
+
+To start the pi's file manager `pcmanfm`  
 
 My public key on Ethereum  
 13eC582A8E8A676e78f4E8e2Bf6B135bBE97c306   
