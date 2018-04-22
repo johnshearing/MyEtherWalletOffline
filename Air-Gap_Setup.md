@@ -1177,19 +1177,24 @@ There is no part 2 in case you are wondering but I followed the instructions and
 
 Now lets try moving text out of the PrivateKeyVault from the command line.  
 In this first example we will show the QR-Code representation of "hello world"  
-Execute the following command:  
+Execute the following command at the terminal window:  
 `qrencode -t ANSIUTF8 "hello world"`  
 You should see a QR-Code on the screen.  
 If you scan this into you smartphone using any QR-Code scanning app you will see that this reads "hello world"  
+The QRCode scanning app I like to use is Norton's Snap for Android.  
+Once the text is scanned into you phone you can do whatever you want with it  
+simply by pasting the text it into other apps like gmail or perhaps a text editor. 
 So this is how you get text out of the Private Key Vault without connecting to other devices.  
 
-Now we will see how to transfer a file from one PrivateKeyVault to another using QR-Codes.  
+Now we will see how to transfer an encrypted text file from one PrivateKeyVault to another using QR-Codes.  
+This will allow us to make a secure file transfer over the Internet without losing our airgap.  
+
 Here is a summary of what we will be doing:  
 * Run a text file through a program that shows each line of text on the screen as a QR-Code.  
 * Make a video recording of this QR-Code parade on our smart phone.  
 
 
-Now we will try outputing an entire file to the screen.  
+Now we will try outputing an entire text file to the screen.  
 The following command will display several QR-codes sequentially on the touchscreen.  
 There will be one QR-Code for each line in the file.  
 Execute the following line of code substituting **TheNameOfMyFile** in the line below with the name of some file on your pi.  
@@ -1199,12 +1204,16 @@ You should see several QR-Codes displayed sequencially on your touch screen.
 The part of the command that reads `sleep .3` means display each QR-Code for .3 seconds.  
 You can change this value if you want.  
 If it's a large file it may take a while to show all the QR-Codes.  
-Press `Ctrl C` if you want to stop the parade of QR-Codes.  
+Press `Ctrl C` if you want to stop the parade of QR-Codes before the program is finished displaying all the QR-Codes.  
 
 Run the above command again but this time use your smartphone to make a video of the QR-Code parade. Email the video to a friend or email it to yourself for this demonstration. You don't need to email the video at all for the purposes of this demonstation - the point is for you to understand that you can get a text file out of Private Key Vault by taking a video of QR-Codes flashed on the screen and that you can send it to someone with another Private Key Vault and import it without ever connecting to the Internet and with out connecting to any other devices as we will soon see.     
 
 Record a video:  
 `raspivid -t 30000 -w 640 -h 480 -fps 25 -b 1200000 -p 0,0,640,480 -o pivideo.h264`  
+The -t 30000 in the line above makes the recording process last for 30 seconds.   
+
+Stop the recording process with the following command:  
+`pkill raspivid`  
 
 Convert the video to mp4 format:  
 `MP4Box -add pivideo.h264 pivideo.mp4`  
