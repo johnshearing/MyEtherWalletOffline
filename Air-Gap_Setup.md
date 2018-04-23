@@ -1184,14 +1184,51 @@ If you scan this into you smartphone using any QR-Code scanning app you will see
 The QRCode scanning app I like to use is Norton's Snap for Android.  
 Once the text is scanned into you phone you can do whatever you want with it  
 simply by pasting the text it into other apps like gmail or perhaps a text editor. 
-So this is how you get text out of the Private Key Vault without connecting to other devices.  
+So this is basically how you get text out of the Private Key Vault without connecting to other devices.  
 
 Now we will see how to transfer an encrypted text file from one PrivateKeyVault to another using QR-Codes.  
 This will allow us to make a secure file transfer over the Internet without losing our airgap.  
+By using this method, there will be no opportunity for attackers to access the Vaults because we will make the transfer without connecting to any other devices. Further more, there will be no chance of anyone reading our message because the message will not be decrypted until the message is safely on the other side of the airgap where spyware and keyloggers can not go. 
 
 Here is a summary of what we will be doing:  
+Let's pretend Alice owns a baking company and she is opening a new cake factory in another city. Her new associate Bob already has the cake recipe but does not yet possess the secrets for making the cake extra moist and delicious. We will be playing both the parts of Alice and Bob in this exchange so that you can experience all the steps required to make the encrypted file transfer.  
+
+The following is the information we will be sending.  
+```  
+Secret 1: Add one box of instant pudding mix to the recipe's dry ingredients and stir. Pudding provides stability to the ingredients and changes the texture of the cake to make it smooth and moist.  
+
+Secret 2: Separate the white from the yolk of one egg included in the recipe. Discard the white and add only the yolk to the batter. This step is necessary for only one egg, regardless of how many are used in the recipe. Egg whites are drying agents and too many will reduce the moisture content of the batter.  
+
+Secret 3: Add an extra 1/3 cup vegetable oil to the batter and stir. Vegetable oil reduces the production of gluten in flour. Gluten works as a binding agent. Too much gluten in a cake will cause it to be sticky rather than moist.  
+
+Secret 4: Use real butter in place of margarine, even though the recipe specifies margarine. Butter substitutes contain more water than fat. However, it is the fat in butter that helps to hold the cake together and moisten it. The excess water in margarine will evaporate in the oven's heat, leaving you with a dry texture to your cake.  
+```  
+
+* First Bob needs to make a public/private keypair:   
+[Here is a video which shows how it's done.](https://youtu.be/ZraIkHqpxzU?t=7m4s)  
+At the command line enter the following command:   
+`gpg2 --gen-key`  
+You will be prompted for the type of key you want.  
+Select: (1) RSA and RSA (Default)  
+
+Next you will be prompted to select the length of the keys.  
+The larger the key size, the harder the encryption is to crack assuming you have a strong password.  
+Unfortunately, larger keysizes take longer to generate and to use.  
+The default (2048) is a good compromise.  
+Select the default to continue.  
+
+Next you will be prompted for the amount of time before the key expires.  
+Select the default (0) to continue.  
+By selecting **0** you specify that the key will never expire.  
+You will be asked to confirm your selection:  
+Press **y** for yes and then press the enter button.  
+
+
+
+
 * Run a text file through a program that shows each line of text on the screen as a QR-Code.  
 * Make a video recording of this QR-Code parade on our smart phone.  
+* Email the 
 
 
 Now we will try outputing an entire text file to the screen.  
