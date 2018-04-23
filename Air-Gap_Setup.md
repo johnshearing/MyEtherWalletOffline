@@ -1248,9 +1248,11 @@ The excess water in margarine will evaporate in the oven's heat, leaving your ca
   * The pi will ask you to move your mouse and type randomly on your keyboard to provide a source of randomness for the key generation process.  
   * It took about 5 minutes for my pi 2 to generate the key pairs. Be patient as you provide random input.  
   *  
+  * Never show anyone your private key.  
+  * Your private keys should never leave your PrivateKeyVault.  
   * If you want information about your new private key enter the following command.  
   * `gpg2 --list-secret-keys`  
-  * The output should look as follows:  
+  * The output should look something like the following:  
 ```  
 /home/pi/.gnupg/secring.gpg
 ---------------------------
@@ -1258,7 +1260,13 @@ sec   2048R/6E477330 2018-04-15
 uid                  John R Shearing (www.PrivateKeyVault.com) <johnshearing@gmail.com>
 ssb   2048R/0199AA57 2018-04-15
 ```   
-  
+  * The top line indicates the location and name of your keyring file.  
+  * The **sec** line shows the key size : 2048, key type : r, the UniqueID : 6E477330, and the creation date.  
+  * The **uid** line shows the your real name, your comment, and your email address which is also used to uniquely identify your key when making commands.  
+  * The **ssb** line shows the size, type, and unique identifyer of your subkey.
+  * Subkeys are cool because you can have as many subkeys associated with your private key as you want but you can revoke them individually without harming your ability to use your other subkeys or the originating private key.  
+  *  
+  * 
   
   
   
