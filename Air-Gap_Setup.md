@@ -1234,8 +1234,20 @@ The excess water in margarine will evaporate in the oven's heat, leaving your ca
   * You will be asked to confirm your selection:  
   * Press **y** for yes and then press the enter button.  
   *   
-  * Next you will be asked for **Your Name**, an **Email Address**, and a **Comment**. Follow the prompts.  
+  * Next you will be asked for **Your Name**, an **Email Address**, and a **Comment**. 
+  * These will be used to make a unique identifyer for your key.  
+  * Follow the prompts.  
+  * Don't worry if you get a message stating that the GPG agent is not available. It doesn't matter.  
+  *  
+  * Next you will be prompted for the password you want to use when accessing your private key.  
+  * Make it a good one, or what's the point of doing all this.  
+  * Make it at least 10 completely random characters using upper and lower case letters, numbers, and special characters.  
+  * After you enter your password, you will be prompted to enter it again to be sure that you typed it correctly.  
+  *  
+  * Then the pi will start doing the work of creating your public/private key pair.  
+  * The pi will ask you to move your mouse and type randomly on your keyboard to provide a source of randomness for the key generation process.  
   * 
+  
   
   
 
