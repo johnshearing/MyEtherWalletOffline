@@ -1191,7 +1191,7 @@ This will allow us to make a secure file transfer over the Internet without losi
 By using this method, there will be no opportunity for attackers to access the Vaults because we will make the transfer without connecting to any other devices. Further more, there will be no chance of anyone reading our message because the message will not be decrypted until the message is safely on the other side of the airgap where spyware and keyloggers can not go. 
 
 Here is a summary of what we will be doing:  
-Let's pretend Alice owns a baking company and she is opening a new cake factory in another city. Her new associate Bob already has the cake recipe but does not yet possess the secrets for making the cake extra moist and delicious. We will be playing both the parts of Alice and Bob in this exchange so that you can experience all the steps required to make the encrypted file transfer.  
+Let's pretend Alice owns a baking company and she is opening a new cake factory in another city. Her new associate Bob already has the cake recipe but does not yet possess the secrets for making the cake extra moist and delicious. Mallory is an industrial spy. He is trying to steal Alice's baking secrets to sell to the highest bidder. We will be playing both the parts of Alice and Bob in this exchange so that you can experience all the steps required to successfully make the encrypted file transfer.  
 
 The following is the information we will be sending.  
 ```  
@@ -1250,7 +1250,7 @@ The excess water in margarine will evaporate in the oven's heat, leaving your ca
   
 Never show anyone your private key.  
 Your private keys should never leave your PrivateKeyVault.  
-If you want to see information about your new private key enter the following command.  
+If you want to see information about your private keys enter the following command.  
 `gpg --list-secret-keys`  
 The output should look something like the following:  
 ```
@@ -1268,11 +1268,37 @@ The email address is also used to uniquely identify your key when making gpg com
 The **ssb** line shows the size, type, and unique identifyer of your subkey.  
 Subkeys are cool because you can have as many subkeys associated with your private key as you want but you can revoke them individually without harming your ability to use your other subkeys or the originating private key.  
 
+Your public keys are meant to be shared with everyone.  
+Public keys are used by others to encrypt documents that can only be decrypted by you using your private key.  
+If you want to see information about your public keys execute the following command.  
+`gpg --list-keys`  
+The output should look something like the following:  
+```
+/home/pi/.gnupg/pubring.gpg
+---------------------------
+pub   2048R/6E477330 2018-04-15
+uid       [ultimate] John R Shearing (www.PrivateKeyVault.com) <johnshearing@gmail.com>
+sub   2048R/0199AA57 2018-04-15
+```
+The output provides the same information about public keys as explained for the private keys in the section above.  
+
+If you wish to see a finger prints for a particular public key execute the following command.  
+`gpg --fingerprint johnshearing@gmail.com`  
+The output should look something like the following:  
+```
+pub   2048R/6E477330 2018-04-15
+      Key fingerprint = DE46 D08E 0666 0BD7 B010  CDEB C708 CD56 6E47 7330
+uid       [ultimate] John R Shearing (www.PrivateKeyVault.com) <johnshearing@gmail.com>
+sub   2048R/0199AA57 2018-04-15
+```  
+If the email address were ommited from the command then fingerprints for all public keys would be shown.  
+That shows one way that UniqueIds are used to specify a key when making GPG commands.  
+The finger print is used to verify that a public key which Alice receives from Bob has not been switched out by Mallory.  
+If Mallory manages to intercept Bobs public key on it's way to Alice and replaces it with his own, then Mallory will be able to decrypt Alices secret message instead of Bob. You will see how a finger print is used to prevent right after we see how Bob sends his private key to Alice.  
 
 
-* Run a text file through a program that shows each line of text on the screen as a QR-Code.  
-* Make a video recording of this QR-Code parade on our smart phone.  
-* Email the 
+
+
 
 
 Now we will try outputing an entire text file to the screen.  
