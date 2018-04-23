@@ -1216,23 +1216,23 @@ The excess water in margarine will evaporate in the oven's heat, leaving your ca
 ```  
 
 * First Bob needs to make a public/private keypair:   
-[Here is a video which shows how it's done.](https://youtu.be/ZraIkHqpxzU?t=7m4s)  
-At the command line enter the following command:   
-`gpg2 --gen-key`  
-You will be prompted for the type of key you want.  
-Select: (1) RSA and RSA (Default)  
+  * [Here is a video which shows how it's done.](https://youtu.be/ZraIkHqpxzU?t=7m4s)  
+  * At the command line enter the following command:   
+  * `gpg2 --gen-key`  
+  * You will be prompted for the type of key you want.  
+  * Select: (1) RSA and RSA (Default)  
+  
+  * Next you will be prompted to select the length of the keys.  
+  * The larger the key size, the harder the encryption is to crack assuming you have a strong password.  
+  * Unfortunately, larger keysizes take longer to generate and to use.  
+  * The default (2048) is a good compromise.  
+  * Select the default to continue.  
 
-Next you will be prompted to select the length of the keys.  
-The larger the key size, the harder the encryption is to crack assuming you have a strong password.  
-Unfortunately, larger keysizes take longer to generate and to use.  
-The default (2048) is a good compromise.  
-Select the default to continue.  
-
-Next you will be prompted for the amount of time before the key expires.  
-Select the default (0) to continue.  
-By selecting **0** you specify that the key will never expire.  
-You will be asked to confirm your selection:  
-Press **y** for yes and then press the enter button.  
+  * Next you will be prompted for the amount of time before the key expires.  
+  * Select the default (0) to continue.  
+  * By selecting **0** you specify that the key will never expire.  
+  * You will be asked to confirm your selection:  
+  * Press **y** for yes and then press the enter button.  
 
 
 
