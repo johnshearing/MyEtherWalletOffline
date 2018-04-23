@@ -1,10 +1,5 @@
 ## The Private Key Vault - Instructions for setting up a raspberry pi with touch screen and camera installed as an optically isolated digital wallet for Ethereum offline transactions.  
 
-As Kanye West said:
-
-> We're living the future so  
-> the present is our past.
-
 This is the start of fully open source documentation of the physical build and all the software.  
 Disk images are forthcoming but you don't need them. You can build from scratch using these instructions.  
 
@@ -1257,14 +1252,14 @@ The excess water in margarine will evaporate in the oven's heat, leaving your ca
   * Your private keys should never leave your PrivateKeyVault.  
   * If you want to see information about your new private key enter the following command.  
   * `gpg2 --list-secret-keys`  
-  * The output should look something like the following:  
-```  
+  * The output should look something like the following:
+  ```  
 /home/pi/.gnupg/secring.gpg
 ---------------------------
 sec   2048R/6E477330 2018-04-15
 uid                  John R Shearing (www.PrivateKeyVault.com) <johnshearing@gmail.com>
 ssb   2048R/0199AA57 2018-04-15  
-```  
+```
   * The top line indicates the location and name of your keyring file.  
   * The **sec** line shows the key size : 2048, key type : r, the UniqueID : 6E477330, and the creation date.  
   * The **uid** line shows the your real name, your comment, and your email address which is also used to uniquely identify your key when making commands.  
