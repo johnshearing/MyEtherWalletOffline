@@ -1234,7 +1234,9 @@ The excess water in margarine will evaporate in the oven's heat, leaving your ca
   * You will be asked to confirm your selection:  
   * Press **y** for yes and then press the enter button.  
 
-
+  * Next you will be asked for **Your Name**, an **Email Address**, and a **Comment**. Follow the prompts.  
+  
+  
 
 
 * Run a text file through a program that shows each line of text on the screen as a QR-Code.  
