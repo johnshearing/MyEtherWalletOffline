@@ -1,5 +1,10 @@
 ## The Private Key Vault - Instructions for setting up a raspberry pi with touch screen and camera installed as an optically isolated digital wallet for Ethereum offline transactions.  
 
+As Kanye West said:
+
+> We're living the future so
+> the present is our past.
+
 This is the start of fully open source documentation of the physical build and all the software.  
 Disk images are forthcoming but you don't need them. You can build from scratch using these instructions.  
 
