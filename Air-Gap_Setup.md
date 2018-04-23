@@ -1247,26 +1247,26 @@ The excess water in margarine will evaporate in the oven's heat, leaving your ca
   * Then the pi will start doing the work of creating your public/private key pair.  
   * The pi will ask you to move your mouse and type randomly on your keyboard to provide a source of randomness for the key generation process.  
   * It took about 5 minutes for my pi 2 to generate the key pairs. Be patient as you provide random input.  
-  *  
-  * Never show anyone your private key.  
-  * Your private keys should never leave your PrivateKeyVault.  
-  * If you want to see information about your new private key enter the following command.  
-  * `gpg2 --list-secret-keys`  
-  * The output should look something like the following:  ```/home/pi/.gnupg/secring.gpg
+  
+Never show anyone your private key.  
+Your private keys should never leave your PrivateKeyVault.  
+If you want to see information about your new private key enter the following command.  
+`gpg --list-secret-keys`  
+The output should look something like the following:  
+```/home/pi/.gnupg/secring.gpg
 ---------------------------
 sec   2048R/6E477330 2018-04-15
 uid                  John R Shearing (www.PrivateKeyVault.com) <johnshearing@gmail.com>
-ssb   2048R/0199AA57 2018-04-15 ```
-  * The top line indicates the location and name of your keyring file.  
-  * The **sec** line shows the key size : 2048, key type : r, the UniqueID : 6E477330, and the creation date.  
-  * The **uid** line shows the your real name, your comment, and your email address which is also used to uniquely identify your key when making commands.  
-  * The **ssb** line shows the size, type, and unique identifyer of your subkey.
-  * Subkeys are cool because you can have as many subkeys associated with your private key as you want but you can revoke them individually without harming your ability to use your other subkeys or the originating private key.  
-  *  
-  * 
-  
-  
-  
+ssb   2048R/0199AA57 2018-04-15 
+```  
+The top line indicates the location and name of your keyring file.  
+The **sec** line shows the key size : 2048, the key type : r for RSA, the UniqueID : 6E477330, and the creation date.  
+The UniqueID is used in GPG commands to refer to that specific private key.  
+The **uid** line shows the your real name, your comment, and your email address.  
+The email address is also used to uniquely identify your key when making gpg commands.  
+The **ssb** line shows the size, type, and unique identifyer of your subkey.  
+Subkeys are cool because you can have as many subkeys associated with your private key as you want but you can revoke them individually without harming your ability to use your other subkeys or the originating private key.  
+
 
 
 * Run a text file through a program that shows each line of text on the screen as a QR-Code.  
