@@ -1218,7 +1218,7 @@ The excess water in margarine will evaporate in the oven's heat, leaving your ca
 * First Bob needs to make a public/private keypair:   
   * [Here is a video which shows how it's done.](https://youtu.be/ZraIkHqpxzU?t=7m4s)  
   * At the command line enter the following command:   
-  * `gpg2 --gen-key`  
+  * `gpg --gen-key`  
   * You will be prompted for the type of key you want.  
   * Select: (1) RSA and RSA (Default)  
   *   
@@ -1246,7 +1246,21 @@ The excess water in margarine will evaporate in the oven's heat, leaving your ca
   *  
   * Then the pi will start doing the work of creating your public/private key pair.  
   * The pi will ask you to move your mouse and type randomly on your keyboard to provide a source of randomness for the key generation process.  
-  * 
+  * It took about 5 minutes for my pi 2 to generate the key pairs. Be patient as you provide random input.  
+  *  
+  * If you want information about your new private key enter the following command.  
+  * `gpg2 --list-secret-keys`  
+  * The output should look as follows:  
+  * ```
+/home/pi/.gnupg/secring.gpg
+---------------------------
+sec   2048R/6E477330 2018-04-15
+uid                  John R Shearing (www.PrivateKeyVault.com) <johnshearing@gmail.com>
+ssb   2048R/0199AA57 2018-04-15
+
+  ```  
+  *   
+  
   
   
   
