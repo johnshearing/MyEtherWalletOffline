@@ -1253,7 +1253,8 @@ Your private keys should never leave your PrivateKeyVault.
 If you want to see information about your new private key enter the following command.  
 `gpg --list-secret-keys`  
 The output should look something like the following:  
-```/home/pi/.gnupg/secring.gpg
+```
+/home/pi/.gnupg/secring.gpg
 ---------------------------
 sec   2048R/6E477330 2018-04-15
 uid                  John R Shearing (www.PrivateKeyVault.com) <johnshearing@gmail.com>
