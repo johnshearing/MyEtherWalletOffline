@@ -1253,11 +1253,11 @@ The excess water in margarine will evaporate in the oven's heat, leaving your ca
   * If you want to see information about your new private key enter the following command.  
   * `gpg2 --list-secret-keys`  
   * The output should look something like the following:  
-    /home/pi/.gnupg/secring.gpg
+    `/home/pi/.gnupg/secring.gpg
     ---------------------------
     sec   2048R/6E477330 2018-04-15
     uid                  John R Shearing (www.PrivateKeyVault.com) <johnshearing@gmail.com>
-    ssb   2048R/0199AA57 2018-04-15
+    ssb   2048R/0199AA57 2018-04-15`
   * The top line indicates the location and name of your keyring file.  
   * The **sec** line shows the key size : 2048, key type : r, the UniqueID : 6E477330, and the creation date.  
   * The **uid** line shows the your real name, your comment, and your email address which is also used to uniquely identify your key when making commands.  
