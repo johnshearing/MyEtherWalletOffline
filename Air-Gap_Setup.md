@@ -1251,7 +1251,7 @@ The excess water in margarine will evaporate in the oven's heat, leaving your ca
   * If you want information about your new private key enter the following command.  
   * `gpg2 --list-secret-keys`  
   * The output should look as follows:  
-  * ```
+  ```
 /home/pi/.gnupg/secring.gpg
 ---------------------------
 sec   2048R/6E477330 2018-04-15
