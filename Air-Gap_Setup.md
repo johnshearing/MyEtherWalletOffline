@@ -1191,7 +1191,7 @@ This will allow us to make a secure file transfer over the Internet without losi
 By using this method, there will be no opportunity for attackers to access the Vaults because we will make the transfer without connecting to any other devices. Further more, there will be no chance of anyone reading our message because the message will not be decrypted until the message is safely on the other side of the airgap where spyware and keyloggers can not go. 
 
 Here is a summary of what we will be doing:  
-Let's pretend Alice owns a baking company and she is opening a new cake factory in another city. Her new associate Bob already has the cake recipe but does not yet possess the secrets for making the cake extra moist and delicious. Both Alice and Bob possess a PrivateKeyVault which is nothing more that an airgapped raspberry pi computer. Mallory is an industrial spy. He is trying to steal Alice's baking secrets to sell to the highest bidder. We will be playing both the parts of Alice and Bob in this exchange so that you can experience all the steps required to successfully make the encrypted file transfer.  
+Let's pretend Alice owns a baking company and she is opening a new cake factory in another city. Her new associate Bob already has the cake recipe but does not yet possess the secrets for making the cake super moist and delicious. Both Alice and Bob possess a PrivateKeyVault which is nothing more that an airgapped raspberry pi computer. Mallory is an industrial spy. He is trying to steal Alice's baking secrets to sell to the highest bidder. We will be playing both the parts of Alice and Bob in this exchange so that you can experience all the steps required to successfully make the encrypted file transfer.  
 
 The following is the information we will be sending.  
 ```  
@@ -1318,10 +1318,10 @@ Now Bob needs to get his public key to Alice.
   * So the file is there. Let's see what's in it:  
   * Execute the following command to open the file with the leafpad text editor.  
   * `leafpad bob@gmail.com_pubkey.asc`  
-  * The output will look something like the following. 
+  * The output will look something like the following block of characters.  
   * That's what is in the `bob@gmail.com_pubkey.asc` file.  
-  * If Bob can get this public key file to Alice unchanged then Alice can use it to make her own encrypted message which explains her secrets for making a moist cake such that only Bob's private key can decrypt her secret message.   
-
+  * If Bob can get this public key file to Alice unchanged then Alice can use it to make an encrypted message which explains her secrets for making cakes which are super moist and delicious. And because she is using Bob's public key to encrypt her message, no one except Bob will be able to decrypt the message because Bob is the only person in the world who has access to the private key which matches the public key he sent to Alice.  
+  
 ```
 -----BEGIN PGP PUBLIC KEY BLOCK-----
 Version: GnuPG v1
@@ -1356,8 +1356,7 @@ T4AB3pe9QWtei872ZUpnb2AT
 -----END PGP PUBLIC KEY BLOCK-----
 ```
 
-Now we will see how to get this public key file out of Bob's PrivateKeyVault, email it to Alice, and get it into her vault without ever connecting the Vaults to any other devices.  
-They will not be using a thumbdrive, no WiFi, no Bluetooth, no ethernet cable, no USB cable - no connections of any kind to other devices.  
+Now we will see how to get this public key file out of Bob's PrivateKeyVault, email it to Alice, and get it into her Vault without ever connecting the Vaults to any other devices. They will not be using a thumbdrive, no WiFi, no Bluetooth, no ethernet cable, no USB cable - no connections of any kind to other devices. By preserving the airgap during the transfer process we prevent Mallory from gaining access to the PrivateKeyVaults which thereby stops him from using spyware to learn how Alice makes her cakes so super moist and delicious.  
 * To do this we will be outputing an entire text file to the screen in the form of QR-Codes.  
   * The following command will display several QR-codes sequentially on the touchscreen.  
   * There will be one QR-Code for each line in the file.  
@@ -1371,8 +1370,11 @@ They will not be using a thumbdrive, no WiFi, no Bluetooth, no ethernet cable, n
   * Press `Ctrl C` if you want to stop the parade of QR-Codes before the program is finished displaying all the lines in the file.  
 * OK, so we displayed Bob's public key file as a parade of QR-Codes but how do we get this to Alice?  
   * Run the above command again but this time use your smartphone to make a video of the QR-Code parade. 
-  * Email the video to Alice or email it to yourself for this demonstration. Actually, you don't need to email the video at all for the purposes of this demonstation - the point is for you to understand that you can get a text file out of Private Key Vault by taking a video of QR-Codes flashed on the screen, and that you can send it to someone with another PrivateKeyVault and import it without ever connecting to the Internet and without connecting to any other devices as we will soon see.   
-* Now we will be playing the part of Alice and importing the video into her PrivateKeyVault and then converting it back into a text file.  
+  * Email the video to Alice or email it to yourself for this demonstration. Actually, you don't need to email the video at all for the purposes of this demonstation - the point is for you to understand that you can get a text file out of the PrivateKeyVault by taking a video of QR-Codes flashed on the screen, and that you can send it to someone with another PrivateKeyVault who can import it without ever connecting to the Internet and without connecting to any other devices as we will soon see.   
+* Now we will be playing the part of Alice.  
+  * Alice has just received Bob's video.  
+  * She now needs to import this video into her PrivateKeyVault without connecting to any other devices so as to maintain the airgap which prevents Mallory from installing spyware on her device.    
+  * And then she needs to convert it back into a text file.  
 
 
 Record a video:  
