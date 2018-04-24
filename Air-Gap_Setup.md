@@ -1353,8 +1353,7 @@ qVCLloH9MWosANCNAN0X6/H/hjjfhb5/BLriJMUDanwokFNLm6xidBR7YSXlfb+G
 T4AB3pe9QWtei872ZUpnb2AT
 =mESj
 -----END PGP PUBLIC KEY BLOCK-----
-
-  ```
+```
 
 Now we will see how to get this public key file out of Bob's PrivateKeyVault, email it to Alice, and get it into her vault without ever connecting the Vaults to any other devices.  
 They will not be using a thumbdrive, no WiFi, no Bluetooth, no ethernet cable, no USB cable - no connections of any kind to other devices.  
