@@ -1191,7 +1191,7 @@ This will allow us to make a secure file transfer over the Internet without losi
 By using this method, there will be no opportunity for attackers to access the Vaults because we will make the transfer without connecting to any other devices. Further more, there will be no chance of anyone reading our message because the message will not be decrypted until the message is safely on the other side of the airgap where spyware and keyloggers can not go. 
 
 Here is a summary of what we will be doing:  
-Let's pretend Alice owns a baking company and she is opening a new cake factory in another city. Her new associate Bob already has the cake recipe but does not yet possess the secrets for making the cake extra moist and delicious. Mallory is an industrial spy. He is trying to steal Alice's baking secrets to sell to the highest bidder. We will be playing both the parts of Alice and Bob in this exchange so that you can experience all the steps required to successfully make the encrypted file transfer.  
+Let's pretend Alice owns a baking company and she is opening a new cake factory in another city. Her new associate Bob already has the cake recipe but does not yet possess the secrets for making the cake extra moist and delicious. Both Alice and Bob possess a PrivateKeyVault which is nothing more that an airgapped raspberry pi computer. Mallory is an industrial spy. He is trying to steal Alice's baking secrets to sell to the highest bidder. We will be playing both the parts of Alice and Bob in this exchange so that you can experience all the steps required to successfully make the encrypted file transfer.  
 
 The following is the information we will be sending.  
 ```  
@@ -1312,22 +1312,68 @@ Now Bob needs to get his public key to Alice.
   * You will not see any output but there will be a new file in the keys directory called `bob@gmail.com_pubkey.asc`  
   * Lets see if it's there.
   * Execute the following command to see what is in your current directory:  
-  * 
+  * `ls`  
+  * You should see the following output:
+  * `bob@gmail.com_pubkey.asc`  
+  * So the file is there. Let's see what's in it:  
+  * Execute the following command to open the file with the leafpad text editor.  
+  * `leafpad bob@gmail.com_pubkey.asc`  
+  * The output will look something like the following. 
+  * That's what is in the `bob@gmail.com_pubkey.asc` file.  
+  * If Bob can get this public key file to Alice unchanged then Alice can use it to make her own encrypted message which explains her secrets for making a moist cake such that only Bob's private key can decrypt her secret message.    
+  ```
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+Version: GnuPG v1
 
+mQENBFrTU3ABCAC5YbcSE/39K3xMTR7jjcy7fEim58P4xJBs4vcU7jXXDM+Rj1hl
+YZi7C/7B0lqeoYduac/XgEU7bXPQOdUmtOnJh2tlQZBnGzIuE9TqA4oyC38d05LI
+XuwKsdb5c5Ev5l5nhnoRIyWlNQMroAOcqsE+05riz/o2nV4aeal5gvpXvo+Br+wn
+RIeBqUPcLg8ArHVUj0PFsEq5VY0ZFU0nG6A0tUsARRZn8pDoqdtNNYWznY+OzVxY
+jODNHdIdxCcIfXlXzZ1afCp/70dYeWPNMbYv/8ZAipIsnzFYyfg8vvmKxsknx2qE
+7Y5qRKhTFeTmWaS00lS7p5rmRAQLxJIuLuJbABEBAAG0QkpvaG4gUiBTaGVhcmlu
+ZyAod3d3LlByaXZhdGVLZXlWYXVsdC5jb20pIDxqb2huc2hlYXJpbmdAZ21haWwu
+Y29tPokBOQQTAQgAIwUCWtNTcAIbAwcLCQgHAwIBBhUIAgkKCwQWAgMBAh4BAheA
+AAoJEMcIzVZuR3Mwu28H/ja0tnbyVU2ZBNXnkyh5ou36dD3udvCZ7BgdUgKGxeOJ
+I+Rzkqt3+sqGz73pkK/VKcuW0nZcffFr7VwjTTM8FJ8QsyqaoHlmOB/hKDuLxRoU
+sg/JhGUGp99lvoVQlf+F3lbn0308NUUvjEbsUld8yur4mIeaQ1mEqsTn/OrGCTK9
+o/7ybOllinJoGs2t27aSwrgfy8qGln2aVh+ln3SmkObroCGJ5a0mP/0+2QLlFlEd
+OQFLrAh6bY9ut1qiAw/E1aREqPTNQORgmY7MqgFD/qfidGts4RqiVgF7QbdNPZcO
+5XsfcRgay+b3LPgJBGcaaVru+YMQpYuQMIur6q47P1+5AQ0EWtNTcAEIAON7wT31
+Ub7wEC7FyC94cdlf7dzHGiZkJHaR60q5BFtNFgKN5GQuco/ndY5baTycOJ00K6in
+JexRxGATZw7KNJ0RYLpZlu5Fpsv7HN462aqWd+PrejfmZ9vhEtP3GqikWr5aSsa0
+OXcJRhepGlud9lZ4gvb/4jlb+T6+7sGgtFxuYP3t6bj+UFGxdUivWDSZgih9tSnv
+SEFHqNPGo5uCifE8NJf3oAYZ9nB1VqY1A8l2354KLe6OCSpoVU5Pvi0hK5X77DuN
+9JSYMLML709tbwL8ue1hmItFez0fPqqVJLzqOhCZCdRxNlxcA7V8i5BtwTA3ftdi
+LovMRFxGensotzcAEQEAAYkBHwQYAQgACQUCWtNTcAIbDAAKCRDHCM1WbkdzMCNR
+B/9eTWvbk5xWQfjmJzY9rk/2qbmDr3GCiAUqxPq5AlmIK57jJAr//8iO+cA26jXN
+4Kqbda0sP6iCNVMH/vta84V60jhQ0vtuVplmrcnttj05DS6x0HT0lAtQ0S04Ajqa
+7YknDkHEYpSerbPoIwFnX6Og+3yeBpR75XwzNQnvdXFMCIqra3e5EgeS3oJi7d4V
+aUmOVrmq9EwHDoIa4SKp5dM95EAjTHandnTmbnK9Ujkm7Vp0sFWKsm5qSn3sh5JM
+qVCLloH9MWosANCNAN0X6/H/hjjfhb5/BLriJMUDanwokFNLm6xidBR7YSXlfb+G
+T4AB3pe9QWtei872ZUpnb2AT
+=mESj
+-----END PGP PUBLIC KEY BLOCK-----
 
-Now we will try outputing an entire text file to the screen.  
-The following command will display several QR-codes sequentially on the touchscreen.  
-There will be one QR-Code for each line in the file.  
-Execute the following line of code substituting **TheNameOfMyFile** in the line below with the name of some file on your pi.  
-You should be able to specify a file of any type and size, but for this demonstration create a text file with maybe 20 lines of text.  
-`base64 TheNameOfMyFile | while read r; do echo $r | qrencode -t ANSIUTF8; sleep .3; done`  
-You should see several QR-Codes displayed sequencially on your touch screen.  
-The part of the command that reads `sleep .3` means display each QR-Code for .3 seconds.  
-You can change this value if you want.  
-If it's a large file it may take a while to show all the QR-Codes.  
-Press `Ctrl C` if you want to stop the parade of QR-Codes before the program is finished displaying all the QR-Codes.  
+  ```
 
-Run the above command again but this time use your smartphone to make a video of the QR-Code parade. Email the video to a friend or email it to yourself for this demonstration. You don't need to email the video at all for the purposes of this demonstation - the point is for you to understand that you can get a text file out of Private Key Vault by taking a video of QR-Codes flashed on the screen and that you can send it to someone with another Private Key Vault and import it without ever connecting to the Internet and with out connecting to any other devices as we will soon see.     
+Now we will see how to get this public key file out of Bob's PrivateKeyVault, email it to Alice, and get it into her vault without ever connecting the Vaults to any other devices.  
+They will not be using a thumbdrive, no WiFi, no Bluetooth, no ethernet cable, no USB cable - no connections of any kind to other devices.  
+* To do this we will be outputing an entire text file to the screen in the form of QR-Codes.  
+  * The following command will display several QR-codes sequentially on the touchscreen.  
+  * There will be one QR-Code for each line in the file.  
+  * Execute the following line of code:    
+  * `base64 bob@gmail.com_pubkey.asc | while read r; do echo $r | qrencode -t ANSIUTF8; sleep .3; done`  
+  * You should see several QR-Codes displayed sequencially on your touch screen.  
+  * The part of the command that reads `sleep .3` means display each QR-Code for .3 seconds.  
+  * You can change this value if you want.  
+  * You can substitute the name of any text file for `bob@gmail.com_pubkey.asc` in the command above.  
+  * If it's a large file it may take a while to show all the QR-Codes.  
+  * Press `Ctrl C` if you want to stop the parade of QR-Codes before the program is finished displaying all the lines in the file.  
+* OK, so we displayed Bob's public key file as a parade of QR-Codes but how do we get this to Alice?  
+  * Run the above command again but this time use your smartphone to make a video of the QR-Code parade. 
+  * Email the video to Alice or email it to yourself for this demonstration. Actually, you don't need to email the video at all for the purposes of this demonstation - the point is for you to understand that you can get a text file out of Private Key Vault by taking a video of QR-Codes flashed on the screen, and that you can send it to someone with another PrivateKeyVault and import it without ever connecting to the Internet and without connecting to any other devices as we will soon see.   
+* Now we will be playing the part of Alice and importing the video into her PrivateKeyVault and then converting it back into a text file.  
+
 
 Record a video:  
 `raspivid -t 30000 -w 640 -h 480 -fps 25 -b 1200000 -p 0,0,640,480 -o pivideo.h264`  
