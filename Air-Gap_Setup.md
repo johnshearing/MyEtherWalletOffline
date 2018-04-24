@@ -1371,10 +1371,32 @@ Now we will see how to get this public key file out of Bob's PrivateKeyVault, em
 * OK, so we displayed Bob's public key file as a parade of QR-Codes but how do we get this to Alice?  
   * Run the above command again but this time use your smartphone to make a video of the QR-Code parade. 
   * Email the video to Alice or email it to yourself for this demonstration. Actually, you don't need to email the video at all for the purposes of this demonstation - the point is for you to understand that you can get a text file out of the PrivateKeyVault by taking a video of QR-Codes flashed on the screen, and that you can send it to someone with another PrivateKeyVault who can import it without ever connecting to the Internet and without connecting to any other devices as we will soon see.   
-* Now we will be playing the part of Alice.  
-  * Alice has just received Bob's video.  
-  * She now needs to import this video into her PrivateKeyVault without connecting to any other devices so as to maintain the airgap which prevents Mallory from installing spyware on her device.    
-  * And then she needs to convert it back into a text file.  
+  
+Now we will be playing the part of Alice.  
+* Alice has just received Bob's video on her smart phone.  
+* She now needs to import this video into her PrivateKeyVault from the smartphone without connecting to it so as to maintain the airgap which prevents Mallory from installing spyware on her device.    
+* Then she needs to convert the video file back into a text file so she can use Bob's public key to encrypt a secret message for Bob which explains how she makes her cakes so super moist and delicious.  
+
+To start the import process,  
+* Alice will use the video camera on her PrivateKeyVault to make a video of the video on her smartphone.  
+* Doing it is actually easier than saying it.  
+* Put the smartphone in front of the pi's video camera.  
+* Now press the video record button on you pi.  
+* Now press the play button on your smartphone.  
+* When the video is finished playing, press the Video Stop button on your pi.  
+  * You will be prompted to name the file and for the place you wish to store it.  
+* If you want, you can look at the video on your PrivateKeyVault by pressing the video play button. 
+* Now press the Convert Video to Text button.  
+* A dialog box will open and prompt you to name the text file.  
+* It will then start the conversion process.  
+* This will take a few minutes. It takes time to bake a cake.  
+
+Now that Alice has Bob's public key in a text file, She will need to import into her public keyring.  
+
+
+
+
+
 
 
 Record a video:  
@@ -1396,8 +1418,11 @@ If you want to look at a png file:
 Check if two files are the same:  
 `diff /home/pi/test/gem4.png ./gem4.png`  
 
+Convert a video to text:  
 `python QRCodeVideoToTextFile.py pivideo.mp4 outputdata.txt`  
 
+Learn more about GPG:  
+`man gpg`  
 
 
 #### Encrypted Messaging  
@@ -1414,7 +1439,6 @@ Digital Signatures are provided by MyEtherWallet as well as by GPG.
 We will go over how to use all this in video tutorials.  
 [Check my YouTube channel for my video tutorials as they are produced.](https://www.youtube.com/channel/UCQlQRc9muSqPZIXSfugN43A)  
 
-Let's send a secret message using the Private Key Vault.  
 
 ## You are about to start working with Private Keys.  
 
