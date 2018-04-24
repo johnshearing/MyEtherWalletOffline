@@ -1320,8 +1320,9 @@ Now Bob needs to get his public key to Alice.
   * `leafpad bob@gmail.com_pubkey.asc`  
   * The output will look something like the following. 
   * That's what is in the `bob@gmail.com_pubkey.asc` file.  
-  * If Bob can get this public key file to Alice unchanged then Alice can use it to make her own encrypted message which explains her secrets for making a moist cake such that only Bob's private key can decrypt her secret message.    
-  ```
+  * If Bob can get this public key file to Alice unchanged then Alice can use it to make her own encrypted message which explains her secrets for making a moist cake such that only Bob's private key can decrypt her secret message.   
+
+```
 -----BEGIN PGP PUBLIC KEY BLOCK-----
 Version: GnuPG v1
 
