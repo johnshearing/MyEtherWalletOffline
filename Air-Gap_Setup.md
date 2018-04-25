@@ -1391,7 +1391,13 @@ To start the import process,
 * It will then start the conversion process.  
 * This will take a few minutes. It takes time to bake a cake.  
 
-Now that Alice has Bob's public key in a text file, She will need to import into her public keyring.  
+Now that Alice has Bob's public key in a text file, she will need to import it into her public keyring so she can use it.  
+* To do that you would normally execute the following command for Alice:  
+* In this case however there is no need because the public key is already on your keyring. 
+* It was put there when you were playing the part of Bob and you generated the key. 
+* So you can skip this step. 
+* Just remember that if someone sends you a public key then you will need to import it into your public keyring file by using the following command. 
+* `gpg --import publickeyfile.asc`  
 
 
 
