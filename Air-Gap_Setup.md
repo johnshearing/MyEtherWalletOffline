@@ -1188,7 +1188,7 @@ So this is basically how you get text out of the Private Key Vault without conne
 
 Now we will see how to transfer an encrypted text file from one PrivateKeyVault to another using QR-Codes.  
 This will allow us to make a secure file transfer over the Internet without losing our airgap.  
-By using this method, there will be no opportunity for attackers to access the Vaults because we will make the transfer without connecting to any other devices. Further more, there will be no chance of anyone reading our message because the message will not be decrypted until the message is safely on the other side of the airgap where spyware and keyloggers can not go. 
+By using this method, there will be no opportunity for attackers to access any files on the Vaults because we will make the transfer without connecting to any other devices. Further more, there will be no chance of anyone reading our message because the message will not be decrypted until the message is safely on the other side of the airgap where spyware and keyloggers can not go. 
 
 Here is a summary of what we will be doing:  
 Let's pretend Alice owns a baking company and she is opening a new cake factory in another city. Her new associate Bob already has the cake recipe but does not yet possess the secrets for making the cake super moist and delicious. Both Alice and Bob possess a PrivateKeyVault which is nothing more that an airgapped raspberry pi computer. Mallory is an industrial spy. He is trying to steal Alice's baking secrets to sell to the highest bidder. We will be playing both the parts of Alice and Bob in this exchange so that you can experience all the steps required to successfully make the encrypted file transfer.  
@@ -1227,19 +1227,20 @@ The excess water in margarine will evaporate in the oven's heat, leaving your ca
   * The larger the key size, the harder the encryption is to crack assuming you have a strong password.  
   * Unfortunately, larger keysizes take longer to generate and to use.  
   * The default (2048) is a good compromise.  
-  * Select the default to continue.  
+  * Select the default for Bob.  
   *   
   * Next Bob will be prompted for the amount of time before the key expires.  
-  * Select the default (0) to continue.  
+  * Select the default (0) on Bob's behalf to continue.  
   * By selecting **0** you specify that Bob's key will never expire.  
   * You will be asked to confirm your selection:  
   * Press **y** for yes and then press the enter button.  
   *   
-  * Next you will be asked for **Bob's Name**, an **Bob's Email Address**, and a **Comment**.  
+  * Next you will be asked for **Bob's Name**, **Bob's Email Address**, and a **Comment**.  
   * These will be used to make a unique identifyer for Bob's key.  
-  * You could use your name and email address if you would like to play the part of the person who receives the secret.  
-  * Follow the prompts.  
-  * Don't worry if you get a message stating that the GPG agent is not available. It doesn't matter.  
+  * Enter **Bob** for the Name, **bob@gmail.com** for the email address, and **Bob's GPG keypair** for the comment.  
+  * Follow the prompts to continue.  
+  * Don't worry if you get a message stating that the GPG agent is not available.  
+  * It doesn't matter.  
   *  
   * Next you will be prompted for the password you want to use when accessing Bob's private key.  
   * Make it a good one, or what's the point of doing all this.  
@@ -1248,27 +1249,34 @@ The excess water in margarine will evaporate in the oven's heat, leaving your ca
   *  
   * Then the pi will start doing the work of creating Bob's public/private key pair.  
   * The pi will ask you to move your mouse and type randomly on your keyboard to provide a source of randomness for the key generation process.  
-  * It took about 5 minutes for my pi 2 to generate the key pairs. Be patient as you provide random input.  
+  * It took about 5 minutes for my pi 2 to generate the key pairs.  
+  * Be patient as you provide random input.  
   
-Never show anyone your private key.  
-Your private keys should never leave your PrivateKeyVault.  
-If you want to see information about your private keys enter the following command.  
+After Bob's keys have been generated you may want to see information about his private keys.  
+Enter the following command.  
 `gpg --list-secret-keys`  
 The output should look something like the following:  
 ```
 /home/pi/.gnupg/secring.gpg
 ---------------------------
 sec   2048R/6E477330 2018-04-15
-uid                  John R Shearing (www.PrivateKeyVault.com) <johnshearing@gmail.com>
+uid                  Bob (Bob's comment) <bob@gmail.com>
 ssb   2048R/0199AA57 2018-04-15 
 ```  
-The top line indicates the location and name of your keyring file.  
+The top line indicates the location and name of the keyring file on your pi.  
 The **sec** line shows the key size : 2048, the key type : r for RSA, the UniqueID : 6E477330, and the creation date.  
 The UniqueID is used in GPG commands to refer to that specific private key.  
-The **uid** line shows the your real name, your comment, and your email address.  
-The email address is also used to uniquely identify your key when making gpg commands.  
-The **ssb** line shows the size, type, and unique identifyer of your subkey.  
+The **uid** line shows Bob's real name, Bob's comment, and Bob's email address.  
+The email address can also be used to uniquely identify Bob's keys when making gpg commands.  
+The **ssb** line shows the size, type, and unique identifyer of Bob's subkey.  
 Subkeys are cool because you can have as many subkeys associated with your private key as you want but you can revoke them individually without harming your ability to use your other subkeys or the originating private key.  
+
+If you want to see what Bob's private key actually looks like the execute the following command:  
+gpg2 --export-secret-key --armor bob@gmail.com  
+You should see a big block of text on the pi's touch screen.  
+Never show anyone your private key.  
+
+Normally, your private keys should never leave your PrivateKeyVault
 
 Your public keys are meant to be shared with everyone.  
 Public keys are used by others to encrypt documents that can only be decrypted by you using your private key.  
