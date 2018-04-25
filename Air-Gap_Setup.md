@@ -1385,6 +1385,7 @@ To start the import process,
 * Now press the play button on your smartphone.  
 * When the video is finished playing, press the Video Stop button on your pi.  
   * You will be prompted to name the file and for the place you wish to store it.  
+  * You can call it anything you want but let's call it `bob@gmail.com_pubkey.asc` because the tells us that the file contains Bob's public key.  
 * If you want, you can look at the video on your PrivateKeyVault by pressing the video play button. 
 * Now press the Convert Video to Text button.  
 * A dialog box will open and prompt you to name the text file.  
@@ -1396,9 +1397,9 @@ Now that Alice has Bob's public key in a text file, she will need to import it i
 * In this case however there is no need because the public key is already on your keyring. 
 * It was put there when you were playing the part of Bob and you generated the key. 
 * So you can skip this step. 
-* Just remember that if someone sends you a public key then you will need to import it into your public keyring file by using the following command. 
-* `gpg --import publickeyfile.asc`  
-
+* Just remember that if someone sends you a public key then you will need to import it into your public keyring file by using the following command: 
+* `gpg --import bob@gmail.com_pubkey.asc`  
+* `bob@gmail.com_pubkey.asc` is the name of the file which contains bob's public key.  
 
 
 
