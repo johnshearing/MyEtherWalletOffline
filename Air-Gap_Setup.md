@@ -1220,7 +1220,7 @@ The excess water in margarine will evaporate in the oven's heat, leaving your ca
   * At the command line Bob enters the following command: 
   * Execute the command for Bob on your device.  
   * `gpg --gen-key`  
-  * You will be prompted for the type of key you want.  
+  * Bob be prompted for the type of key he wants.  
   * Select: (1) RSA and RSA (Default)  
   *   
   * Next Bob will be prompted to select the length of the keys.  
@@ -1235,27 +1235,28 @@ The excess water in margarine will evaporate in the oven's heat, leaving your ca
   * You will be asked to confirm your selection:  
   * Press **y** for yes and then press the enter button.  
   *   
-  * Next you will be asked for **Bob's Name**, **Bob's Email Address**, and a **Comment**.  
+  * Next Bob will be asked for **Bob's Name**, **Bob's Email Address**, and a **Comment**.  
   * These will be used to make a unique identifyer for Bob's key.  
   * Enter **Bob** for the Name, **bob@gmail.com** for the email address, and **Bob's GPG keypair** for the comment.  
   * Follow the prompts to continue.  
   * Don't worry if you get a message stating that the GPG agent is not available.  
   * It doesn't matter.  
   *  
-  * Next you will be prompted for the password you want to use when accessing Bob's private key.  
-  * Make it a good one, or what's the point of doing all this.  
+  * Next Bob will be prompted for the password to use when accessing his private key.  
+  * Make a good one for Bob, or what's the point of doing all this.  
   * Make it at least 10 completely random characters using upper and lower case letters, numbers, and special characters.  
-  * After you enter your password, you will be prompted to enter it again to be sure that you typed it correctly.  
+  * After you enter Bob's password, you will be prompted to enter it again to be sure that you typed it correctly.  
   *  
   * Then the pi will start doing the work of creating Bob's public/private key pair.  
   * The pi will ask you to move your mouse and type randomly on your keyboard to provide a source of randomness for the key generation process.  
   * It took about 5 minutes for my pi 2 to generate the key pairs.  
   * Be patient as you provide random input.  
   
-After Bob's keys have been generated you may want to see information about his private keys.  
-Enter the following command.  
+After Bob's keys have been generated you may want to see information which helps you access his private keys.  
+Enter the following command:  
 `gpg --list-secret-keys`  
 The output should look something like the following:  
+We only see information about one secret key because so far we only have one key on the secret key ring.  
 ```
 /home/pi/.gnupg/secring.gpg
 ---------------------------
@@ -1263,7 +1264,7 @@ sec   2048R/6E477330 2018-04-15
 uid                  Bob (Bob's comment) <bob@gmail.com>
 ssb   2048R/0199AA57 2018-04-15 
 ```  
-The top line indicates the location and name of the keyring file on your pi.  
+The top line indicates the location and name of the secret keyring file on your pi.  
 The **sec** line shows the key size : 2048, the key type : r for RSA, the UniqueID : 6E477330, and the creation date.  
 The UniqueID is used in GPG commands to refer to that specific private key.  
 The **uid** line shows Bob's real name, Bob's comment, and Bob's email address.  
@@ -1274,9 +1275,17 @@ Subkeys are cool because you can have as many subkeys associated with your priva
 If you want to see what Bob's private key actually looks like the execute the following command:  
 gpg2 --export-secret-key --armor bob@gmail.com  
 You should see a big block of text on the pi's touch screen.  
+That's the private key.  
 Never show anyone your private key.  
 
-Normally, your private keys should never leave your PrivateKeyVault
+Normally, private keys should never leave your PrivateKeyVault.  
+Although you may want to export your private keys to a file so that you can back them up on a thumb drive or to move them to another machine.  
+Here is the command to export Bob's private key to a file:  
+`gpg --export-secret-key --armor --output BobsPrivateKeyFile.asc bob@gmail.com`  
+**gpg --export-secret-key** is the command.  
+**--armor** specifies that base64 encoding will be used. That ensures that all characters will be unambiguous and easy to read.  
+**--output BobsPrivateKeyFile.asc** specifies what name you wish to give the file, and  
+**bob@gmail.com** specifies which private key on the keyring you wish to export.  
 
 Your public keys are meant to be shared with everyone.  
 Public keys are used by others to encrypt documents that can only be decrypted by you using your private key.  
@@ -1290,19 +1299,19 @@ pub   2048R/6E477330 2018-04-15
 uid       [ultimate] Bob (Bob's Comment) <bob@gmail.com>
 sub   2048R/0199AA57 2018-04-15
 ```
-The output provides the same information about public keys as explained for the private keys in the section above.  
+The output above provides information about keys on the public keyring exactly as explained in the section above for keys on the private key ring.  
 
 If you wish to see a finger prints for a particular public key execute the following command.  
-`gpg --fingerprint johnshearing@gmail.com`  
+`gpg --fingerprint bob@gmail.com`  
 The output should look something like the following:  
 ```
 pub   2048R/6E477330 2018-04-15
       Key fingerprint = DE46 D08E 0666 0BD7 B010  CDEB C708 CD56 6E47 7330
-uid       [ultimate] John R Shearing (www.PrivateKeyVault.com) <johnshearing@gmail.com>
+uid       [ultimate] Bob (Bob's comment) <bob@gmail.com>
 sub   2048R/0199AA57 2018-04-15
 ```  
 If the email address were ommited from the command then fingerprints for all public keys would be shown.  
-That shows one way that UniqueIds are used to specify a key when making GPG commands.  
+That shows one way that UniqueIds are used to specify a particular key when making GPG commands.  
 The finger print is used to verify that a public key which Alice receives from Bob has not been switched out by Mallory.  
 If Mallory manages to intercept Bobs public key on it's way to Alice and replaces it with his own, then Mallory will be able to decrypt Alices secret message instead of Bob. You will see how a finger print is used to prevent this right after we see how Bob sends his private key to Alice.  
 
