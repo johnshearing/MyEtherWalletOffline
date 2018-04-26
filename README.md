@@ -1,5 +1,5 @@
-## This is a modified version of MyEtherWallet.
-## It is optimised for use with [The Private Key Vault - An Air-Gapped Rasberry Pi](https://github.com/johnshearing/MyEtherWalletOffline/blob/master/Air-Gap_Setup.md). 
+## This is a modified version of MyEtherWallet optimised for use with 
+## [The Private Key Vault - An Air-Gapped Rasberry Pi](https://github.com/johnshearing/MyEtherWalletOffline/blob/master/Air-Gap_Setup.md). 
 
 [The repository from which this was taken can be found here](https://github.com/kvhnuke/etherwallet)  
 [The orignal online version of this software can be found here](https://www.MyEtherWallet.com)  
