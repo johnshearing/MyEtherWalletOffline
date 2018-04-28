@@ -17,6 +17,7 @@ The items you will need for the most basic setup with no printer, no battery, an
  
 Specially machined parts will be made available for purchase and CAD files will be freely posted here so you can make them yourself. Also the fully assembled device already loaded with software can be purchased from me or you can set up your own business to do the same.  
 
+#### Installing the OS and Setting Up Basic Functionality.  
 The following is the written tutorial from which these notes are made.  
 [Setup Headless, Security, WiFi, VNC, Camera, and Much More](http://thezanshow.com/electronics-tutorials/raspberry-pi)
 
@@ -1318,26 +1319,27 @@ If Mallory manages to intercept Bobs public key on it's way to Alice and replace
 Now Bob needs to get his public key to Alice.  
 * First Bob needs to get his public key out of the public keyring file and into a file of it's own so he can send it to Alice.  
   * Make a directory or folder to hold the key file that Bob needs.  
-  * Execute the following command for Bob:
-  * `mkdir keys`  
+    * Execute the following command for Bob:
+    * `mkdir keys`  
   * Now move to the **keys** directory.  
-  * Execute the following command:  
-  * `cd keys`  
+    * Execute the following command:  
+    * `cd keys`  
   * Next Bob would execute the following command to make a file containing his public key.  
-  * Execute the command for Bob.  
-  * `gpg --export --armor bob@gmail.com > bob@gmail.com_pubkey.asc`  
+    * Execute the command for Bob.  
+    * `gpg --export --armor bob@gmail.com > bob@gmail.com_pubkey.asc`  
   * You will not see any output but there will be a new file in the keys directory called `bob@gmail.com_pubkey.asc`  
-  * Lets see if it's there.
-  * Execute the following command to see what is in your current directory:  
-  * `ls`  
+    * Lets see if it's there.
+    * Execute the following command to see what is in your current directory:  
+    * `ls`  
   * You should see the following output:
-  * `bob@gmail.com_pubkey.asc`  
-  * So the file is there. Let's see what's in it:  
-  * Execute the following command to open the file with the leafpad text editor.  
-  * `leafpad bob@gmail.com_pubkey.asc`  
+    * `bob@gmail.com_pubkey.asc`  
+    * So the file is there. Let's see what's in it:  
+  * Lets look at the contents of the file.  
+    * Execute the following command to open the file with the leafpad text editor.  
+    * `leafpad bob@gmail.com_pubkey.asc`  
   * The output will look something like the following block of characters.  
-  * That's what is in the `bob@gmail.com_pubkey.asc` file.  
-  * If Bob can get this public key file to Alice unchanged then Alice can use it to make an encrypted message which explains her secrets for making cakes which are super moist and delicious. And because she is using Bob's public key to encrypt her message, no one except Bob will be able to decrypt the message because Bob is the only person in the world who has access to the private key which matches the public key he sent to Alice.  
+    * That's what is in the `bob@gmail.com_pubkey.asc` file.  
+    * If Bob can get this public key file to Alice unchanged then Alice can use it to make an encrypted message which explains her secrets for making cakes which are super moist and delicious. And because she is using Bob's public key to encrypt her message, no one except Bob will be able to decrypt the message because Bob is the only person in the world who has access to the private key which matches the public key he sent to Alice.  
   
 ```
 -----BEGIN PGP PUBLIC KEY BLOCK-----
@@ -1373,8 +1375,8 @@ T4AB3pe9QWtei872ZUpnb2AT
 -----END PGP PUBLIC KEY BLOCK-----
 ```
 
-Now we will see how to get this public key file out of Bob's PrivateKeyVault, email it to Alice, and get it into her Vault without ever connecting the Vaults to any other devices. They will not be using a thumbdrive, no WiFi, no Bluetooth, no ethernet cable, no USB cable - no connections of any kind to other devices. By preserving the airgap during the transfer process we prevent Mallory from gaining access to the PrivateKeyVaults which thereby stops him from using spyware to learn how Alice makes her cakes so super moist and delicious.  
-* To do this we will be outputing an entire text file to the screen in the form of QR-Codes.  
+Now we will see how to get this public key file out of Bob's PrivateKeyVault, email it to Alice, and get it into her Vault without ever connecting the Vaults to any other devices. They will not be using a thumbdrive, no WiFi, no Bluetooth, no ethernet cable, no USB cable - no connections of any kind to other devices. By preserving the airgap during the transfer process we prevent Mallory from gaining access to the PrivateKeyVaults. So he can not use spyware to read how Alice makes her cakes so super moist and delicious.  
+* To do all this we will start by outputing an entire text file to the touch screen in the form of QR-Codes.  
   * The following command will display several QR-codes sequentially on the touchscreen.  
   * There will be one QR-Code for each line in the file.  
   * Execute the following line of code:    
@@ -1402,7 +1404,7 @@ To start the import process,
 * Now press the play button on your smartphone.  
 * When the video is finished playing, press the Video Stop button on your pi.  
   * You will be prompted to name the file and for the place you wish to store it.  
-  * You can call it anything you want but let's call it `bob@gmail.com_pubkey.asc` because the tells us that the file contains Bob's public key.  
+  * You can call it anything you want but let's call it `bob@gmail.com_pubkey.asc` because that tells us the file contains Bob's public key.  
 * If you want, you can look at the video on your PrivateKeyVault by pressing the video play button. 
 * Now press the Convert Video to Text button.  
 * A dialog box will open and prompt you to name the text file.  
@@ -1417,7 +1419,6 @@ Now that Alice has Bob's public key in a text file, she will need to import it i
 * Just remember that if someone sends you a public key then you will need to import it into your public keyring file by using the following command: 
 * `gpg --import bob@gmail.com_pubkey.asc`  
 * `bob@gmail.com_pubkey.asc` is the name of the file which contains bob's public key.  
-
 
 
 
@@ -1448,7 +1449,6 @@ Convert a video to text:
 Learn more about GPG:  
 `man gpg`  
 
-
 #### Encrypted Messaging  
 Encrypted messaging comes with the raspbian OS. So you have it already.  
 To use it, use the command line tool `gpg` or `gpg2`  
@@ -1458,6 +1458,7 @@ The folowing links are good online resources on how to use gpg:
 [30 Minute QuickStart - YouTube](https://youtu.be/ZSa-d_9O5DA)  
 [In Depth Tutorials - YouTube Playlist](https://www.youtube.com/watch?v=AZZ9THLkNgY&list=PLaIoXCTxbCRbYeYpPLuYOQ7YLfnSjLJlR&index=1)  
 [Keeping It At The Console - Input to GPG from Stdin / GPG Output to Stdout](https://stackoverflow.com/questions/5504721/how-do-i-encrypt-plaintext-with-gnupg)  
+
 
 Digital Signatures are provided by MyEtherWallet as well as by GPG.  
 We will go over how to use all this in video tutorials.  
