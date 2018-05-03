@@ -1074,15 +1074,14 @@ The following line installs a png viewer.
 `sudo apt-get install eog`  
 
 
-Next we will need to create the following python program in the directory or folder where you will keep the text files that you are importing into your pi from a video of QR-Codes.  
-At the teminal window of your pi while in your home directory, execute the folowing instuctions:  
+Next we will need to create the following programs and scripts in a directory which is noted in your path variable.  
+This will allow you to call the programs and scripts from the command prompt simply by typing the name of the program.      
 
-The following command makes a directory called qr2txt.  
-You can call what every you want.  
-`mkdir qr2txt`  
-
-Navigate to the new directory:  
-`cd qr2txt`  
+Navigate to the /usr/local/bin directory:  
+On a Linux system, this is typically where you would store programs and scripts that you create.  
+Your raspberry pi will look in this directory when commands are typed into the console.  
+Execute the following command:  
+`cd /usr/local/bin`  
 
 Create the python program needed to convert a video of QR-Codes back into a text file:  
 `sudo leafpad QRCodeVideoToTextFile.py`  
