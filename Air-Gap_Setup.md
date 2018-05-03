@@ -1077,7 +1077,7 @@ The following line installs a png viewer.
 Next we will need to create the following python program in the directory or folder where you will keep the text files that you are importing into your pi from a video of QR-Codes.  
 At the teminal window of your pi while in your home directory, execute the folowing instuctions:  
 
-The following command makes a directory called qrimport.  
+The following command makes a directory called qr2txt.  
 You can call what every you want.  
 `mkdir qr2txt`  
 
@@ -1180,32 +1180,35 @@ Paste the following into the text editor and save your work.
 ```
 #/usr/bin/bash
 
-inputVideo=$(zenity --file-selection); python QRCodeVideoToTextFile.py $inputVideo outputdata.txt
+inputVideo=$(zenity --file-selection); python /usr/local/bin/QRCodeVideoToTextFile.py $inputVideo outputdata.txt
 ```  
 
-Now copy your new program into the **/usr/local/bin** folder.  
-Execute the following command. 
+Now copy your new calling script into the **/usr/local/bin** folder.  
+Execute the following command.  
+`sudo cp qrvid2txt /usr/local/bin/qrvid2txt`   
 
-`cp qrvid2txt /usr/local/bin/qrvid2txt` 
+Now give yourself permission to run the script.  
+Execute the following command:  
+`sudo chmod 777 /usr/local/bin/qrvid2txt`  
 
+Now we need to make a script that flashes a QR-Code on the screen for every line in a user selected text file.  
+Execute the following command:  
+`sudo leafpad qrflash`  
 
-
-`sudo leafpad qrflash`
-
+Now paste the following code into the open text editor, save your work, and then exit:  
 ```
 #/usr/bin/bash
 
 x=$(zenity --file-selection); base64 $x | while read r; do echo $r | qrencode -t ANSIUTF8; sleep .3; done
 ```
 
+Now copy your new calling script into the **/usr/local/bin** folder.  
+Execute the following command.  
+`sudo cp qrvid2txt /usr/local/bin/qrflash`   
 
-
-
-
-/usr/local/bin  
-
-python QRCodeVideoToTextFile.py pivideo.mp4 outputdata.txt  
-
+Now give yourself permission to run the script.  
+Execute the following command:  
+`sudo chmod 777 /usr/local/bin/qrflash`  
 
 
 Finally we will need to install OpenCV 3 image processing software which does the work of reading all the QR-Codes from the video and converting each one back into text. This install takes about 3 hours on a pi 2. Most of this is time that the machine is compiling all the files. During this time you can have a nice nap.  
