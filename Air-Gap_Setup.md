@@ -1079,10 +1079,10 @@ At the teminal window of your pi while in your home directory, execute the folow
 
 The following command makes a directory called qrimport.  
 You can call what every you want.  
-`mkdir qrimport`  
+`mkdir qr2txt`  
 
 Navigate to the new directory:  
-`cd qrimport`  
+`cd qr2txt`  
 
 Create the python program needed to convert a video of QR-Codes back into a text file:  
 `sudo leafpad QRCodeVideoToTextFile.py`  
@@ -1166,6 +1166,47 @@ cap.release()
 cv2.destroyAllWindows()
 print("Data written to "+args.output)
 ```  
+
+Now copy your new program into the **/usr/local/bin** folder.  
+This puts the program in your path so that the calling bash script can find it.  
+Execute the following command.  
+`cp QRCodeVideoToTextFile.py /usr/local/bin/QRCodeVideoToTextFile.py`  
+
+Now lets make the calling script.  
+Execute the following command.  
+`sudo leafpad qrvid2txt`  
+
+Paste the following into the text editor and save your work.  
+```
+#/usr/bin/bash
+
+inputVideo=$(zenity --file-selection); python QRCodeVideoToTextFile.py $inputVideo outputdata.txt
+```  
+
+Now copy your new program into the **/usr/local/bin** folder.  
+Execute the following command. 
+
+`cp qrvid2txt /usr/local/bin/qrvid2txt` 
+
+
+
+`sudo leafpad qrflash`
+
+```
+#/usr/bin/bash
+
+x=$(zenity --file-selection); base64 $x | while read r; do echo $r | qrencode -t ANSIUTF8; sleep .3; done
+```
+
+
+
+
+
+/usr/local/bin  
+
+python QRCodeVideoToTextFile.py pivideo.mp4 outputdata.txt  
+
+
 
 Finally we will need to install OpenCV 3 image processing software which does the work of reading all the QR-Codes from the video and converting each one back into text. This install takes about 3 hours on a pi 2. Most of this is time that the machine is compiling all the files. During this time you can have a nice nap.  
 
@@ -1385,6 +1426,9 @@ Now we will see how to get this public key file out of Bob's PrivateKeyVault, em
   * The part of the command that reads `sleep .3` means display each QR-Code for .3 seconds.  
   * You can change this value if you want.  
   * You can substitute the name of any text file for `bob@gmail.com_pubkey.asc` in the command above.  
+  * Or try the following command instead.  
+  * The following command is the same as above but allows you to pick the file using a file selection dialog box.  
+  * `x=$(zenity --file-selection); base64 $x | while read r; do echo $r | qrencode -t ANSIUTF8; sleep .3; done`
   * If it's a large file it may take a while to show all the QR-Codes.  
   * Press `Ctrl C` if you want to stop the parade of QR-Codes before the program is finished displaying all the lines in the file.  
 * OK, so we displayed Bob's public key file as a parade of QR-Codes but how do we get this to Alice?  
