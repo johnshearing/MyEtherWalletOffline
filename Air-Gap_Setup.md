@@ -1080,6 +1080,7 @@ This will allow you to call the programs and scripts from the command prompt sim
 Navigate to the /usr/local/bin directory:  
 On a Linux system, this is typically where you would store programs and scripts that you create.  
 Your raspberry pi will look in this directory when commands are typed into the console.  
+The advantage is that you don't need to type the full pathname or be in that directory when executing the command.  
 Execute the following command:  
 `cd /usr/local/bin`  
 
@@ -1166,12 +1167,8 @@ cv2.destroyAllWindows()
 print("Data written to "+args.output)
 ```  
 
-Now copy your new program into the **/usr/local/bin** folder.  
-This puts the program in your path so that the calling bash script can find it.  
-Execute the following command.  
-`cp QRCodeVideoToTextFile.py /usr/local/bin/QRCodeVideoToTextFile.py`  
-
 Now lets make the calling script.  
+The following script will prompt you for a video file and then convert any qr-codes shown in the video to text which will be appended to a new file called outputdata.txt that will show up in you current directory. If outputdata.txt already exists then it will be overwritten.  
 Execute the following command.  
 `sudo leafpad qrvid2txt`  
 
@@ -1180,11 +1177,7 @@ Paste the following into the text editor and save your work.
 #/usr/bin/bash
 
 inputVideo=$(zenity --file-selection); python /usr/local/bin/QRCodeVideoToTextFile.py $inputVideo outputdata.txt
-```  
-
-Now copy your new calling script into the **/usr/local/bin** folder.  
-Execute the following command.  
-`sudo cp qrvid2txt /usr/local/bin/qrvid2txt`   
+```    
 
 Now give yourself permission to run the script.  
 Execute the following command:  
