@@ -1176,7 +1176,13 @@ Paste the following into the text editor and save your work.
 ```
 #/usr/bin/bash
 
-inputVideo=$(zenity --file-selection); python /usr/local/bin/QRCodeVideoToTextFile.py $inputVideo outputdata.txt
+clear; 
+
+inputVideo=$(zenity --title="Select a video.MP4 file of QR-Codes to be converted into text" --file-selection --filename="/home/pi/" 2>/dev/null); 
+
+clear;
+
+python /usr/local/bin/QRCodeVideoToTextFile.py $inputVideo outputdata.txt;
 ```    
 
 Now give yourself permission to run the script.  
@@ -1191,7 +1197,15 @@ Now paste the following code into the open text editor, save your work, and then
 ```
 #/usr/bin/bash
 
-x=$(zenity --file-selection); base64 $x | while read r; do echo $r | qrencode -t ANSIUTF8; sleep .3; done
+clear; 
+
+x=$(zenity --title="Select a text file to display as a qr-code parade" --file-selection --filename="/home/pi/" 2>/dev/null); 
+
+clear;
+
+base64 $x | while read r; do echo $r | qrencode -t ANSIUTF8; sleep .3; done
+
+clear;
 ```
 
 Now copy your new calling script into the **/usr/local/bin** folder.  
