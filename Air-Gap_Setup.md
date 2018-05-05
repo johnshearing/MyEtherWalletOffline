@@ -1178,11 +1178,33 @@ Paste the following into the text editor and save your work.
 
 clear; 
 
+# Prompt user to select a video.MP4 file to convert back into text.
 inputVideo=$(zenity --title="Select a video.MP4 file of QR-Codes to be converted into text" --file-selection --filename="/home/pi/" 2>/dev/null); 
+
+# If the user cancels the prompt action then exit this script.
+if [ $? == 1 ]; then exit; fi
 
 clear;
 
-python /usr/local/bin/QRCodeVideoToTextFile.py $inputVideo outputdata.txt;
+# Prompt user for the directory where the output text file will be written to.
+outputDirectory=$(zenity --title="Select the location where the outputed text file will be written" --file-selection --filename="/home/pi/" --directory 2>/dev/null); 
+
+# If the user cancels the prompt action then exit this script.
+if [ $? == 1 ]; then exit; fi
+
+clear;
+
+# Prompt user to specify the name of the output text file.
+OutputFileName=$(zenity --entry --title="Specify the name of the output text file" --entry-text="output.txt" --width 600 2>/dev/null); 
+
+# If the user cancels the prompt action then exit this script.
+if [ $? == 1 ]; then exit; fi
+
+clear;
+
+outputPathAndFileName=$outputDirectory/$OutputFileName;
+
+python /usr/local/bin/QRCodeVideoToTextFile.py $inputVideo $outputPathAndFileName;
 ```    
 
 Now give yourself permission to run the script.  
@@ -1199,11 +1221,23 @@ Now paste the following code into the open text editor, save your work, and then
 
 clear; 
 
-x=$(zenity --title="Select a text file to display as a qr-code parade" --file-selection --filename="/home/pi/" 2>/dev/null); 
+# Prompt user to select a file to parade. 
+fileToParade=$(zenity --title="Select a text file to display as a qr-code parade" --file-selection --filename="/home/pi/" 2>/dev/null); 
+
+# If the user cancels the prompt action then exit this script.
+if [ $? == 1 ]; then exit; fi
 
 clear;
 
-base64 $x | while read r; do echo $r | qrencode -t ANSIUTF8; sleep .3; done
+# Prompt user to specify the amount of time that each qr-code will be displayed.
+timeToDisplay=$(zenity --entry --title="Specify The Amount Of Time To Display Each QR-Code" --entry-text=".3" --width 600 2>/dev/null); 
+
+# If the user cancels the prompt action then exit this script.
+if [ $? == 1 ]; then exit; fi
+
+clear;
+
+base64 $fileToParade | while read r; do echo $r | qrencode -t ANSIUTF8; sleep $timeToDisplay; done
 
 clear;
 ```
