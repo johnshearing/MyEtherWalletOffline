@@ -1240,11 +1240,7 @@ clear;
 base64 $fileToParade | while read r; do echo $r | qrencode -t ANSIUTF8; sleep $timeToDisplay; done
 
 clear;
-```
-
-Now copy your new calling script into the **/usr/local/bin** folder.  
-Execute the following command.  
-`sudo cp qrvid2txt /usr/local/bin/qrflash`   
+```  
 
 Now give yourself permission to run the script.  
 Execute the following command:  
