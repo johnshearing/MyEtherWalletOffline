@@ -1202,6 +1202,8 @@ if [ $? == 1 ]; then exit; fi
 
 clear;
 
+cd $outputDirectory;
+
 outputPathAndFileName=$outputDirectory/$OutputFileName;
 
 python /usr/local/bin/QRCodeVideoToTextFile.py $inputVideo $outputPathAndFileName;
@@ -1246,6 +1248,49 @@ Now give yourself permission to run the script.
 Execute the following command:  
 `sudo chmod 777 /usr/local/bin/qrflash`  
 
+
+Now we need a menu script that we can use to call all the other scripts that we just wrote.  
+Execute the following command:  
+`sudo leafpad qrmenu`   
+
+Next paste the following code into the text editor, save your work and exit:
+```
+#/usr/bin/bash
+
+# Secure Messaging Menu Script 
+# Written by John Shearing with much help from the open source community.
+
+# This is a simple GUI for gpg secure messaging between PrivateKeyVaults or other Linux airgapped devices.
+
+clear;
+
+# Ask user to choose an operation.
+operation=$(zenity --list \
+--title="PrivateKeyVault Secure Messaging Services" \
+--text="Select a task from the menu" \
+--width 700 \
+--column "ScriptName" --column "Description" \
+"qrflash" "Display a text file on screen as a parade of QR-Codes" \
+"qrvid2txt" "Extract text from an MP4 video file containing QR-Codes" 2>/dev/null);
+
+# if user cancels, exit
+if [ $? == 1 ]; then exit; fi
+
+clear;
+
+# Execute the chosen operation.
+if [ $operation = qrflash ]; then
+qrflash
+elif [ $operation = qrvid2txt ]; then
+qrvid2txt
+fi
+```  
+
+Now give yourself permission to execute the script.  
+Execute the following command:  
+`sudo chmod 777 /usr/local/bin/qrmenu`  
+
+Now lets make an icon for this menu and put it on the task bar. ????
 
 Finally we will need to install OpenCV 3 image processing software which does the work of reading all the QR-Codes from the video and converting each one back into text. This install takes about 3 hours on a pi 2. Most of this is time that the machine is compiling all the files. During this time you can have a nice nap.  
 
@@ -1524,10 +1569,7 @@ If you want to look at a png file:
 `eog gem4.png`  
 
 Check if two files are the same:  
-`diff /home/pi/test/gem4.png ./gem4.png`  
-
-Convert a video to text:  
-`python QRCodeVideoToTextFile.py pivideo.mp4 outputdata.txt`  
+`diff /home/pi/test/gem4.png ./gem4.png`    
 
 Learn more about GPG:  
 `man gpg`  
