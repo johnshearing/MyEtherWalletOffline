@@ -1248,6 +1248,35 @@ Now give yourself permission to run the script.
 Execute the following command:  
 `sudo chmod 777 /usr/local/bin/qrflash`  
 
+Now we need to make a script that displays the fingerprint for a specified public key.  
+Execute the following command.  
+`sudo leafpad qrfingerprint`  
+
+Now paste the following into the text editor, save your work, and exit.   
+```
+#/usr/bin/bash
+
+clear;
+
+# Prompt user to specify the email address associated with the public key.
+emailAddress=$(zenity \
+--entry \
+--title="Specify the email address associated with the public key" \
+--entry-text="Enter an email address or leave blank to show all fingerprints" \
+--width 700 \
+2>/dev/null); 
+
+# If the user cancels the prompt action then exit this script.
+if [ $? == 1 ]; then exit; fi
+
+clear;
+
+gpg --fingerprint $emailAddress; 
+```
+
+Now give yourself permission to run the script.  
+Execute the following command:  
+`sudo chmod 777 qrfingerprint`   
 
 Now we need a menu script that we can use to call all the other scripts that we just wrote.  
 Execute the following command:  
@@ -1264,14 +1293,20 @@ Next paste the following code into the text editor, save your work and exit:
 
 clear;
 
-# Ask user to choose an operation.
-operation=$(zenity --list \
+# Ask user to choose a task.
+task=$(zenity --list \
 --title="PrivateKeyVault Secure Messaging Services" \
 --text="Select a task from the menu" \
---width 700 \
---column "ScriptName" --column "Description" \
+--width 1000 \
+--height 1000 \
+--column "Task" --column "Description" \
 "qrflash" "Display a text file on screen as a parade of QR-Codes" \
-"qrvid2txt" "Extract text from an MP4 video file containing QR-Codes" 2>/dev/null);
+"qrvid2txt" "Extract text from an MP4 video file containing QR-Codes" \
+"fingerprint" "Show fingerprint for public keys" \
+"list-keys" "Display info about public keys" \
+"list-secret-keys" "Display info about secret keys" \
+"gen-key" "Generate a Public / Private key pair" \
+2>/dev/null);
 
 # if user cancels, exit
 if [ $? == 1 ]; then exit; fi
@@ -1279,10 +1314,18 @@ if [ $? == 1 ]; then exit; fi
 clear;
 
 # Execute the chosen operation.
-if [ $operation = qrflash ]; then
+if [ $task = qrflash ]; then
 qrflash
-elif [ $operation = qrvid2txt ]; then
+elif [ $task = qrvid2txt ]; then
 qrvid2txt
+elif [ $task = fingerprint ]; then
+qrfingerprint
+elif [ $task = list-keys ]; then
+gpg --list-keys
+elif [ $task = list-secret-keys ]; then
+gpg --list-secret-keys
+elif [ $task = "gen-key" ]; then
+gpg --gen-key
 fi
 ```  
 
@@ -1290,7 +1333,9 @@ Now give yourself permission to execute the script.
 Execute the following command:  
 `sudo chmod 777 /usr/local/bin/qrmenu`  
 
-Now lets make an icon for this menu and put it on the task bar.   ????  
+????
+
+Now lets make an icon for this menu and put it on the task bar.  
 Get a nice icon from the internet to represent the qrmenu and save it to the following directory:  
 `/usr/share/icons/`  
 Be sure to convert it to the png format using a paint like program before saving it to the pi.  
@@ -1312,7 +1357,7 @@ Paste the following code into the file:
 Name=Encrypted Messaging
 Comment=Start the menu for encrypted messaging services.
 Icon=/usr/share/icons/GPG.png
-Exec=sudo /usr/local/bin/qrmenu
+Exec=lxterminal --geometry=98x45 -e qrmenu
 Type=Application
 Encoding=UTF-8
 Terminal=false
@@ -1461,7 +1506,7 @@ sub   2048R/0199AA57 2018-04-15
 ```
 The output above provides information about keys on the public keyring exactly as explained in the section above for keys on the private key ring.  
 
-If you wish to see a finger prints for a particular public key execute the following command.  
+If you wish to see a finger print for a particular public key execute the following command.  
 `gpg --fingerprint bob@gmail.com`  
 The output should look something like the following:  
 ```
