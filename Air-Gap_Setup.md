@@ -1471,6 +1471,7 @@ task=$(zenity --list \
 "fingerprint" "Show fingerprint for public keys" \
 "list-keys" "Display info about public keys" \
 "list-secret-keys" "Display info about secret keys" \
+"pub2txt" "Export a public key to a text file" \
 "priv2txt" "Export a private key to a text file" \
 "gen-key" "Generate a Public / Private key pair" \
 2>/dev/null);
@@ -1491,6 +1492,8 @@ elif [ $task = list-keys ]; then
 gpg --list-keys
 elif [ $task = list-secret-keys ]; then
 gpg --list-secret-keys
+elif [ $task = pub2txt ]; then
+pub2txt
 elif [ $task = priv2txt ]; then
 priv2txt
 elif [ $task = "gen-key" ]; then
