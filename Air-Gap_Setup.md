@@ -1276,11 +1276,76 @@ gpg --fingerprint $emailAddress;
 
 Now give yourself permission to run the script.  
 Execute the following command:  
-`sudo chmod 777 qrfingerprint`   
+`sudo chmod 777 /usr/local/bin/qrfingerprint`   
+
+
+Now we need a script to export GPG private keys.  
+Execute the following command.  
+`sudo leafpad priv2txt`  
+
+Now paste the following into the text editor, save your work, and exit.  
+```
+#/usr/bin/bash
+
+clear;
+
+# Prompt user for the directory where the exported text file will be written to.
+outputDirectory=$(zenity \
+--title="Select the location where the exported text file will be written" \
+--file-selection \
+--filename="/home/pi/" \
+--directory \
+2>/dev/null); 
+
+# If the user cancels the prompt action then exit this script.
+if [ $? == 1 ]; then exit; fi
+
+clear;
+
+# Prompt user to specify the name for the exported text file.
+outputFileName=$(zenity \
+--entry \
+--title="Specify the name for the exported text file" \
+--entry-text="privatekeyexport.txt" \
+--width 600 \
+2>/dev/null); 
+
+# If the user cancels the prompt action then exit this script.
+if [ $? == 1 ]; then exit; fi
+
+clear;
+
+# Prompt user for the email address or unique id of the private key.
+uniqueID=$(zenity \
+--entry \
+--title="Specify the email address or uniqueID of the private key" \
+--entry-text="UniqueID or Email Address" \
+--width 600 \
+2>/dev/null); 
+
+# If the user cancels the prompt action then exit this script.
+if [ $? == 1 ]; then exit; fi
+
+cd $outputDirectory;
+
+outputPathAndFileName=$outputDirectory/$outputFileName;
+
+gpg --export-secret-key --armor --output $outputPathAndFileName $uniqueID
+
+clear;
+
+echo "Private key was exported to "$outputPathAndFileName
+```
+
+Now give yourself permission to run the script.  
+Execute the following command:  
+sudo chmod 777 /usr/local/bin/priv2txt
+
+
 
 Now we need a menu script that we can use to call all the other scripts that we just wrote.  
 Execute the following command:  
-`sudo leafpad qrmenu`   
+`sudo leafpad menu`   
 
 Next paste the following code into the text editor, save your work and exit:
 ```
@@ -1305,6 +1370,7 @@ task=$(zenity --list \
 "fingerprint" "Show fingerprint for public keys" \
 "list-keys" "Display info about public keys" \
 "list-secret-keys" "Display info about secret keys" \
+"priv2txt" "Export a private key to a text file" \
 "gen-key" "Generate a Public / Private key pair" \
 2>/dev/null);
 
@@ -1319,11 +1385,13 @@ qrflash
 elif [ $task = qrvid2txt ]; then
 qrvid2txt
 elif [ $task = fingerprint ]; then
-qrfingerprint
+fingerprint
 elif [ $task = list-keys ]; then
 gpg --list-keys
 elif [ $task = list-secret-keys ]; then
 gpg --list-secret-keys
+elif [ $task = priv2txt ]; then
+priv2txt
 elif [ $task = "gen-key" ]; then
 gpg --gen-key
 fi
@@ -1331,12 +1399,12 @@ fi
 
 Now give yourself permission to execute the script.  
 Execute the following command:  
-`sudo chmod 777 /usr/local/bin/qrmenu`  
+`sudo chmod 777 /usr/local/bin/menu`  
 
 ????
 
 Now lets make an icon for this menu and put it on the task bar.  
-Get a nice icon from the internet to represent the qrmenu and save it to the following directory:  
+Get a nice icon from the internet to represent the menu and save it to the following directory:  
 `/usr/share/icons/`  
 Be sure to convert it to the png format using a paint like program before saving it to the pi.  
 I called my icon **GPG.png**  
@@ -1348,7 +1416,7 @@ Execute the following command in the pi's terminal window:
 
 Third File: The Desktop file - This is file determines the properties of the short cut.  
 Execute the following command in the pi's terminal window   
-`sudo leafpad /home/pi/.local/share/applications/qrmenu.desktop`  
+`sudo leafpad /home/pi/.local/share/applications/menu.desktop`  
 It could have been named anything but the location maters.  
 
 Paste the following code into the file:  
@@ -1357,7 +1425,7 @@ Paste the following code into the file:
 Name=Encrypted Messaging
 Comment=Start the menu for encrypted messaging services.
 Icon=/usr/share/icons/GPG.png
-Exec=lxterminal --geometry=98x45 -e qrmenu
+Exec=lxterminal --geometry=98x45 -e menu
 Type=Application
 Encoding=UTF-8
 Terminal=false
@@ -1366,7 +1434,7 @@ Categories=Utility;
 
 Next, Grant read, write, and execute permissions to every one.  
 Execute the following command in the pi's terminal window:  
-`sudo chmod 777 /home/pi/.local/share/applications/qrmenu.desktop`
+`sudo chmod 777 /home/pi/.local/share/applications/menu.desktop`
 
 Reboot the pi and then right click on the Application Launch Bar so that you can edit its properties in the same way that was shown for the Florence virtual keyboard above.  
 Select your new desktop item (It can be found in accessories) and place it onto the Application Launch Bar.  
