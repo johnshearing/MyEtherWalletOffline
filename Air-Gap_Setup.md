@@ -1440,6 +1440,44 @@ Now give yourself permission to run the script.
 Execute the following command:  
 'sudo chmod 777 /usr/local/bin/pub2txt` 
 
+
+Now we need a script to import public and private keys from a text file.  
+Execute the following command:  
+`sudo leafpad /usr/local/bin/txt2rings`  
+
+Now paste the following into your open text editor, save your work, and exit:  
+```
+#/usr/bin/bash
+
+# This script will import a public or private key from a text file into a GPG keyring.
+
+clear; 
+
+# Prompt user to select a key text file to import. 
+fileToImport=$(zenity \
+--title="Select a key text file to import" \
+--file-selection \
+--filename="/home/pi/" \
+2>/dev/null); 
+
+# If the user cancels the prompt action then exit this script.
+if [ $? == 1 ]; then exit; fi
+
+clear;
+
+gpg --import $fileToImport;
+
+clear;
+
+echo "Run list-keys to check that a public key has been imported.";
+echo "Run list-secret-keys to check that a private key has been imported.";
+```
+
+
+Now give yourself permission to run the script.  
+Execute the following command:  
+'sudo chmod 777 /usr/local/bin/txt2rings` 
+
 ????
 
 
@@ -1471,6 +1509,7 @@ task=$(zenity --list \
 "fingerprint" "Show fingerprint for public keys" \
 "list-keys" "Display info about public keys" \
 "list-secret-keys" "Display info about secret keys" \
+"txt2rings" "Import a public or private key from a text file" \
 "pub2txt" "Export a public key to a text file" \
 "priv2txt" "Export a private key to a text file" \
 "gen-key" "Generate a Public / Private key pair" \
@@ -1492,6 +1531,8 @@ elif [ $task = list-keys ]; then
 gpg --list-keys
 elif [ $task = list-secret-keys ]; then
 gpg --list-secret-keys
+elif [ $task = txt2rings ]; then
+txt2rings
 elif [ $task = pub2txt ]; then
 pub2txt
 elif [ $task = priv2txt ]; then
@@ -2223,5 +2264,5 @@ gpg2 --encrypt --sign -r your@email.com filename
 gpg --edit-key KeyID  revsig, save  
 gpg --send-keys keyID  
 gpg2 --delete-secret-keys KeyID  
-gpg2 --delete--key KeyID  
+gpg2 --delete-key KeyID  
 
