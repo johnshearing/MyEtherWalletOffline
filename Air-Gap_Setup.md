@@ -1250,7 +1250,7 @@ Execute the following command:
 
 Now we need to make a script that displays the fingerprint for a specified public key.  
 Execute the following command.  
-`sudo leafpad qrfingerprint`  
+`sudo leafpad fingerprint`  
 
 Now paste the following into the text editor, save your work, and exit.   
 ```
@@ -1276,7 +1276,7 @@ gpg --fingerprint $emailAddress;
 
 Now give yourself permission to run the script.  
 Execute the following command:  
-`sudo chmod 777 /usr/local/bin/qrfingerprint`   
+`sudo chmod 777 /usr/local/bin/fingerprint`   
 
 
 Now we need a script to export GPG private keys.  
@@ -1287,11 +1287,43 @@ Now paste the following into the text editor, save your work, and exit.
 ```
 #/usr/bin/bash
 
+# This script will export your private key to a text file for backup.
+# DO NOT SHOW YOUR PRIVATE KEY TO ANYONE.
+
 clear;
 
-# Prompt user for the directory where the exported text file will be written to.
+# if we ran the script on accident then exit
+zenity \
+--question \
+--text "Are you sure you want to export your private key?" \
+--ok-label "Yes" \
+--cancel-label "Cancel" \
+2>/dev/null;
+
+# If the user cancels the prompt action then exit this script.
+if [ $? == 1 ]; then exit; fi
+
+clear;
+
+zenity \
+--info \
+--title "Private Key Export" \
+--text='DO NOT SHOW YOUR PRIVATE KEYS ANYONE.' \
+2>/dev/null;
+
+clear;
+
+zenity \
+--info \
+--title "Private Key Export" \
+--text='KEEP YOUR BACK UP IN A SAFE PLACE' \
+2>/dev/null;
+
+clear;
+
+# Prompt user for the directory where the exported private key text file will be written to.
 outputDirectory=$(zenity \
---title="Select the location where the exported text file will be written" \
+--title="Select the location where the exported private key backup file will be written" \
 --file-selection \
 --filename="/home/pi/" \
 --directory \
@@ -1302,10 +1334,10 @@ if [ $? == 1 ]; then exit; fi
 
 clear;
 
-# Prompt user to specify the name for the exported text file.
+# Prompt user to specify the name for the exported private key backup file.
 outputFileName=$(zenity \
 --entry \
---title="Specify the name for the exported text file" \
+--title="Specify the name for the exported private key backup file" \
 --entry-text="privatekeyexport.txt" \
 --width 600 \
 2>/dev/null); 
@@ -1334,12 +1366,81 @@ gpg --export-secret-key --armor --output $outputPathAndFileName $uniqueID
 
 clear;
 
-echo "Private key was exported to "$outputPathAndFileName
+echo "Private key was exported to "$outputPathAndFileName;
+echo "Keep the exported private key backup file in a secure location";
+echo "DO NOT SHOW YOUR PRIVATE KEY TO ANYONE";
 ```
 
 Now give yourself permission to run the script.  
 Execute the following command:  
-sudo chmod 777 /usr/local/bin/priv2txt
+'sudo chmod 777 /usr/local/bin/priv2txt`  
+
+
+Now we need a script to export public keys so that we can share them with others.  
+execute the following command:  
+`sudo leafpad /usr/local/bin/pub2txt`  
+
+Now paste the following into the text editor, save your work, and exit.  
+```
+#/usr/bin/bash
+
+# This script will export your public key to a text file so you can share it with others.
+
+clear;
+
+# Prompt user for the directory where the exported public key text file will be written to.
+outputDirectory=$(zenity \
+--title="Select the directory where the exported public key text file will be written" \
+--file-selection \
+--filename="/home/pi/" \
+--directory \
+2>/dev/null); 
+
+# If the user cancels the prompt action then exit this script.
+if [ $? == 1 ]; then exit; fi
+
+clear;
+
+# Prompt user to specify the name for the exported public key text file.
+outputFileName=$(zenity \
+--entry \
+--title="Specify the name for the exported public key text file" \
+--entry-text="publickeyexport.txt" \
+--width 600 \
+2>/dev/null); 
+
+# If the user cancels the prompt action then exit this script.
+if [ $? == 1 ]; then exit; fi
+
+clear;
+
+# Prompt user for the email address or unique id of the public key.
+uniqueID=$(zenity \
+--entry \
+--title="Specify the email address or uniqueID of the public key" \
+--entry-text="UniqueID or Email Address" \
+--width 600 \
+2>/dev/null); 
+
+# If the user cancels the prompt action then exit this script.
+if [ $? == 1 ]; then exit; fi
+
+cd $outputDirectory;
+
+outputPathAndFileName=$outputDirectory/$outputFileName;
+
+gpg --export --armor $uniqueID > $outputPathAndFileName;
+
+clear;
+
+echo "Public key was exported to "$outputPathAndFileName
+```  
+
+Now give yourself permission to run the script.  
+Execute the following command:  
+'sudo chmod 777 /usr/local/bin/pub2txt` 
+
+????
 
 
 
@@ -1400,8 +1501,6 @@ fi
 Now give yourself permission to execute the script.  
 Execute the following command:  
 `sudo chmod 777 /usr/local/bin/menu`  
-
-????
 
 Now lets make an icon for this menu and put it on the task bar.  
 Get a nice icon from the internet to represent the menu and save it to the following directory:  
