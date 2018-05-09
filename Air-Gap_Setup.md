@@ -1469,8 +1469,8 @@ gpg --import $fileToImport;
 
 clear;
 
-echo "Run list-keys to check that a public key has been imported.";
-echo "Run list-secret-keys to check that a private key has been imported.";
+echo "Run list-keys from the menu to check that a public key has been imported.";
+echo "Run list-secret-keys from the menu to check that a private key has been imported.";
 ```
 
 
@@ -1818,6 +1818,11 @@ To start the import process,
 * Alice will use the video camera on her PrivateKeyVault to make a video of the video on her smartphone.  
 * Doing it is actually easier than saying it.  
 * Put the smartphone in front of the pi's video camera.  
+
+
+raspivid -t 30000 -w 640 -h 480 -fps 25 -b 1200000 -p 0,0,640,480 -o pivideo.h264
+
+
 * Now press the video record button on you pi.  
 * Now press the play button on your smartphone.  
 * When the video is finished playing, press the Video Stop button on your pi.  
@@ -1837,7 +1842,6 @@ Now that Alice has Bob's public key in a text file, she will need to import it i
 * Just remember that if someone sends you a public key then you will need to import it into your public keyring file by using the following command: 
 * `gpg --import bob@gmail.com_pubkey.asc`  
 * `bob@gmail.com_pubkey.asc` is the name of the file which contains bob's public key.  
-
 
 
 
