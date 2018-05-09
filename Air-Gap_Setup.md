@@ -1478,6 +1478,92 @@ Now give yourself permission to run the script.
 Execute the following command:  
 'sudo chmod 777 /usr/local/bin/txt2rings` 
 
+
+Now we need a script to record a video of a qr-code parade being displayed on a smartphone.  
+execute the following command:  
+`sudo leafpad /usr/local/bin/recvid`  
+
+
+```
+#/usr/bin/bash
+
+# Record a video 
+# Used for importing a QR-Code parade being displayed on a smartphone
+
+#Steps:
+# Done: select an output directory: zenity dialog. 
+# Done: change to the selected directory: cd command
+# Done: select an output file name: zenity dialog
+# Done: concatenate directory and filename and set as output for -o or --output
+# select an amount of time to record and set as timeout for -t or --timeout
+# select the image width and set as width for - w or --width
+# select the image height and set as height for -h or --height
+# select the frames per second and set as framerate for -fsp or --framerate
+# select the bitrate and set as bitrate for -b or --bitrate
+# select the preview options x,y,w,h and set as preview for -p or --preview
+# display a stop button: `pkill raspivid`
+# convert the .h264 file to .MP4: `MP4Box -add pivideo.h264 pivideo.mp4`
+# play the recorded video: `omxplayer pivideo.mp4`
+# prompt to convert the video to text if desired.
+# prompt to display the text if desired.
+# prompt to decrypt the text
+# prompt to display the decrypted message.
+
+
+clear; 
+
+# Prompt user for the directory where the output.h264 video file will be written to.
+outputDirectory=$(zenity \
+--title="Select the location where the outputed .h264 video file will be written" \
+--file-selection \
+--filename="/home/pi/" \
+--directory \
+2>/dev/null); 
+
+# If the user cancels the prompt action then exit this script.
+if [ $? == 1 ]; then exit; fi
+
+# Navigate to the selected directory.
+cd $outputDirectory;
+
+clear;
+
+# Prompt user to specify the name of the output .h264 video file.
+OutputFileName=$(zenity \
+--entry \
+--title="Specify the name of the outputed .h264 video file" \
+--entry-text="output.txt" \
+--width 600 \
+2>/dev/null); 
+
+# If the user cancels the prompt action then exit this script.
+if [ $? == 1 ]; then exit; fi
+
+clear;
+
+output=$outputDirectory/$OutputFileName;
+
+
+
+
+# python /usr/local/bin/QRCodeVideoToTextFile.py $inputVideo $outputPathAndFileName;
+
+# raspivid -t 30000 -w 640 -h 480 -fps 25 -b 1200000 -p 0,0,640,480 -o pivideo.h264;
+
+raspivid \
+-t $timeout \
+-w $width \
+-h $height \
+-fps $framerate \
+-b $bitrate \
+-p 0,0,640,480 \
+-o pivideo.h264;
+```
+
+Now give yourself permission to run the script.  
+Execute the following command:  
+'sudo chmod 777 /usr/local/bin/recvid` 
+
 ????
 
 
