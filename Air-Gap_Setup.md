@@ -1495,14 +1495,15 @@ execute the following command:
 # Done: change to the selected directory: cd command
 # Done: select an output file name: zenity dialog
 # Done: concatenate directory and filename and set as output for -o or --output
-# select an amount of time to record and set as timeout for -t or --timeout
-# select the image width and set as width for - w or --width
-# select the image height and set as height for -h or --height
-# select the frames per second and set as framerate for -fsp or --framerate
-# select the bitrate and set as bitrate for -b or --bitrate
-# select the preview options x,y,w,h and set as preview for -p or --preview
-# display a stop button: `pkill raspivid`
-# convert the .h264 file to .MP4: `MP4Box -add pivideo.h264 pivideo.mp4`
+# Done: select an amount of time to record and set as timeout for -t or --timeout
+# Done: select the image width and set as width for - w or --width
+# Done: select the image height and set as height for -h or --height
+# Done: select the frames per second and set as framerate for -fsp or --framerate
+# Done: select the bitrate and set as bitrate for -b or --bitrate
+# Done: select the preview options x,y,w,h and set as preview for -p or --preview
+# Done: display a stop button: `pkill raspivid`
+# Done: convert the .h264 file to .MP4: `MP4Box -add pivideo.h264 pivideo.mp4`
+# Done: remove the .264 file
 # play the recorded video: `omxplayer pivideo.mp4`
 # prompt to convert the video to text if desired.
 # prompt to display the text if desired.
@@ -1529,10 +1530,10 @@ cd $outputDirectory;
 clear;
 
 # Prompt user to specify the name of the output .h264 video file.
-OutputFileName=$(zenity \
+outputFileName=$(zenity \
 --entry \
 --title="Specify the name of the outputed .h264 video file" \
---entry-text="output.txt" \
+--entry-text="outputVideo" \
 --width 600 \
 2>/dev/null); 
 
@@ -1541,12 +1542,89 @@ if [ $? == 1 ]; then exit; fi
 
 clear;
 
-output=$outputDirectory/$OutputFileName;
+output=$outputDirectory/$outputFileName;
 
 
 
+# select a maximum amount of time to record and set as timeout for -t or --timeout
+timeout=$(zenity \
+--entry \
+--title="Specify the maximum amount of time that the video can record" \
+--entry-text="30000" \
+--width 600 \
+2>/dev/null); 
 
-# python /usr/local/bin/QRCodeVideoToTextFile.py $inputVideo $outputPathAndFileName;
+# If the user cancels the prompt action then exit this script.
+if [ $? == 1 ]; then exit; fi
+
+clear;
+
+
+# select the image width and set as width for - w or --width
+width=$(zenity \
+--entry \
+--title="Specify the width of the recorded video" \
+--entry-text="640" \
+--width 600 \
+2>/dev/null); 
+
+# If the user cancels the prompt action then exit this script.
+if [ $? == 1 ]; then exit; fi
+
+clear;
+
+# select the image height and set as height for -h or --height
+height=$(zenity \
+--entry \
+--title="Specify the height of the recorded video" \
+--entry-text="480" \
+--width 600 \
+2>/dev/null); 
+
+# If the user cancels the prompt action then exit this script.
+if [ $? == 1 ]; then exit; fi
+
+clear;
+
+# select the frames per second and set as framerate for -fsp or --framerate
+framerate=$(zenity \
+--entry \
+--title="Specify the framerate" \
+--entry-text="10" \
+--width 600 \
+2>/dev/null); 
+
+# If the user cancels the prompt action then exit this script.
+if [ $? == 1 ]; then exit; fi
+
+clear;
+
+# select the bitrate and set as bitrate for -b or --bitrate
+bitrate=$(zenity \
+--entry \
+--title="Specify the bitrate" \
+--entry-text="1200000" \
+--width 600 \
+2>/dev/null); 
+
+# If the user cancels the prompt action then exit this script.
+if [ $? == 1 ]; then exit; fi
+
+clear;
+
+# select the preview options x,y,w,h and set as preview for -p or --preview
+preview=$(zenity \
+--entry \
+--title="Specify the position and size of the preview window x,y,w,h" \
+--entry-text="100,100,120,100" \
+--width 600 \
+2>/dev/null); 
+
+# If the user cancels the prompt action then exit this script.
+if [ $? == 1 ]; then exit; fi
+
+clear;
+
 
 # raspivid -t 30000 -w 640 -h 480 -fps 25 -b 1200000 -p 0,0,640,480 -o pivideo.h264;
 
@@ -1556,8 +1634,42 @@ raspivid \
 -h $height \
 -fps $framerate \
 -b $bitrate \
--p 0,0,640,480 \
--o pivideo.h264;
+-p $preview \
+-o $output.h264 \
+2>/dev/null &
+
+
+# display a stop button: `killall raspivid`
+zenity \
+--error \
+--title "Stop Recording" \
+--text='Stop Recording' \
+--ok-label "Stop Recording" \
+2>/dev/null; 
+
+if [ $? == 0 ]; then killall raspivid 2>/dev/null; fi
+
+clear
+
+# Convert the .h264 file to .MP4
+MP4Box -add $output.h264 $output.MP4 2>/dev/null ;
+
+# Remove the .h264 file
+sudo rm $output.h264 2>/dev/null ;
+
+# Play back the video if user wants
+zenity \
+--question \
+--title "Play Video" \
+--text "Would you like to play back the recording?" \
+--ok-label "Play Video" \
+--cancel-label "No, Skip" \
+2>/dev/null ; 
+
+# If the user selects Play Video then play it.
+if [ $? == 0 ]; then omxplayer $output.MP4; fi
+
+clear;
 ```
 
 Now give yourself permission to run the script.  
