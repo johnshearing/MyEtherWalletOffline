@@ -1501,11 +1501,13 @@ execute the following command:
 # Done: select the frames per second and set as framerate for -fsp or --framerate
 # Done: select the bitrate and set as bitrate for -b or --bitrate
 # Done: select the preview options x,y,w,h and set as preview for -p or --preview
+# Display a record button
 # Done: display a stop button: `pkill raspivid`
 # Done: convert the .h264 file to .MP4: `MP4Box -add pivideo.h264 pivideo.mp4`
 # Done: remove the .264 file
-# play the recorded video: `omxplayer pivideo.mp4`
-# prompt to convert the video to text if desired.
+# Done: Prompt to play the recorded video: `omxplayer pivideo.mp4`
+# Done: prompt to convert the video to text if desired.
+# Done: prompt for the name of the converted text file
 # prompt to display the text if desired.
 # prompt to decrypt the text
 # prompt to display the decrypted message.
@@ -1626,18 +1628,33 @@ if [ $? == 1 ]; then exit; fi
 clear;
 
 
-# raspivid -t 30000 -w 640 -h 480 -fps 25 -b 1200000 -p 0,0,640,480 -o pivideo.h264;
+# display a record button
+zenity \
+--question \
+--title "Record Video" \
+--text "Would you like to start recording?" \
+--ok-label "Start Recording" \
+--cancel-label "No, Skip" \
+2>/dev/null ; 
 
-raspivid \
--t $timeout \
--w $width \
--h $height \
--fps $framerate \
--b $bitrate \
--p $preview \
--o $output.h264 \
-2>/dev/null &
-
+# If the user presses the record button.
+if [ $? == 0 ]; 
+then \
+    # raspivid -t 30000 -w 640 -h 480 -fps 25 -b 1200000 -p 0,0,640,480 -o pivideo.h264;
+    raspivid \
+    -t $timeout \
+    -w $width \
+    -h $height \
+    -fps $framerate \
+    -b $bitrate \
+    -p $preview \
+    -o $output.h264 \
+    2>/dev/null & 
+elif [ $? == 1 ]; 
+then \
+    exit
+fi
+clear;
 
 # display a stop button: `killall raspivid`
 zenity \
@@ -1670,6 +1687,72 @@ zenity \
 if [ $? == 0 ]; then omxplayer $output.MP4; fi
 
 clear;
+
+# prompt to convert the video to text if desired.
+zenity \
+--question \
+--title "Convert Video to Text?" \
+--text "Would you like to convert the video to text?" \
+--ok-label "Convert to Text" \
+--cancel-label "No, Skip" \
+2>/dev/null ; 
+
+clear;
+
+# If the user selects the Convert to Text button then prompt user for the name of the converted text file.
+if [ $? == 0 ]; 
+then \
+extractedFileName=$(zenity \
+--entry \
+--title="Specify the name of the text file extracted from the video" \
+--entry-text="extractedText" \
+--width 600 \
+2>/dev/null); 
+
+    # If the user cancels the prompt action then exit this script.
+    if [ $? == 1 ]; 
+    then 
+        exit; 
+    fi
+
+    clear;
+
+fi
+
+python /usr/local/bin/QRCodeVideoToTextFile.py $output.MP4 $extractedFileName.txt;
+
+clear;
+
+# prompt to display the text if desired.
+zenity \
+--question \
+--title "View the text extracted from the video?" \
+--text "Would you like to view the text extracted from the video?" \
+--ok-label "View Extracted Text" \
+--cancel-label "No, Skip" \
+2>/dev/null ; 
+
+clear;
+
+# If the user selects to view the text .
+if [ $? == 0 ]; 
+then \
+extractedFileName=$(zenity \
+--entry \
+--title="Specify the name of the text file extracted from the video" \
+--entry-text="extractedText" \
+--width 600 \
+2>/dev/null); 
+
+    # If the user cancels the prompt action then exit this script.
+    if [ $? == 1 ]; 
+    then 
+        exit; 
+    fi
+
+    clear;
+
+fi
 ```
 
 Now give yourself permission to run the script.  
