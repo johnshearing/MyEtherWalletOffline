@@ -1479,8 +1479,8 @@ Execute the following command:
 'sudo chmod 777 /usr/local/bin/txt2rings` 
 
 
-Now we need a script to record a video of a qr-code parade being displayed on a smartphone.  
-execute the following command:  
+Now we need a script to record a video of a qr-code parade being displayed on a smartphone and extract the text from it.  
+Execute the following command:  
 `sudo leafpad /usr/local/bin/recvid`  
 
 
@@ -1511,9 +1511,6 @@ execute the following command:
 # Done: extract the text from the video.
 # Done: prompt to display the extracted text if desired.
 # Done: display the extracted text.
-# prompt to decrypt the text.
-# prompt to display the decrypted message.
-
 
 clear; 
 
@@ -1734,24 +1731,6 @@ zenity \
 if [ $? == 0 ]; 
 then \
  leafpad $extractedFileName.txt; 
-fi
-
-clear;
-
-# prompt to decrypt the extracted text.
-zenity \
---question \
---title "Decrypt the Extracted Text?" \
---text "Would you like to decrypt the text extracted from the video?" \
---ok-label "Decrypt the Extracted Text" \
---cancel-label "No, Skip" \
-2>/dev/null ; 
-
-# If the user selects the Decrypt Extracted Text button.
-# decrypt the extracted text.
-if [ $? == 0 ]; 
-then \
-    gpg $extractedFileName.txt; 
 fi
 
 clear;
