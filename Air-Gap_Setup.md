@@ -1505,11 +1505,13 @@ execute the following command:
 # Done: display a stop button: `pkill raspivid`
 # Done: convert the .h264 file to .MP4: `MP4Box -add pivideo.h264 pivideo.mp4`
 # Done: remove the .264 file
-# Done: Prompt to play the recorded video: `omxplayer pivideo.mp4`
-# Done: prompt to convert the video to text if desired.
-# Done: prompt for the name of the converted text file
-# prompt to display the text if desired.
-# prompt to decrypt the text
+# Done: prompt to play the recorded video: `omxplayer pivideo.mp4`
+# Done: prompt to extract text from the video if desired.
+# Done: prompt for the name of the converted text file.
+# Done: extract the text from the video.
+# Done: prompt to display the extracted text if desired.
+# Done: display the extracted text.
+# prompt to decrypt the text.
 # prompt to display the decrypted message.
 
 
@@ -1688,42 +1690,37 @@ if [ $? == 0 ]; then omxplayer $output.MP4; fi
 
 clear;
 
-# prompt to convert the video to text if desired.
+# prompt to extract text from the video if desired.
 zenity \
 --question \
---title "Convert Video to Text?" \
---text "Would you like to convert the video to text?" \
---ok-label "Convert to Text" \
+--title "Extract Text From the Video?" \
+--text "Would you like to extract text from the video?" \
+--ok-label "Extract the Text" \
 --cancel-label "No, Skip" \
 2>/dev/null ; 
 
-clear;
+# If the user cancels the prompt action then exit this script.
+if [ $? == 1 ]; then exit; fi
 
-# If the user selects the Convert to Text button then prompt user for the name of the converted text file.
+# If the user selects the Extract the Text button then prompt user for the name of the converted text file.
 if [ $? == 0 ]; 
 then \
 extractedFileName=$(zenity \
 --entry \
---title="Specify the name of the text file extracted from the video" \
---entry-text="extractedText" \
+--title="Specify the name of the text file where extracted text will go" \
+--entry-text="extractedTextFile" \
 --width 600 \
 2>/dev/null); 
-
-    # If the user cancels the prompt action then exit this script.
-    if [ $? == 1 ]; 
-    then 
-        exit; 
-    fi
-
-    clear;
-
 fi
 
+clear;
+
+# extract the text from the video.
 python /usr/local/bin/QRCodeVideoToTextFile.py $output.MP4 $extractedFileName.txt;
 
 clear;
 
-# prompt to display the text if desired.
+# prompt to display the extracted text if desired.
 zenity \
 --question \
 --title "View the text extracted from the video?" \
@@ -1732,27 +1729,32 @@ zenity \
 --cancel-label "No, Skip" \
 2>/dev/null ; 
 
-clear;
-
-# If the user selects to view the text .
+# If the user selects the View Extracted Text button.
+# display the extracted text.
 if [ $? == 0 ]; 
 then \
-extractedFileName=$(zenity \
---entry \
---title="Specify the name of the text file extracted from the video" \
---entry-text="extractedText" \
---width 600 \
-2>/dev/null); 
-
-    # If the user cancels the prompt action then exit this script.
-    if [ $? == 1 ]; 
-    then 
-        exit; 
-    fi
-
-    clear;
-
+ leafpad $extractedFileName.txt; 
 fi
+
+clear;
+
+# prompt to decrypt the extracted text.
+zenity \
+--question \
+--title "Decrypt the Extracted Text?" \
+--text "Would you like to decrypt the text extracted from the video?" \
+--ok-label "Decrypt the Extracted Text" \
+--cancel-label "No, Skip" \
+2>/dev/null ; 
+
+# If the user selects the Decrypt Extracted Text button.
+# decrypt the extracted text.
+if [ $? == 0 ]; 
+then \
+    gpg $extractedFileName.txt; 
+fi
+
+clear;
 ```
 
 Now give yourself permission to run the script.  
