@@ -1740,6 +1740,84 @@ Now give yourself permission to run the script.
 Execute the following command:  
 'sudo chmod 777 /usr/local/bin/recvid` 
 
+
+Now we need a script to encrypt a text file.  
+Execute the following command:  
+`sudo leafpad /usr/local/bin/ncrypt`  
+
+Now paste the followin code into your open text editor and then save and exit.
+
+```
+#/usr/bin/bash
+
+# This script will encrypt a text file.
+
+# Steps:
+# Done: Prompt user to select a text file to encrypt.
+# Ask if user would like to sign the encrypted message.
+# Prompt the user for recipients in a while loop.
+
+clear; 
+
+# Prompt user to select a text file to encrypt. 
+fileToEncrypt=$(zenity \
+--title="Select a text file to encrypt" \
+--file-selection \
+--filename="/home/pi/" \
+2>/dev/null); 
+
+# If the user cancels the prompt action then exit this script.
+if [ $? == 1 ]; then exit; fi
+
+clear;
+
+zenity \
+--question \
+--text "Do you want to sign the encrypted message?" \
+--ok-label "Yes" \
+--cancel-label "No" \
+2>/dev/null;
+
+# If the user cancels the prompt action then exit this script.
+if [ $? == 0 ];
+then \
+    sign="--sign"; 
+else \
+    sign="";
+fi;
+
+clear;
+
+gpg2 --armor --encrypt $sign $fileToEncrypt;
+
+clear;
+
+echo "Your encrypted file is named $fileToEncrypt.asc"
+```  
+
+Now give yourself permission to run the script.  
+Execute the following command:  
+'sudo chmod 777 /usr/local/bin/ncrypt` 
+
+
+Now we need a script to encrypt a text file.  
+Execute the following command:  
+`sudo leafpad /usr/local/bin/strtfm`  
+
+Now paste the followin code into your open text editor and then save and exit.
+```
+#/usr/bin/bash
+# This script starts the file manager.
+cd ~;
+pcmanfm;
+clear;
+```  
+
+Now give yourself permission to run the script.  
+Execute the following command:  
+'sudo chmod 777 /usr/local/bin/strtfm`
+
+
 ????
 
 
