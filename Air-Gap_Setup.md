@@ -1766,7 +1766,13 @@ task=$(zenity --list \
 --width 1000 \
 --height 1000 \
 --column "Task" --column "Description" \
-"qrflash" "Display a text file on screen as a parade of QR-Codes" \
+"mew" "*Launch MyEtherWallet" \
+"strtfm" "*Manage files" \
+"nano" "*Read or write a message" \
+"ncrypt" "Encrypt a text file" \
+"qrflash" "Export a text file to screen as a parade of QR-Codes" \
+"recvid" "Import a QR_Coded video and extract the text" \
+"dcrypt" "*Decrypt a text file" \
 "qrvid2txt" "Extract text from an MP4 video file containing QR-Codes" \
 "fingerprint" "Show fingerprint for public keys" \
 "list-keys" "Display info about public keys" \
@@ -1775,31 +1781,42 @@ task=$(zenity --list \
 "pub2txt" "Export a public key to a text file" \
 "priv2txt" "Export a private key to a text file" \
 "gen-key" "Generate a Public / Private key pair" \
+"delete-pubkey" "*Delete a public or private key" \
 2>/dev/null);
 
 # if user cancels, exit
-if [ $? == 1 ]; then exit; fi
+if [ $? == 1 || $task == ""]; then exit; fi
 
 clear;
 
 # Execute the chosen operation.
-if [ $task = qrflash ]; then
+if [[ $task = mew ]]; then
+mew
+elif [[ $task = strtfm ]]; then
+strtfm
+elif [[ $task = leafpad ]]; then
+leafpad
+elif [[ $task = ncrypt ]]; then
+ncrypt
+elif [[ $task = qrflash ]]; then
 qrflash
-elif [ $task = qrvid2txt ]; then
+elif [[ $task = recvid ]]; then
+recvid
+elif [[ $task = qrvid2txt ]]; then
 qrvid2txt
-elif [ $task = fingerprint ]; then
+elif [[ $task = fingerprint ]]; then
 fingerprint
-elif [ $task = list-keys ]; then
+elif [[ $task = list-keys ]]; then
 gpg --list-keys
-elif [ $task = list-secret-keys ]; then
+elif [[ $task = list-secret-keys ]]; then
 gpg --list-secret-keys
-elif [ $task = txt2rings ]; then
+elif [[ $task = txt2rings ]]; then
 txt2rings
-elif [ $task = pub2txt ]; then
+elif [[ $task = pub2txt ]]; then
 pub2txt
-elif [ $task = priv2txt ]; then
+elif [[ $task = priv2txt ]]; then
 priv2txt
-elif [ $task = "gen-key" ]; then
+elif [[ $task = "gen-key" ]]; then
 gpg --gen-key
 fi
 ```  
