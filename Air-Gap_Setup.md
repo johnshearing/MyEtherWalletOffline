@@ -1815,7 +1815,26 @@ clear;
 
 Now give yourself permission to run the script.  
 Execute the following command:  
-'sudo chmod 777 /usr/local/bin/strtfm`
+'sudo chmod 777 /usr/local/bin/strtfm`  
+
+
+Now we need a menu script that we can use to call MyEtherWallet.  
+Execute the following command:  
+`sudo leafpad mew`   
+
+Next paste the following code into the text editor, save your work and exit:
+
+```
+#/usr/bin/bash
+
+# This script starts MyEtherWallet.
+
+chromium-browser --app=URL file:///home/pi/MEW/index.html#offline-transaction 2>/dev/null
+```
+
+Now give yourself permission to run the script.  
+Execute the following command:  
+'sudo chmod 777 /usr/local/bin/mew`  
 
 
 ????
