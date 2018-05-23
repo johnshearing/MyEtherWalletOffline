@@ -1840,6 +1840,43 @@ Execute the following command:
 ????
 
 
+Now we need a scrypt to decrypt messages.  
+Execute the following command:  
+`sudo leafpad dcrypt`   
+
+Next paste the following code into the text editor, save your work and exit:
+```
+#/usr/bin/bash
+
+# This script will decrypt a text file.
+
+# Steps:
+# Prompt user to select a text file to decrypt.
+# Decrypt the text file.
+
+clear; 
+
+# Prompt user to select a text file to decrypt. 
+fileToDecrypt=$(zenity \
+--title="Select a text file to decrypt" \
+--file-selection \
+--filename="/home/pi/" \
+2>/dev/null); 
+
+# If the user cancels the prompt action then exit this script.
+if [ $? == 1 ]; then exit; fi
+
+clear;
+
+gpg2 $fileToDecrypt;
+
+# clear;
+```
+
+Now give yourself permission to run the script.  
+Execute the following command:  
+'sudo chmod 777 /usr/local/bin/dcrypt` 
+
 
 Now we need a menu script that we can use to call all the other scripts that we just wrote.  
 Execute the following command:  
