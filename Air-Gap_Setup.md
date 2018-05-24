@@ -1837,9 +1837,6 @@ Execute the following command:
 'sudo chmod 777 /usr/local/bin/mew`  
 
 
-????
-
-
 Now we need a scrypt to decrypt messages.  
 Execute the following command:  
 `sudo leafpad dcrypt`   
@@ -1877,6 +1874,162 @@ Now give yourself permission to run the script.
 Execute the following command:  
 'sudo chmod 777 /usr/local/bin/dcrypt` 
 
+
+Now we need script to delete private keys.  
+Execute the following command:  
+`sudo leafpad delprv`   
+
+Next paste the following code into the text editor, save your work and exit:
+
+```
+#/usr/bin/bash
+
+# This script will delete a private key. 
+
+# Steps:
+# Done: Inform the user that this program is for deleting private keys.
+# Prompt user to cancel if he would like to back up the private key before continuing.
+# Ask user if he would like to continue.
+# Ask user for the email address or unique ID for the key to be deleted.
+# Delete the private key.
+# 
+
+clear;
+
+# Inform the user that this program is for deleting private keys.
+zenity \
+--info \
+--title "Delete Private Key" \
+--text='This program is for deleting private keys' \
+2>/dev/null;
+
+clear;
+
+# Ask the user if he would like to back up the private key before continuing.
+zenity \
+--question \
+--text "Cancel if you want to back up your key, otherwise Continue" \
+--ok-label "Continue" \
+--cancel-label "Cancel" \
+2>/dev/null;
+
+# If the user cancels the prompt action then exit this script.
+if [ $? == 1 ]; then exit; fi
+
+clear;
+
+# Ask the user if he would like to continue.
+zenity \
+--question \
+--text "Delete a private key from your key-ring?" \
+--ok-label "Continue" \
+--cancel-label "Cancel" \
+2>/dev/null;
+
+# If the user cancels the prompt action then exit this script.
+if [ $? == 1 ]; then exit; fi
+
+clear;
+
+# Ask user for the email address or unique ID for the key to be deleted.
+keyID=$(zenity \
+--entry \
+--title="Specify email address or uniqueID for the private key to be deleted." \
+--entry-text="alice@gmail.com" \
+--width 600 \
+2>/dev/null); 
+
+# If the user cancels the prompt action then exit this script.
+if [ $? == 1 ]; then exit; fi
+
+clear;
+
+gpg --delete-secret-keys $keyID 
+```
+
+Now give yourself permission to run the script.  
+Execute the following command:  
+'sudo chmod 777 /usr/local/bin/delprv`  
+
+
+Now we need a script to delete public keys.  
+Execute the following command:  
+`sudo leafpad delpub`   
+
+Next paste the following code into the text editor, save your work and exit:
+
+```
+#/usr/bin/bash
+
+# This script will delete a public key. 
+
+# Steps:
+# Done: Inform the user that this program is for deleting public keys.
+# Prompt user to cancel if he would like to back up the public key before continuing.
+# Ask user if he would like to continue.
+# Ask user for the email address or unique ID for the key to be deleted.
+# Delete the public key.
+# 
+
+clear;
+
+# Inform the user that this program is for deleting public keys.
+zenity \
+--info \
+--title "Delete Public Key" \
+--text='This program is for deleting public keys' \
+2>/dev/null;
+
+clear;
+
+# Ask the user if he would like to back up the public key before continuing.
+zenity \
+--question \
+--text "Cancel if you want to back up your key, otherwise Continue" \
+--ok-label "Continue" \
+--cancel-label "Cancel" \
+2>/dev/null;
+
+# If the user cancels the prompt action then exit this script.
+if [ $? == 1 ]; then exit; fi
+
+clear;
+
+# Ask the user if he would like to continue.
+zenity \
+--question \
+--text "Delete a public key from your key-ring?" \
+--ok-label "Continue" \
+--cancel-label "Cancel" \
+2>/dev/null;
+
+# If the user cancels the prompt action then exit this script.
+if [ $? == 1 ]; then exit; fi
+
+clear;
+
+# Ask user for the email address or unique ID for the key to be deleted.
+keyID=$(zenity \
+--entry \
+--title="Specify email address or uniqueID for the public key to be deleted." \
+--entry-text="bob@gmail.com" \
+--width 600 \
+2>/dev/null); 
+
+# If the user cancels the prompt action then exit this script.
+if [ $? == 1 ]; then exit; fi
+
+clear;
+
+gpg --delete-key $keyID
+```
+
+Now give yourself permission to run the script.  
+Execute the following command:  
+'sudo chmod 777 /usr/local/bin/delpub`  
+
+
+????
 
 Now we need a menu script that we can use to call all the other scripts that we just wrote.  
 Execute the following command:  
