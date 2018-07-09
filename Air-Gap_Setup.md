@@ -158,6 +158,8 @@ Then change `XKBLAYOUT="gb"` to `XKBLAYOUT="us"`
 Insert your WiFi dongle and reboot the pi.  
 After the pi reboots, you will see a WiFi icon in the task bar near the right side.  
 You will recognize the icon as a blue up arrow and a down arrow next to each other.  
+If the icon does not appear then pulling out the dongle and reinserting will probably fix your problem.
+If you are still having trouble you can check that your WiFi hub is broadcasting and reciving at a slow enough bandwith for the dongle you are using.  
 Click on the icon.  
 After a few seconds your wireless router will appear in a dropdown list.  
 Click on the list item representing your router.  
@@ -170,8 +172,11 @@ This will allow you to copy and paste commands from this document into the raspb
 
 #### Purge Wolfram
 Purge the Wolfram engine from your pi to save space on the SD card.  
-Execute the following line of code in you pi's terminal window:  
+Execute the following line of code in your pi's terminal window:  
 `sudo apt-get purge wolfram-engine`  
+
+Running the following command in the terminal window will get you even more free space.  
+`apt-get autoremove`  
 
 #### Screen lockers are a Security Risk  
 Logging out and then back in again is accomplished by selecting the **Shutdown** option on the main menu and then selecting the **Logout** button. This will log the user out and then present the user with a login screen to start a new session if desired. This is fail safe because if the login service crashes or is hacked no one is logged in. But if a screen lock is used then the user is still logged in so if the screen lock crashes or is hacked then the users's session becomes accessable to the attacker. Obviously, applications are closed when the user logs out so logging out is a bit inconvenient when compared with a screen saver but the extra security makes the effort worthwhile. [Jamie Zawinski explains in detail here](https://www.jwz.org/xscreensaver/toolkits.html)  
@@ -186,7 +191,7 @@ Run the following command in xTerminal to edit lightdm.conf:
 in section [Seat:*] add or adjust line to say:  
 `xserver-command=X -s 0 -dpms`  
 
-I was having trouble getting the pi to stop blanking the screen untill I put the above line of code in every section of the file.  
+I was having trouble getting the pi to stop blanking the screen until I put the above line of code in every section of the file.  
 Now the screen stays on all the time.  
 That's what I want.  
 
