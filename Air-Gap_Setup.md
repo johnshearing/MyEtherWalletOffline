@@ -381,15 +381,22 @@ Next, Grant read, write, and execute permissions to every one.
 Execute the following command in the pi's terminal window:  
 `sudo chmod 777 /home/pi/ld_qr_reader.sh`  
 
-Second File: Get a nice icon from the internet to represent the QR-Code reader and save it to the following directory:  
+Second File: Get two nice icons from the internet. One you will click on to start the QR-Code reader and the other will be used to stop it after getting a good read.   
+Save these to the following directory:  
 `/usr/share/icons/`  
-Be sure to convert it to the png format using a paint like program before saving it to the pi.  
+Be sure to convert them to the png format using a paint like program before saving it to the pi.  
 I called my icon **QR-Code.png**  
-We will refer to the icon later by this name.
+[It can be found here](https://github.com/johnshearing/MyEtherWalletOffline/blob/master/QR-Code.png)  
+This is already in the correct format.  
+[The other icon - Kill_QR-Code.png is found here](https://github.com/johnshearing/MyEtherWalletOffline/blob/master/Kill_QR-Code.png)  
 
-Next, Grant read, write, and execute permissions to every one.  
-Execute the following command in the pi's terminal window:  
+We will refer to the icons later by the names already given to them.  
+Be sure to save these in the `/usr/share/icons/` directory.  
+
+Next, Grant read, write, and execute permissions to all users.  
+Execute the following commands in the pi's terminal window:  
 `sudo chmod 777 /usr/share/icons/QR-Code.png`
+`sudo chmod 777 /usr/share/icons/Kill_QR-Code.png`
 
 Third File: The Desktop file - This is file determines the properties of the short cut.  
 Execute the following command in the pi's terminal window   
@@ -424,6 +431,7 @@ Three files are involved:
 The First File:
 Make a copy of your scanner icon and mark it up with the paint program to signify turning off the QR-Code scanner.  
 Save it to the pi in the following directory:  
+If you have been following along then this is already done in the previous step.  
 `/usr/share/icons/`  
 Be sure to convert it to the png format using a paint like program before saving it to the pi.  
 I called mine Kill_QR-Code.png  
@@ -432,7 +440,8 @@ We will refer to the icon by this name.
 Next, Grant read, write, and execute permissions to every one.  
 Using the pi's terminal window, navigate to the `/usr/share/icons/` directory.
 Then execute the following command in the pi's terminal window:  
-`sudo chmod 777 Kill_QR-Code.png`
+`sudo chmod 777 Kill_QR-Code.png`  
+Again, this has already been done if you have been following along.  
 
 Second file:  
 Next, create a file in the pi directory called kill_qr_reader.sh  
