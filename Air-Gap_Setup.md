@@ -246,12 +246,13 @@ Then on the **Edit** menu select **Cut**.
 Now navigate up to the **pi** folder and select **Paste** from the Edit menu.  
 The **MEW** folder has now been moved up into the **pi** folder.  
 
+If you want to, you may now go back to your **Downloads** folder and delete the ZIP file: **MyEtherWalletOffline-master.zip**.  
+You may also delete the extracted folder: **MyEtherWalletOffline-master**.  
+You will not need these anymore.  
+To delete a file or folder - click on the item and then under the Edit Menu click Remove.  
+
 **Do not change anything inside the MEW folder**  
 If you change anything inside the MEW folder it my break the application.  
-
-If you want to, you may now go back to your **Downloads** folder and delete the ZIP file: **MyEtherWalletOffline-master.zip**.  
-You may also delete the extracted folder: **MyEtherWalletOffline-master**.
-You will not need these anymore.  
 
 #### Change the Chrome Browser Settings So That MyEtherWallet Will Run When Chrome Starts.  
 Open the **Chrome** browser by clicking the second icon from the top left on the **Start Bar**.  
@@ -321,15 +322,19 @@ Small sharp sissors are good for turning the retaining ring.
 Some force will be required to break the dots of glue that hold the retaining ring in place.  
 The focus comes set at infinity.  
 Counter clock wise moves the focus closer.  
-I adjusted the focus to about 8 inches.  
-It might be good to put a dot of super glue on the retaining ring when finished adjusting the focus.  
+I adjusted the focus to about 4 inches.  
+This is because you will be using the camera to take pictures QR-Codes on your phone which will be held by a device about 4 inches from your camera.  
+It might be good to put a tiny dot of super glue on the retaining ring when finished adjusting the focus.  
 This whole process is best done before putting the camera in it's housing.  
 To see what is possible with raspistill execute `raspistill --help`  
 
-Install zbarcam. This is the program that decodes QR code.   
+Install zbarcam. This is the program that decodes QR code.  
+Run the following command in the pi's terminal window one at a time.  
+`sudo apt-get update`  
 `sudo apt-get install zbar-tools`  
 
-Download and compile "crikey. This takes output from the zbarcam and pipes it to the active input control.    
+Download and compile "crikey.  
+This takes output from the zbarcam and pipes it to the active input control.    
 `sudo apt-get install libx11-dev x11proto-xext-dev libxt-dev libxtst-dev`  
 `wget http://www.shallowsky.com/software/crikey/crikey-0.8.3.tar.gz`  
 `tar -xzf crikey-0.8.3.tar.gz`  
