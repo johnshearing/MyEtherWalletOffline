@@ -793,9 +793,25 @@ Now give yourself permission to execute all the scripts you have downloaded.
 Execute the following command:  
 `sudo chmod 777 /usr/local/bin/*`  
 
-Now lets make an icon for this menu and put it on the task bar.  
-Get a nice icon from the internet to represent the menu and save it to the following directory:  
-`/usr/share/icons/`  
+Now let's check out the software you just installed.  
+Execute the following command at your pi's terminal window.  
+`menu`  
+
+You should see a menu of activities you can perform with your PrivateKeyVault.  
+Most of the things you will need to do can be done from this menu.  
+We will come back to the menu shortly but for now we need to install more software.  
+
+Now lets make an icon for this menu and put it on the task bar. 
+The file type must be png.  
+Get a nice icon from the internet to represent the menu.
+I picked one that looks like a padlock that also looks like a menu button.
+[You can find it by clicking here](https://github.com/johnshearing/MyEtherWalletOffline/blob/master/GPG.png)
+
+Download the icon and save it to the following directory: `/usr/share/icons/`  
+Execute the following command at the pi's terminal window.
+`sudo mv /home/pi/Downloads/GPG.png /usr/share/icons`  
+
+
 Be sure to convert it to the png format using a paint like program before saving it to the pi.  
 I called my icon **GPG.png**  
 We will refer to the icon later by this name.  
