@@ -141,3 +141,54 @@ This is a long install during which you will be asked to verify switching from L
 
 Install an Application for changing GDM3 settings and other settings in GNOME  
 `sudo apt-get install dconf-tools.` 
+
+#### Adding an icon on the Task Bar for the GPG Menu application
+This didn't work - That's why it wound up here.
+There were three problems
+1. The menu wouldn't run any scripts.
+2. It was not possible to quit the menu.
+3. It seemed to crash the TaskBar.
+
+Now lets make an icon for this menu and put it on the task bar. 
+The file type must be png.  
+Get a nice icon from the internet to represent the menu.
+I picked one that looks like a padlock that also looks like a menu button.
+[You can find it by clicking here](https://github.com/johnshearing/MyEtherWalletOffline/blob/master/GPG.png)
+
+Download the icon and save it to the following directory: `/usr/share/icons/`  
+Execute the following command at the pi's terminal window.
+`sudo mv /home/pi/Downloads/GPG.png /usr/share/icons`  
+
+
+Be sure to convert it to the png format using a paint like program before saving it to the pi.  
+I called my icon **GPG.png**  
+We will refer to the icon later by this name.  
+
+Next, Grant read, write, and execute permissions to every one.  
+Execute the following command in the pi's terminal window:  
+`sudo chmod 777 /usr/share/icons/GPG.png`  
+
+Third File: The Desktop file - This is file determines the properties of the short cut.  
+Execute the following command in the pi's terminal window   
+`sudo leafpad /home/pi/.local/share/applications/menu.desktop`  
+It could have been named anything but the location maters.  
+
+Paste the following code into the file:  
+```
+[Desktop Entry]
+Name=Encrypted Messaging
+Comment=Start the menu for encrypted messaging services.
+Icon=/usr/share/icons/GPG.png
+Exec=lxterminal --geometry=98x45 -e menu
+Type=Application
+Encoding=UTF-8
+Terminal=false
+Categories=Utility;
+```
+
+Next, Grant read, write, and execute permissions to every one.  
+Execute the following command in the pi's terminal window:  
+`sudo chmod 777 /home/pi/.local/share/applications/menu.desktop`
+
+Reboot the pi and then right click on the Application Launch Bar so that you can edit its properties in the same way that was shown for the Florence virtual keyboard above.  
+Select your new desktop item (It can be found in accessories) and place it onto the Application Launch Bar. 
