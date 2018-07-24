@@ -1662,7 +1662,7 @@ Done: Change the Paper wallet so that it prints nicely on the Nano Printer.
 Done: Generate a qr-code when a message is signed so that it can be passed out of the pi.  
 Also load modified MEW onto my phone so that I can generate a qr-code for a signed message and pass it into the brick.
 
-Add GPG Encrypted Messaging utility where encrypted messages are passed in and out of the device using QR-Code.  
+Done: Add GPG Encrypted Messaging utility where encrypted messages are passed in and out of the device using QR-Code.  
 We will need this so that people can send private keys via email.  
 Maybe even something that allows the exchange of encrypted messages on the block chain.  
 This should not be too costly if only encrypted private keys are being exchanged this way.
@@ -1694,7 +1694,7 @@ That will make it possible to compare imported smart contract code with code sen
 
 Look into posting a smart contract using offline transaction screen.  
 
-Figure out how to pass large contracts out of the brick using multiple qr-codes.  
+Done: Figure out how to pass large contracts out of the brick using multiple qr-codes.  
 
 Not Now: Disable the notice that MEW is not connected to the Internet.  
 It will always be offline so there is no need for the message.  
