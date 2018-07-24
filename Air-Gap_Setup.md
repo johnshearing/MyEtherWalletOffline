@@ -16,7 +16,7 @@ In this way there is never any doubt that the only person who has the keys is th
 The items you will need for the most basic setup with no printer, no battery, and no smart power management is as follows. A material list with links for a setup with all of the above features included will be forth coming when we have settled on a final design. But to get started, you will need a raspberry pi 2 board, the official raspberry pi 7 inch touchscreen, the SmartiPi Case for the pi, a camera, the smartiPi case for the camera, a 16 G-bite SD card, a power adaptor, an ethernet cable, a 
 dongle, a 32Mb thumbdrive, and a power adapter.  
  
-Specially machined parts will be made available for purchase and CAD files will be freely posted here so you can make them yourself. Also the fully assembled device already loaded with software can be purchased from me or you can set up your own business to do the same.  
+Specially machined parts will be made available for purchase and CAD files will be freely posted here so you can make them yourself using a laser cutter. Also the fully assembled device already loaded with software can be purchased from me or you can set up your own business to do the same.  
 
 #### Installing the OS and Setting Up Basic Functionality.  
 The following is the written tutorial from which these notes are made.  
@@ -1527,6 +1527,9 @@ You get the idea.
 This takes a while to accomplish, but if you use this method, no one can ever guess your private key. An attacker might still be able to steal it or force you to hand it over, but he or she would never be able to guess it using a dictionary attack nor by guessing personal information about you.  
 
 #### Generating the public address or public key  
+My custom version of MyEtherWallet (the one already loaded on your pi if you have been following along) does this for you.  
+You can also do this at the pi's command line.  
+I include the following instructions only for those who want to know what is going on behind the scenes.  
 You already have the program **keygen.js** in your ethereum directory.  
 
 Open the Terminal window on your pi.  
@@ -1543,17 +1546,19 @@ The console will return your public address.
 #### Check that your public and private key work together.  
 **You can lose all your ether if you do not take the following precaution.**
 
-So now you have a public/private key pair and think they work together. But if you are wrong, you could send your ether to your new public address and then have now way to get your ether out when you want it. Then you would be F--ked. This has happened to several people. So send a very little bit of ether to the public address and test that you can move some of it out with your private key.  
+So now you have a public/private key pair and think they work together. But if you are wrong, you could send your ether to your new public address and then have no way to get your ether out when you want it. Then you would be F--ked. This has happened to several people. So send a very little bit of ether to the public address and test that you can move some of it out again with your private key. Moving ether out of an account is the only way to be sure that public/private keys work together properly.  
 
 **Warning About Quantum Computers**
-Right now quantum computers are not wide spread so they are not much of a concern right now. In the future however, It would be impossible to for a quantum computer to get you private key with only the public address as input. This is because there is a difference between the public address and the public key. The public address is a truncated version of the public key - several charecters are missing. It might however be possible for a quantum computer to figure out your private key given your public key. The public key however is not revealed to the public until the first transaction appears on the block chain. So if quantum computers are a concern then it actually makes sense to never test the private key / public address pair. Instead you would generate the public address from the private key but never make a transaction until you are ready to clear out the account. So you lose the ability to test that the private key can be used to move funds from the public address but you never expose the public key to quantum computers until it's too late to be of any use. One way to safely test that you can use the private key to access fund at the corresponding public address would be to test this on a private copy of the blockchain.
+Right now quantum computers are not wide spread so they are not much of a concern at this moment. In the future however, it would be impossible to for a quantum computer to get you private key with only the public address as input. This is because there is a difference between the public address and the public key. The public address is a truncated version of the public key - several charecters are missing. It might however be possible for a quantum computer to figure out your private key given your public key. The public key however is not revealed to the public until the first transaction appears on the block chain. So if quantum computers are a concern then it actually makes sense to never test the private key / public address pair. Instead you would generate the public address from the private key but never make a transaction until you are ready to clear out the account. So you lose the ability to test that the private key can be used to move funds from the public address but you never expose the public key to quantum computers until it's too late to be of any use. One way to safely test that you can use the private key to access funds at the corresponding public address would be to test this on a private copy of the blockchain.
 
-#### Generate a Keystore File (UTC / JSON) using NodeJS from a private key. 
-There is too much opportunity for other people to see the private key when using that option in MEW. Better to use a Keystore file.  
-There is an opportunity here to associate a photograph with the keystore file as well for use as a blockie. This will prevent moving ether from the wrong account. 
-[This Stack Exchange thread shows how to do it](https://ethereum.stackexchange.com/questions/11166/how-to-generate-a-keystore-utc-file-from-the-raw-private-key)  
+#### Generate a Keystore File from a private key.  
+This can be done using the custom version of MyEtherWallet which is already loaded on you pi if you have been following along.  
+There is too much opportunity for other people to see the private key when using that option in MEW. Better to use a Keystore file. A keystore file is a password protected version of a private key. If you lose the password then you will not be able to use the keystore file to access your ether. So don't lose the password for the keystore file. My custom version of MyEtherWallet can generate keystore files given a private key. You can name the keystore files anything you want so that you can be sure you are sending ether from the appropriate account.  
+[This Stack Exchange thread shows how to do it at the command line.](https://ethereum.stackexchange.com/questions/11166/how-to-generate-a-keystore-utc-file-from-the-raw-private-key)  
 
 The following is example code from the above thread with some modification and explanation.  
+There is no need to do any of this because my modified version of MyEtherWallet does this for you.  
+I include the following only for those who wish to know what is going on behind the scenes.  
 Start your favorite command line utility. I use PowerShell.  
 Then navigate to the directory where ethereumjs-wallet is installed  
 `cd DirectoryWhere_ethereumjs-wallet_IsInstalled`  
