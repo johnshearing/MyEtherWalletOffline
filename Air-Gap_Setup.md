@@ -1810,7 +1810,7 @@ gpg2 --export --armor theiremailaddress@provider.com
 gpg2 --export --armor theiremailaddress@provider.com > filename.asc  
 gpg2 --interactive --edit-key emailaddress@provider.com sign, trust, save  
 gpg2 --list-sigs your@email.address  
-pg2 --export-secret-key --armor --output filename emailaddress@provider.com  
+gpg2 --export-secret-key --armor --output filename emailaddress@provider.com  
 gpg2 --refresh-keys  
 gpg2 filename.txt  
 gpg2 --armor --encrypt --sign -r your@email.com -r recipient@email.com filename  
