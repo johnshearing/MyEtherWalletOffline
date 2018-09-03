@@ -1612,6 +1612,42 @@ You already installed this package if you have been following along.
 Since writing this section I have actually built this fuctionality into MyEtherWallet.  
 So now it is possible to create a keystore file from a private key without leaving the MyEtherWallet application.  
 
+
+#### Cloning Your Encrypted SD card Using Only the Raspberry Pi  
+It is of course possible to use Win 32 Disk Imager to clone your SD card for back up purposes.  
+No one would be able to read the data from the image created.  
+But now that you have private keys on the encrypted partition, putting your SD card into an Internet device is dangerous business.  
+The attack vector is called The Evil Maid Attack also known as The Maid In The Middle Attack.  
+The attack is carried out by slipping malicious code such as a keylogger into the boot partition of the image now stored on your PC.  
+They might just as easily put the key logger directly onto the boot partition of the SD card you are backing up.
+So if you restore the image and attempt to use it, or if they tampered with your original SD card then your password will be caputured by the key logger and stored in a file on the boot partition for later use by the criminals who tampered with the image.  
+
+The point is, that (assuming a strong password) anyone who gets physical access to your SD card can not read it unless you supply that password. The Evil Maid Attack is one way to get you to supply the password without you knowing it. 
+
+We will talk more about the Evil Maid Attack in the the next section.  
+The important point to remember here is that it we need to make back up copies of the encrypted SD card without putting the card into an Internet connected device. The following explains how to accomplish this.  
+
+Get two SD card to USB adaptors.  
+Get a USB hub. This plugs in to one of your USB ports on the pi but gives you 4 more places to plug in USB devices.  
+The reason you need the hub is because the SD card to USB adaptors are too big to fit directly into the closely stacked USB ports on the raspberry pi itself.  
+
+Now you will need three SD cards.  
+The first SD card will contain a trusted install of Jessie but does not have to be encrypted.  
+You will put this into the raspberry pi SD card slot.  
+This will run the raspberry pi during the copy process.  
+Plug in the USB hub and turn on the raspberry pi.  
+
+The second card is the encrypted SD card that you wish to clone. 
+It will go into an SD to USB adaptor and this will in turn get plugged into the hub which should already be plugged into the running raspberry pi.  
+
+The third SD card is blank. It will become and exact copy of the second card.  
+If there is any data on this card it will overwritten with data from the ecrypted card that you are cloning.  
+This card also goes into an SD card to USB adaptor and then gets plugged into the the hub.  
+
+
+
+
+
 ## Conclusion:  
 QR-Code functionality airgaps the PrivateKeyVault.  
 
