@@ -1637,16 +1637,66 @@ You will put this into the raspberry pi SD card slot.
 This will run the raspberry pi during the copy process.  
 Plug in the USB hub and turn on the raspberry pi.  
 
-The second card is the encrypted SD card that you wish to clone. 
-It will go into an SD to USB adaptor and this will in turn get plugged into the hub which should already be plugged into the running raspberry pi.  
+The second card is the encrypted SD card that you wish to clone.  
+It will go into an SD to USB adaptor and this will in turn get plugged into the hub which should already be plugged into the running raspberry pi. 
+Don't plug it into the hub yet. 
+Mark this card so that you can see clearly that this is the encrypted card which holds your important data.  
 
 The third SD card is blank. It will become and exact copy of the second card.  
 If there is any data on this card it will overwritten with data from the ecrypted card that you are cloning.  
 This card also goes into an SD card to USB adaptor and then gets plugged into the the hub.  
+Don't plug it into the hub yet.  
 
+Open the terminal window on your pi.  
+run the following command:  
+`lsblk`  
+You should see the SD card which is in the pi's SC card slot listed as **mmcblk0**  
+The root partition will be listed below that as **mmcblk0p2**  
+And the boot partition will be listed below that as **mmcblk0p1**  
 
+Now insert the card you wish to clone into the adaptor and then insert this into the hub.  
+Just to be very clear, we are talking about your encrypted card with all your private keys.  
+After you insert the adaptor into the machine you may be prompted by the pi to enter a password or to it may invite you to see the contents of the SD card using the file manager.  
+Ignore these offers if they appear by pressing the cancel button.  
 
+Now run the `lsblk` command again.  
+You should now see your encrypted card show up as **sda** with two partitions sda1 and sda2 showing up underneith.  
+Remember that the raspbery pi calls your encrypted card **sda**
 
+Now insert the empty card into the adaptor and then insert that into the hub.  
+Run the `lsblk` command for a third time.  
+You should still see the first two cards but now the empty card shows up as **sdb** and the partitions show up underneith as sdb1 and sdb2.  
+Remember that the raspberry pi calls your empty card **sdb**
+
+You probably see the pattern.  
+The first card you insert into the hub will be called **sda** and the second card you insert into the hub will be known as **sdb**.  
+So be careful about which card you insert first and which card you insert second.  
+
+Now we are ready to copy all the information from the encrypted card to the blank card.  
+Run the following command in the pi's terminal window.  
+Carefull - the following command assumes that the encrypted card with all your precious data is know to the pi as **sda**.  
+`sudo dd if=/dev/sda of=/dev/sdb`  
+This command will take several hours to run with out giving any sign that it is working at all.  
+**Don't worry - everything is fine**  
+Have a long nap. when you wake up you will see output on the console from the dd command telling you:  
+how many records in,  
+how many records out,  
+and how many bytes were coppied.  
+
+That's it! now sdb is a clone of sda.  
+
+#### Preventing the Evil Maid Attack
+Keep your cloned sd card in a secure location.  
+If someone steals your card it's not a problem (the card is encrypted) but if they put a keylogger on the boot partition without you knowing about it, then you will be giving away your password when you try to use it.  
+So while you are not worried about theft, tampering is a big concern.  
+In order know if your card has been tampered with, use sparkly nail polish.  
+Yes that's right, security experts use sparkly nail polish to tell if their sd cards have been tampered with.  
+Just put the sd card in a small box and paint the seams of the box with sparkly nail polish.  
+Then take several picturs of the box.  
+If anyone tries to open the box it will cause the nail polish to break off.  
+And if they paint the seams again it will not look the same because sparkly nail polish goes on differently every time you put it on.  
+Simply compare your box with the photos you took when you sealed it up.  
+If the nail polish looks different then someone has tampered with the box.  
 
 ## Conclusion:  
 QR-Code functionality airgaps the PrivateKeyVault.  
