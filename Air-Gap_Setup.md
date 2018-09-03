@@ -1672,6 +1672,14 @@ You probably see the pattern.
 The first card you insert into the hub will be called **sda** and the second card you insert into the hub will be known as **sdb**.  
 So be careful about which card you insert first and which card you insert second.  
 
+Before we are ready to do the actual cloning we must first be sure the SD cards are not mounted.  
+To do this, just press the eject button in the upper right corner of the pi's touch screen.  
+If any cards show up in the pulldown list then press these to unmount them.  
+You will get a message saying that it is safe to remove the media.  
+Cards in the list which are grayed out are already unmounted.  
+Encrypted cards may not even show up in the list because they are impossible to mount in the first place.  
+
+
 Now we are ready to copy all the information from the encrypted card to the blank card.  
 Run the following command in the pi's terminal window.  
 Carefull - the following command assumes that the encrypted card with all your precious data is know to the pi as **sda**.  
