@@ -1676,6 +1676,8 @@ Before we are ready to do the actual cloning we must first be sure the SD cards 
 To do this, just press the eject button in the upper right corner of the pi's touch screen.  
 If any cards show up in the pulldown list then press these to unmount them.  
 You will get a message saying that it is safe to remove the media.  
+Don't actually remove the cards from the pi. If you did then it would be impossible to clone them.  
+We want to unmount them which means to disassociate the cards from the pi's file system.  
 Cards in the list which are grayed out are already unmounted.  
 Encrypted cards may not even show up in the list because they are impossible to mount in the first place.  
 
