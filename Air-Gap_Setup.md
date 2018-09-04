@@ -1693,7 +1693,29 @@ how many records in,
 how many records out,  
 and how many bytes were coppied.  
 
+My SD card to USB adaptor has a little red LED light which flashes when the card is being accessed. These lights flashed during the entire copy process indicating that something was happening and that the command was working.  
+That was some comfort during the copy process.  
+
 That's it! now sdb is a clone of sda.  
+
+If you want to check that the two SD cards are exactly the same and that the copy process worked properly then you can execute the following commands one at a time.  
+These commands take a long time to run and will not show any sign on the screen that they are working.  
+If your SD card to USB adaptor is like mine however, lights will flash while the command is running.  
+So when running these commands don't think that your pi is hung.  
+Just wait patiently and you will be rewarded with a hexidecimal number when the command is finished running.  
+This number is a unique hash of the contents on the SD card it is checking.  
+After the first command is finished running then run the second command.  
+If the number from the second command matches the number from the first command then you can be sure that the clone is exactly like the original.  
+Here is the first command:  
+`sudo dd if=sda | sha1sum`  
+This command is getting the sha1sum of the original encrypted SD card.  
+Here is the second command:  
+`sudo dd if=sdb | sha1sum`  
+You probably guessed that this command is getting the sha1sum of the newly cloned SD card.  
+If the two numbers on the screen match then the contents of two cards are the same.  
+
+Finally, I would be a good idea to try both SD cards to be sure that they work properly and that both of them can be used to access your secrets.  
+
 
 #### Preventing the Evil Maid Attack
 Keep your cloned sd card in a secure location.  
