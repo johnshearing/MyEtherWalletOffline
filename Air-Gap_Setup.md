@@ -1729,12 +1729,12 @@ If the two numbers on the screen match then the contents of two cards are the sa
 
 Finally, it would be a good idea to try both SD cards to be sure that they work properly and that both of them can be used to access your secrets.  
 
-
 #### Preventing the Evil Maid Attack
 Keep your cloned sd card in a secure location.  
 If someone steals your card it's not a problem (the card is encrypted) but if they put a keylogger on the boot partition without you knowing about it, then you will be giving away your password when you try to use it.  
 So while you are not worried about theft, tampering is a big concern.  
 In order know if your card has been tampered with, use sparkly nail polish.  
+This is nail polish with glitter mixed in.  
 Yes that's right, security experts use sparkly nail polish to tell if their sd cards have been tampered with.  
 Just put the sd card in a small box and paint the seams of the box with sparkly nail polish.  
 Then take several picturs of the box.  
@@ -1742,6 +1742,11 @@ If anyone tries to open the box it will cause the nail polish to break off.
 And if they paint the seams again it will not look the same because sparkly nail polish goes on differently every time you put it on.  
 Simply compare your box with the photos you took when you sealed it up.  
 If the nail polish looks different then someone has tampered with the box.  
+In that case do not use the SD card but rather mark it as compromised.  
+Do not use this card unless you have no other choice and then only with extreme caution.  
+
+Take the same precautions with your PrivateKeyVault.  
+If attackers steal your Pi with the encrypted SD card aboard then they could place a keylogger anywhere they want without you knowing about it. They could put it on the SD card or at any place in the hardware such as the keyboard, the pi itself, the camera, just about anywhere. So the PrivateKeyVault should be wrapped in paper or put in a box, and sealed with sparkly nail polish to make it evident should the device be tampered with.  
 
 ## Conclusion:  
 QR-Code functionality airgaps the PrivateKeyVault.  
