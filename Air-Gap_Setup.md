@@ -1905,10 +1905,7 @@ Then execute the command `gulp`
 
 To start MyEtherWallet for development navigate to the **dist** directory using the File Manager and double click on **index.html**.  
 
-To start the pi's file manager `pcmanfm`  
-
-My public key on Ethereum  
-13eC582A8E8A676e78f4E8e2Bf6B135bBE97c306   
+To start the pi's file manager `pcmanfm`     
 
 [My Ethereum Notes are Found Here](https://gist.github.com/johnshearing)  
 [and here](https://github.com/johnshearing/Ethereum_Local_Block_Chain)  
