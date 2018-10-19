@@ -1,8 +1,8 @@
 ## This is a modified version of MyEtherWallet optimised for use with 
 ## [The Private Key Vault - An Air-Gapped Rasberry Pi](https://github.com/johnshearing/MyEtherWalletOffline/blob/master/Air-Gap_Setup.md).  
-Click on the link above to see the device and learn how to make it.  
+Click on the link above to see the Private Key Vault and learn how to make it.  
 
-Continue reading this document if you wish to learn how to use the MyEtherWallet software which is used to make offline transactions on the Ethereum BlockChain.  
+Continue reading this document if you wish to learn how to use the MyEtherWallet software which is used to make offline transactions on the Ethereum blockchain using the Private Key Vault.    
 [The repository from which this was taken can be found here](https://github.com/kvhnuke/etherwallet)  
 [The orignal online version of this software can be found here](https://www.MyEtherWallet.com)  
 
