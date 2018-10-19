@@ -1697,7 +1697,7 @@ Run the following command in the pi's terminal window.
 Careful - the following command assumes that the encrypted card with all your precious data is known to the pi as **sda**.  
 dd in the following command is the name of the command.  
 if= in the following command specifies the input file (the SD card you wish to read from).  
-of= in the following command specifies the output file (the SD card you wish to write to).
+of= in the following command specifies the output file (the SD card you wish to write to).  
 `sudo dd if=/dev/sda of=/dev/sdb`  
 This command will take several hours to run with out giving any sign that it is working at all.  
 **Don't worry - everything is fine**  
@@ -1720,10 +1720,10 @@ This number is a unique hash of the contents on the SD card it is checking.
 After the first command is finished running then run the second command.  
 If the number from the second command matches the number from the first command then you can be sure that the clone is exactly like the original.  
 Here is the first command:  
-`sudo dd if=sda | sha1sum`  
+`sudo dd if=/dev/sda | sha1sum`  
 The command above is getting the sha1sum of the original encrypted SD card.  
 Here is the second command:  
-`sudo dd if=sdb | sha1sum`  
+`sudo dd if=/dev/sdb | sha1sum`  
 You probably guessed that the above command is getting the sha1sum of the newly cloned SD card.  
 If the two numbers on the screen match then the contents of two cards are the same.  
 
