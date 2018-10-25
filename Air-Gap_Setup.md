@@ -1,4 +1,4 @@
-[## Make Instructions for the PrivateKeyVault has moved. Please click here to see the make instructions in it's new location.](https://github.com/johnshearing/PrivateKeyVault)
+## [Make Instructions for the PrivateKeyVault has moved. Please click here to see the make instructions in it's new location.](https://github.com/johnshearing/PrivateKeyVault)
 
 ## The Private Key Vault - Instructions for setting up a raspberry pi with touch screen and camera installed as an optically isolated digital wallet for Ethereum offline transactions.  
 
