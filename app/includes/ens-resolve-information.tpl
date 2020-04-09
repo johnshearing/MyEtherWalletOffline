@@ -31,6 +31,6 @@
     </tr>
     <tr>
       <td>ENS - Registry: </td>
-      <td class="mono">0x314159265dD8dbb310642f98f50C066173C1259b</td>
+      <td class="mono">0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e</td>
     </tr>
   </table>
